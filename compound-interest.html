@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Free Compound Interest Calculator — See how your money grows over time with the power of compounding interest. Enter your investment details and get instant results." />
+  <meta name="keywords" content="compound interest calculator, investment growth calculator, savings calculator, interest calculator" />
+  <title>Compound Interest Calculator | InsureCalcPro</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: { sans: ['Inter', 'system-ui', 'sans-serif'] },
+          colors: {
+            brand: { 50:'#eff6ff',100:'#dbeafe',200:'#bfdbfe',300:'#93c5fd',400:'#60a5fa',500:'#3b82f6',600:'#2563eb',700:'#1d4ed8',800:'#1e40af',900:'#1e3a8a' }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body { font-family: 'Inter', system-ui, sans-serif; }
+
+    /* Animated gradient on result card */
+    .result-gradient { background: linear-gradient(135deg, #1e40af 0%, #2563eb 50%, #3b82f6 100%); }
+
+    /* Smooth result reveal */
+    #results { transition: opacity .4s ease, transform .4s ease; }
+    #results.hidden-soft { opacity: 0; transform: translateY(12px); pointer-events: none; }
+
+    /* Input prefix/suffix wrapper */
+    .input-wrap { position: relative; }
+    .input-prefix { position: absolute; left: 12px; top: 50%; transform: translateY(-50%); color: #94a3b8; font-weight: 600; pointer-events: none; user-select: none; }
+    .input-suffix { position: absolute; right: 12px; top: 50%; transform: translateY(-50%); color: #94a3b8; font-weight: 600; pointer-events: none; user-select: none; }
+    .has-prefix { padding-left: 28px; }
+    .has-suffix { padding-right: 36px; }
+
+    /* Progress bar */
+    .bar-fill { transition: width .6s cubic-bezier(.4,0,.2,1); }
+
+    /* Nav active link underline */
+    .nav-active { color: #2563eb; font-weight: 700; }
+
+    /* Mobile menu */
+    #mobile-menu { transition: max-height .3s ease, opacity .3s ease; max-height: 0; overflow: hidden; opacity: 0; }
+    #mobile-menu.open { max-height: 300px; opacity: 1; }
+
+    /* Year table scroll */
+    .table-wrap { max-height: 280px; overflow-y: auto; }
+    .table-wrap::-webkit-scrollbar { width: 4px; }
+    .table-wrap::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 9999px; }
+
+    @keyframes count-up { from { opacity: 0; transform: scale(.95); } to { opacity: 1; transform: scale(1); } }
+    .count-anim { animation: count-up .35s ease; }
+  </style>
+</head>
+<body class="bg-gray-50 antialiased text-slate-800">
+
+<!-- ═══ NAVBAR ═══ -->
+<header class="bg-white border-b border-gray-200 sticky top-0 z-50 shadow-sm">
+  <div class="max-w-6xl mx-auto px-4 sm:px-6">
+    <div class="flex items-center justify-between h-16">
+
+      <!-- Logo -->
+      <a href="index.html" class="flex items-center gap-2.5 flex-shrink-0">
+        <span class="w-8 h-8 rounded-lg bg-blue-600 flex items-center justify-center">
+          <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+          </svg>
+        </span>
+        <span class="font-extrabold text-gray-900">InsureCalc<span class="text-blue-600">Pro</span></span>
+      </a>
+
+      <!-- Desktop Nav -->
+      <nav class="hidden md:flex items-center gap-1">
+        <a href="index.html" class="px-4 py-2 rounded-lg text-sm font-medium text-gray-600 hover:text-blue-600 hover:bg-blue-50 transition-all">Life Insurance</a>
+        <a href="compound-interest.html" class="px-4 py-2 rounded-lg text-sm font-medium bg-blue-50 text-blue-600 nav-active transition-all">Compound Interest</a>
+        <a href="mortgage-calculator.html" class="px-4 py-2 rounded-lg text-sm font-medium text-gray-600 hover:text-blue-600 hover:bg-blue-50 transition-all">Mortgage Calc</a>
+      </nav>
+
+      <!-- Mobile hamburger -->
+      <button id="hamburger" class="md:hidden p-2 rounded-lg text-gray-500 hover:bg-gray-100 transition-colors" aria-label="Toggle menu">
+        <svg id="icon-open" class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/></svg>
+        <svg id="icon-close" class="w-5 h-5 hidden" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
+      </button>
+    </div>
+
+    <!-- Mobile Menu -->
+    <div id="mobile-menu">
+      <nav class="flex flex-col gap-1 pb-4">
+        <a href="index.html" class="px-4 py-2.5 rounded-lg text-sm font-medium text-gray-600 hover:text-blue-600 hover:bg-blue-50 transition-all">Life Insurance</a>
+        <a href="compound-interest.html" class="px-4 py-2.5 rounded-lg text-sm font-medium bg-blue-50 text-blue-600">Compound Interest</a>
+        <a href="mortgage-calculator.html" class="px-4 py-2.5 rounded-lg text-sm font-medium text-gray-600 hover:text-blue-600 hover:bg-blue-50 transition-all">Mortgage Calc</a>
+      </nav>
+    </div>
+  </div>
+</header>
+
+<!-- ═══ HERO ═══ -->
+<div class="bg-white border-b border-gray-100 py-10 px-4">
+  <div class="max-w-2xl mx-auto text-center">
+    <span class="inline-flex items-center gap-1.5 bg-blue-50 text-blue-600 text-xs font-bold uppercase tracking-widest px-3 py-1.5 rounded-full mb-4">
+      <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 20 20"><path d="M8.433 7.418c.155-.103.346-.196.567-.267v1.698a2.305 2.305 0 01-.567-.267C8.07 8.34 8 8.114 8 8c0-.114.07-.34.433-.582zM11 12.849v-1.698c.22.071.412.164.567.267.364.243.433.468.433.582 0 .114-.07.34-.433.582a2.305 2.305 0 01-.567.267z"/><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-13a1 1 0 10-2 0v.092a4.535 4.535 0 00-1.676.662C6.602 6.234 6 7.009 6 8c0 .99.602 1.765 1.324 2.246.48.32 1.054.545 1.676.662v1.941c-.391-.127-.68-.317-.843-.504a1 1 0 10-1.51 1.31c.562.649 1.413 1.076 2.353 1.253V15a1 1 0 102 0v-.092a4.535 4.535 0 001.676-.662C13.398 13.766 14 12.991 14 12c0-.99-.602-1.765-1.324-2.246A4.535 4.535 0 0011 9.092V7.151c.391.127.68.317.843.504a1 1 0 101.511-1.31c-.563-.649-1.413-1.076-2.354-1.253V5z" clip-rule="evenodd"/></svg>
+      Free Calculator
+    </span>
+    <h1 class="text-3xl sm:text-4xl font-extrabold text-gray-900 mb-3 tracking-tight">Compound Interest Calculator</h1>
+    <p class="text-gray-500 text-lg leading-relaxed">
+      Discover how your investments grow over time. Enter your details below and see the power of compounding work for you.
+    </p>
+  </div>
+</div>
+
+<!-- ═══ MAIN ═══ -->
+<main class="max-w-2xl mx-auto px-4 py-12">
+
+  <!-- Calculator Card -->
+  <div class="bg-white shadow-xl rounded-2xl overflow-hidden">
+
+    <!-- Card Header -->
+    <div class="bg-gradient-to-r from-blue-700 to-blue-600 px-7 py-5">
+      <h2 class="text-white font-bold text-lg">Enter Your Investment Details</h2>
+      <p class="text-blue-200 text-sm mt-0.5">All fields are required. Compounding frequency: monthly.</p>
+    </div>
+
+    <!-- Inputs -->
+    <div class="p-7">
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+
+        <!-- Initial Investment -->
+        <div>
+          <label class="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-2">Initial Investment</label>
+          <div class="input-wrap">
+            <span class="input-prefix">$</span>
+            <input id="principal" type="text" inputmode="numeric" placeholder="10,000"
+              class="has-prefix w-full border border-gray-200 rounded-xl py-3 pr-4 text-gray-900 font-semibold text-base focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition placeholder-gray-300" />
+          </div>
+        </div>
+
+        <!-- Monthly Contribution -->
+        <div>
+          <label class="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-2">Monthly Contribution</label>
+          <div class="input-wrap">
+            <span class="input-prefix">$</span>
+            <input id="monthly" type="text" inputmode="numeric" placeholder="200"
+              class="has-prefix w-full border border-gray-200 rounded-xl py-3 pr-4 text-gray-900 font-semibold text-base focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition placeholder-gray-300" />
+          </div>
+        </div>
+
+        <!-- Annual Interest Rate -->
+        <div>
+          <label class="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-2">Annual Interest Rate</label>
+          <div class="input-wrap">
+            <input id="rate" type="text" inputmode="decimal" placeholder="7"
+              class="has-suffix w-full border border-gray-200 rounded-xl py-3 pl-4 text-gray-900 font-semibold text-base focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition placeholder-gray-300" />
+            <span class="input-suffix">%</span>
+          </div>
+        </div>
+
+        <!-- Years to Grow -->
+        <div>
+          <label class="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-2">Years to Grow</label>
+          <div class="input-wrap">
+            <input id="years" type="text" inputmode="numeric" placeholder="20"
+              class="w-full border border-gray-200 rounded-xl py-3 px-4 text-gray-900 font-semibold text-base focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition placeholder-gray-300" />
+          </div>
+          <p class="text-gray-400 text-xs mt-1.5 ml-1">Between 1 and 50 years</p>
+        </div>
+      </div>
+
+      <!-- Error message -->
+      <div id="error-msg" class="hidden mt-4 bg-red-50 border border-red-200 text-red-700 text-sm px-4 py-3 rounded-xl flex items-center gap-2">
+        <svg class="w-4 h-4 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd"/></svg>
+        <span id="error-text">Please fill in all fields with valid numbers.</span>
+      </div>
+
+      <!-- Calculate Button -->
+      <button id="calc-btn"
+        class="mt-6 w-full bg-blue-600 hover:bg-blue-700 active:bg-blue-800 text-white font-bold text-base py-3.5 rounded-xl transition-all shadow-lg shadow-blue-600/25 hover:shadow-blue-700/30 hover:-translate-y-0.5">
+        Calculate Growth &rarr;
+      </button>
+    </div>
+
+    <!-- ═══ RESULTS ═══ -->
+    <div id="results" class="hidden-soft hidden border-t border-gray-100">
+
+      <!-- Final Balance Hero -->
+      <div class="result-gradient px-7 py-7 text-white text-center">
+        <p class="text-blue-200 text-xs font-bold uppercase tracking-widest mb-2">Projected Final Balance</p>
+        <div id="final-balance" class="text-5xl sm:text-6xl font-extrabold tracking-tight count-anim">$0</div>
+        <p class="text-blue-200 text-sm mt-2">After <span id="res-years">0</span> years of monthly compounding</p>
+      </div>
+
+      <!-- Stat Cards -->
+      <div class="grid grid-cols-3 divide-x divide-gray-100 border-b border-gray-100">
+        <div class="px-4 py-5 text-center">
+          <p class="text-gray-400 text-xs font-semibold uppercase tracking-wider mb-1.5">Total Contributed</p>
+          <p id="total-contributed" class="text-gray-900 font-extrabold text-lg leading-tight">$0</p>
+        </div>
+        <div class="px-4 py-5 text-center">
+          <p class="text-gray-400 text-xs font-semibold uppercase tracking-wider mb-1.5">Interest Earned</p>
+          <p id="total-interest" class="text-green-600 font-extrabold text-lg leading-tight">$0</p>
+        </div>
+        <div class="px-4 py-5 text-center">
+          <p class="text-gray-400 text-xs font-semibold uppercase tracking-wider mb-1.5">Total Return</p>
+          <p id="total-return-pct" class="text-blue-600 font-extrabold text-lg leading-tight">0%</p>
+        </div>
+      </div>
+
+      <!-- Visual Breakdown -->
+      <div class="px-7 py-6">
+        <p class="text-xs font-bold text-gray-500 uppercase tracking-wider mb-3">Balance Composition</p>
+        <div class="flex h-3 rounded-full overflow-hidden bg-gray-100 mb-3">
+          <div id="bar-principal" class="bar-fill bg-blue-500 h-full" style="width:0%"></div>
+          <div id="bar-interest" class="bar-fill bg-green-400 h-full" style="width:0%"></div>
+        </div>
+        <div class="flex items-center justify-between text-xs text-gray-500">
+          <div class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-blue-500 inline-block"></span> Your Contributions</div>
+          <div class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-green-400 inline-block"></span> Interest Earned</div>
+        </div>
+
+        <!-- Year-by-Year Table -->
+        <div class="mt-6">
+          <p class="text-xs font-bold text-gray-500 uppercase tracking-wider mb-3">Year-by-Year Growth</p>
+          <div class="table-wrap rounded-xl border border-gray-100 overflow-hidden">
+            <table class="w-full text-sm">
+              <thead class="bg-gray-50 sticky top-0">
+                <tr>
+                  <th class="text-left px-4 py-2.5 text-xs font-bold text-gray-500 uppercase tracking-wider">Year</th>
+                  <th class="text-right px-4 py-2.5 text-xs font-bold text-gray-500 uppercase tracking-wider">Balance</th>
+                  <th class="text-right px-4 py-2.5 text-xs font-bold text-gray-500 uppercase tracking-wider">Interest</th>
+                </tr>
+              </thead>
+              <tbody id="year-table" class="divide-y divide-gray-50"></tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Disclaimer -->
+        <p class="text-gray-400 text-xs leading-relaxed mt-5 text-center">
+          This calculator is for educational purposes only. Results assume a fixed annual rate, monthly compounding, and consistent contributions. Actual investment returns vary and are not guaranteed.
+        </p>
+      </div>
+    </div><!-- /results -->
+  </div><!-- /card -->
+
+  <!-- Info box -->
+  <div class="mt-6 bg-blue-50 border border-blue-200 rounded-2xl p-5 flex gap-3">
+    <svg class="w-5 h-5 text-blue-500 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"/></svg>
+    <p class="text-blue-800 text-sm leading-relaxed">
+      <strong>Formula used:</strong> FV = P&thinsp;&times;&thinsp;(1&thinsp;+&thinsp;r/12)<sup>12t</sup> &plus; PMT&thinsp;&times;&thinsp;[((1&thinsp;+&thinsp;r/12)<sup>12t</sup>&thinsp;&minus;&thinsp;1)&thinsp;/&thinsp;(r/12)], where P is the initial principal, PMT is the monthly contribution, r is the annual rate, and t is the number of years.
+    </p>
+  </div>
+
+</main>
+
+<!-- ═══ FOOTER ═══ -->
+<footer class="bg-gray-900 text-gray-400 py-8 px-4 mt-8">
+  <div class="max-w-5xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4 text-sm">
+    <span class="font-extrabold text-white">InsureCalc<span class="text-blue-400">Pro</span></span>
+    <div class="flex flex-wrap justify-center gap-5">
+      <a href="privacy.html" class="hover:text-blue-400 transition-colors">Privacy Policy</a>
+      <a href="terms.html" class="hover:text-blue-400 transition-colors">Terms of Service</a>
+      <a href="contact.html" class="hover:text-blue-400 transition-colors">Contact Us</a>
+    </div>
+    <p class="text-xs text-gray-500">&copy; 2025 InsureCalcPro. All rights reserved.</p>
+  </div>
+</footer>
+
+<script>
+(function () {
+  'use strict';
+
+  // ── Utilities ──────────────────────────────────────────────────────────────
+
+  const fmt = (n) => '$' + Math.round(n).toLocaleString('en-US');
+  const fmtDec = (n) => '$' + n.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  const parse = (id) => parseFloat(document.getElementById(id).value.replace(/[$,%,\s]/g, '')) || 0;
+
+  // Format text inputs with commas on blur
+  function attachFormatter(id, isPercent) {
+    const el = document.getElementById(id);
+    el.addEventListener('blur', () => {
+      if (!el.value) return;
+      const n = parseFloat(el.value.replace(/[$,\s]/g, ''));
+      if (!isNaN(n)) el.value = isPercent ? n : n.toLocaleString('en-US');
+    });
+    el.addEventListener('focus', () => {
+      const n = parseFloat(el.value.replace(/[$,\s]/g, ''));
+      if (!isNaN(n)) el.value = n;
+    });
+  }
+
+  ['principal', 'monthly'].forEach(id => attachFormatter(id, false));
+  ['rate', 'years'].forEach(id => attachFormatter(id, true));
+
+  // ── DOM refs ───────────────────────────────────────────────────────────────
+
+  const resultsEl  = document.getElementById('results');
+  const errorEl    = document.getElementById('error-msg');
+  const errorText  = document.getElementById('error-text');
+
+  function showError(msg) {
+    errorText.textContent = msg;
+    errorEl.classList.remove('hidden');
+    resultsEl.classList.add('hidden-soft', 'hidden');
+  }
+  function hideError() { errorEl.classList.add('hidden'); }
+
+  // ── Core calculation ───────────────────────────────────────────────────────
+
+  function compute(P, PMT, annualRate, years) {
+    const r = annualRate / 100 / 12; // monthly rate
+    const n = years * 12;            // total months
+
+    const FV = r === 0
+      ? P + PMT * n
+      : P * Math.pow(1 + r, n) + PMT * (Math.pow(1 + r, n) - 1) / r;
+
+    const totalContributed = P + PMT * n;
+    const totalInterest    = FV - totalContributed;
+    const returnPct        = totalContributed > 0 ? (totalInterest / totalContributed) * 100 : 0;
+
+    // Build year-by-year array
+    const rows = [];
+    for (let y = 1; y <= years; y++) {
+      const ny = y * 12;
+      const balY = r === 0
+        ? P + PMT * ny
+        : P * Math.pow(1 + r, ny) + PMT * (Math.pow(1 + r, ny) - 1) / r;
+      const contribY = P + PMT * ny;
+      const intY     = balY - contribY;
+      rows.push({ year: y, balance: balY, interest: intY });
+    }
+
+    return { FV, totalContributed, totalInterest, returnPct, rows };
+  }
+
+  // ── Render ─────────────────────────────────────────────────────────────────
+
+  function render(result, yearsVal) {
+    const { FV, totalContributed, totalInterest, returnPct, rows } = result;
+
+    document.getElementById('final-balance').textContent      = fmtDec(FV);
+    document.getElementById('res-years').textContent          = yearsVal;
+    document.getElementById('total-contributed').textContent  = fmt(totalContributed);
+    document.getElementById('total-interest').textContent     = fmt(totalInterest);
+    document.getElementById('total-return-pct').textContent   = returnPct.toFixed(1) + '%';
+
+    // Progress bars
+    const pctPrincipal = FV > 0 ? (totalContributed / FV) * 100 : 0;
+    const pctInterest  = FV > 0 ? (totalInterest  / FV) * 100 : 0;
+    document.getElementById('bar-principal').style.width = pctPrincipal.toFixed(1) + '%';
+    document.getElementById('bar-interest').style.width  = pctInterest.toFixed(1) + '%';
+
+    // Year table
+    const tbody = document.getElementById('year-table');
+    tbody.innerHTML = rows.map((r, i) => `
+      <tr class="${i % 2 === 0 ? 'bg-white' : 'bg-gray-50/50'}">
+        <td class="px-4 py-2.5 text-gray-700 font-medium">Year ${r.year}</td>
+        <td class="px-4 py-2.5 text-right text-gray-900 font-bold">${fmtDec(r.balance)}</td>
+        <td class="px-4 py-2.5 text-right text-green-600 font-semibold">${fmt(r.interest)}</td>
+      </tr>`).join('');
+
+    // Reveal results
+    resultsEl.classList.remove('hidden');
+    // Let paint happen, then animate
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => { resultsEl.classList.remove('hidden-soft'); });
+    });
+
+    // Scroll to results
+    resultsEl.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }
+
+  // ── Button handler ─────────────────────────────────────────────────────────
+
+  document.getElementById('calc-btn').addEventListener('click', () => {
+    const P       = parse('principal');
+    const PMT     = parse('monthly');
+    const rate    = parse('rate');
+    const years   = parse('years');
+
+    // Validation
+    if (P < 0)             return showError('Initial Investment cannot be negative.');
+    if (PMT < 0)           return showError('Monthly Contribution cannot be negative.');
+    if (rate <= 0 || rate > 100) return showError('Please enter a valid Annual Interest Rate between 0.01% and 100%.');
+    if (years < 1 || years > 50 || !Number.isInteger(years))
+      return showError('Years to Grow must be a whole number between 1 and 50.');
+    if (P === 0 && PMT === 0) return showError('Please enter an Initial Investment or a Monthly Contribution (or both).');
+
+    hideError();
+    const result = compute(P, PMT, rate, years);
+    render(result, years);
+  });
+
+  // Allow Enter key to trigger calculation
+  document.querySelectorAll('input').forEach(inp => {
+    inp.addEventListener('keydown', e => { if (e.key === 'Enter') document.getElementById('calc-btn').click(); });
+  });
+
+  // ── Mobile nav ─────────────────────────────────────────────────────────────
+
+  const hamburger   = document.getElementById('hamburger');
+  const mobileMenu  = document.getElementById('mobile-menu');
+  const iconOpen    = document.getElementById('icon-open');
+  const iconClose   = document.getElementById('icon-close');
+
+  hamburger.addEventListener('click', () => {
+    const isOpen = mobileMenu.classList.contains('open');
+    mobileMenu.classList.toggle('open', !isOpen);
+    iconOpen.classList.toggle('hidden', !isOpen);
+    iconClose.classList.toggle('hidden', isOpen);
+  });
+
+})();
+</script>
+</body>
+</html>

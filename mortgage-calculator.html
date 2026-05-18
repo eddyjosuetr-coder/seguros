@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Free Mortgage Calculator — Estimate your monthly mortgage payment instantly. Enter your home price, down payment, interest rate, and loan term to see principal and interest breakdown." />
+  <meta name="keywords" content="mortgage calculator, monthly payment calculator, home loan calculator, mortgage payment estimator" />
+  <title>Mortgage Calculator | InsureCalcPro</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: { sans: ['Inter', 'system-ui', 'sans-serif'] },
+          colors: {
+            brand: { 50:'#eff6ff',100:'#dbeafe',200:'#bfdbfe',300:'#93c5fd',400:'#60a5fa',500:'#3b82f6',600:'#2563eb',700:'#1d4ed8',800:'#1e40af',900:'#1e3a8a' }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body { font-family: 'Inter', system-ui, sans-serif; }
+
+    /* Animated gradient */
+    .result-gradient { background: linear-gradient(135deg, #1e40af 0%, #2563eb 50%, #3b82f6 100%); }
+
+    /* Smooth reveal */
+    #results { transition: opacity .4s ease, transform .4s ease; }
+    #results.hidden-soft { opacity: 0; transform: translateY(12px); pointer-events: none; }
+
+    /* Input wrappers */
+    .input-wrap { position: relative; }
+    .input-prefix { position: absolute; left: 12px; top: 50%; transform: translateY(-50%); color: #94a3b8; font-weight: 600; pointer-events: none; user-select: none; }
+    .input-suffix { position: absolute; right: 12px; top: 50%; transform: translateY(-50%); color: #94a3b8; font-weight: 600; pointer-events: none; user-select: none; }
+    .has-prefix { padding-left: 28px; }
+    .has-suffix { padding-right: 52px; }
+
+    /* Progress bar */
+    .bar-fill { transition: width .7s cubic-bezier(.4,0,.2,1); }
+
+    /* Nav active */
+    .nav-active { color: #2563eb; font-weight: 700; }
+
+    /* Mobile menu */
+    #mobile-menu { transition: max-height .3s ease, opacity .3s ease; max-height: 0; overflow: hidden; opacity: 0; }
+    #mobile-menu.open { max-height: 300px; opacity: 1; }
+
+    /* Donut chart (pure CSS) */
+    .donut-ring { transform: rotate(-90deg); transform-origin: 50% 50%; }
+
+    /* Amortization table */
+    .table-wrap { max-height: 300px; overflow-y: auto; }
+    .table-wrap::-webkit-scrollbar { width: 4px; }
+    .table-wrap::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 9999px; }
+
+    @keyframes count-up { from { opacity: 0; transform: scale(.95); } to { opacity: 1; transform: scale(1); } }
+    .count-anim { animation: count-up .35s ease; }
+
+    /* Down payment indicator bar */
+    .dp-bar { transition: width .4s ease; }
+  </style>
+</head>
+<body class="bg-gray-50 antialiased text-slate-800">
+
+<!-- ═══ NAVBAR ═══ -->
+<header class="bg-white border-b border-gray-200 sticky top-0 z-50 shadow-sm">
+  <div class="max-w-6xl mx-auto px-4 sm:px-6">
+    <div class="flex items-center justify-between h-16">
+
+      <!-- Logo -->
+      <a href="index.html" class="flex items-center gap-2.5 flex-shrink-0">
+        <span class="w-8 h-8 rounded-lg bg-blue-600 flex items-center justify-center">
+          <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+          </svg>
+        </span>
+        <span class="font-extrabold text-gray-900">InsureCalc<span class="text-blue-600">Pro</span></span>
+      </a>
+
+      <!-- Desktop Nav -->
+      <nav class="hidden md:flex items-center gap-1">
+        <a href="index.html" class="px-4 py-2 rounded-lg text-sm font-medium text-gray-600 hover:text-blue-600 hover:bg-blue-50 transition-all">Life Insurance</a>
+        <a href="compound-interest.html" class="px-4 py-2 rounded-lg text-sm font-medium text-gray-600 hover:text-blue-600 hover:bg-blue-50 transition-all">Compound Interest</a>
+        <a href="mortgage-calculator.html" class="px-4 py-2 rounded-lg text-sm font-medium bg-blue-50 text-blue-600 nav-active transition-all">Mortgage Calc</a>
+      </nav>
+
+      <!-- Mobile hamburger -->
+      <button id="hamburger" class="md:hidden p-2 rounded-lg text-gray-500 hover:bg-gray-100 transition-colors" aria-label="Toggle menu">
+        <svg id="icon-open" class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/></svg>
+        <svg id="icon-close" class="w-5 h-5 hidden" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
+      </button>
+    </div>
+
+    <!-- Mobile Menu -->
+    <div id="mobile-menu">
+      <nav class="flex flex-col gap-1 pb-4">
+        <a href="index.html" class="px-4 py-2.5 rounded-lg text-sm font-medium text-gray-600 hover:text-blue-600 hover:bg-blue-50 transition-all">Life Insurance</a>
+        <a href="compound-interest.html" class="px-4 py-2.5 rounded-lg text-sm font-medium text-gray-600 hover:text-blue-600 hover:bg-blue-50 transition-all">Compound Interest</a>
+        <a href="mortgage-calculator.html" class="px-4 py-2.5 rounded-lg text-sm font-medium bg-blue-50 text-blue-600">Mortgage Calc</a>
+      </nav>
+    </div>
+  </div>
+</header>
+
+<!-- ═══ HERO ═══ -->
+<div class="bg-white border-b border-gray-100 py-10 px-4">
+  <div class="max-w-2xl mx-auto text-center">
+    <span class="inline-flex items-center gap-1.5 bg-blue-50 text-blue-600 text-xs font-bold uppercase tracking-widest px-3 py-1.5 rounded-full mb-4">
+      <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 20 20"><path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z"/></svg>
+      Free Calculator
+    </span>
+    <h1 class="text-3xl sm:text-4xl font-extrabold text-gray-900 mb-3 tracking-tight">Mortgage Payment Calculator</h1>
+    <p class="text-gray-500 text-lg leading-relaxed">
+      Estimate your monthly mortgage payment in seconds. See a full breakdown of principal, interest, and total loan cost.
+    </p>
+  </div>
+</div>
+
+<!-- ═══ MAIN ═══ -->
+<main class="max-w-2xl mx-auto px-4 py-12">
+
+  <!-- Calculator Card -->
+  <div class="bg-white shadow-xl rounded-2xl overflow-hidden">
+
+    <!-- Card Header -->
+    <div class="bg-gradient-to-r from-blue-700 to-blue-600 px-7 py-5">
+      <h2 class="text-white font-bold text-lg">Enter Your Loan Details</h2>
+      <p class="text-blue-200 text-sm mt-0.5">Calculates Principal &amp; Interest only. Does not include taxes, insurance, or HOA fees.</p>
+    </div>
+
+    <!-- Inputs -->
+    <div class="p-7">
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+
+        <!-- Home Price -->
+        <div>
+          <label class="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-2">Home Price</label>
+          <div class="input-wrap">
+            <span class="input-prefix">$</span>
+            <input id="home-price" type="text" inputmode="numeric" placeholder="400,000"
+              class="has-prefix w-full border border-gray-200 rounded-xl py-3 pr-4 text-gray-900 font-semibold text-base focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition placeholder-gray-300" />
+          </div>
+        </div>
+
+        <!-- Down Payment -->
+        <div>
+          <label class="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-2">
+            Down Payment
+            <span id="dp-pct-badge" class="ml-2 bg-blue-100 text-blue-700 text-xs px-2 py-0.5 rounded-full font-bold normal-case">0%</span>
+          </label>
+          <div class="input-wrap">
+            <span class="input-prefix">$</span>
+            <input id="down-payment" type="text" inputmode="numeric" placeholder="80,000"
+              class="has-prefix w-full border border-gray-200 rounded-xl py-3 pr-4 text-gray-900 font-semibold text-base focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition placeholder-gray-300" />
+          </div>
+          <!-- Down payment % bar -->
+          <div class="mt-2 h-1.5 bg-gray-100 rounded-full overflow-hidden">
+            <div id="dp-bar" class="dp-bar h-full bg-blue-500 rounded-full" style="width:0%"></div>
+          </div>
+          <div class="flex justify-between text-xs text-gray-400 mt-1">
+            <span>0%</span>
+            <span class="text-blue-500 font-semibold">20% recommended</span>
+            <span>100%</span>
+          </div>
+        </div>
+
+        <!-- Annual Interest Rate -->
+        <div>
+          <label class="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-2">Annual Interest Rate</label>
+          <div class="input-wrap">
+            <input id="rate" type="text" inputmode="decimal" placeholder="6.5"
+              class="has-suffix w-full border border-gray-200 rounded-xl py-3 pl-4 text-gray-900 font-semibold text-base focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition placeholder-gray-300" />
+            <span class="input-suffix">%</span>
+          </div>
+          <p class="text-gray-400 text-xs mt-1.5 ml-1">US 30-yr avg: ~6.5% (2025)</p>
+        </div>
+
+        <!-- Loan Term -->
+        <div>
+          <label class="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-2">Loan Term</label>
+          <div class="relative">
+            <select id="loan-term"
+              class="w-full border border-gray-200 rounded-xl py-3 px-4 pr-10 text-gray-900 font-semibold text-base focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition appearance-none bg-white cursor-pointer">
+              <option value="30">30 Years (Fixed)</option>
+              <option value="20">20 Years (Fixed)</option>
+              <option value="15">15 Years (Fixed)</option>
+              <option value="10">10 Years (Fixed)</option>
+            </select>
+            <svg class="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400 pointer-events-none" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
+          </div>
+          <p class="text-gray-400 text-xs mt-1.5 ml-1">Most common: 30 or 15 years</p>
+        </div>
+      </div>
+
+      <!-- Loan amount indicator -->
+      <div id="loan-indicator" class="hidden mt-4 bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 flex items-center justify-between">
+        <span class="text-gray-500 text-sm font-medium">Loan Amount (Principal)</span>
+        <span id="loan-amount-display" class="text-gray-900 font-extrabold text-base">$0</span>
+      </div>
+
+      <!-- PMI warning -->
+      <div id="pmi-warning" class="hidden mt-3 bg-amber-50 border border-amber-200 rounded-xl px-4 py-3 flex gap-2.5">
+        <svg class="w-4 h-4 text-amber-500 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd"/></svg>
+        <p class="text-amber-800 text-xs leading-relaxed"><strong>PMI Required:</strong> A down payment below 20% typically requires Private Mortgage Insurance (PMI), adding an estimated $50&ndash;$200+/month not included in this calculation.</p>
+      </div>
+
+      <!-- Error message -->
+      <div id="error-msg" class="hidden mt-4 bg-red-50 border border-red-200 text-red-700 text-sm px-4 py-3 rounded-xl flex items-center gap-2">
+        <svg class="w-4 h-4 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd"/></svg>
+        <span id="error-text">Please fill in all fields with valid numbers.</span>
+      </div>
+
+      <!-- Calculate Button -->
+      <button id="calc-btn"
+        class="mt-6 w-full bg-blue-600 hover:bg-blue-700 active:bg-blue-800 text-white font-bold text-base py-3.5 rounded-xl transition-all shadow-lg shadow-blue-600/25 hover:shadow-blue-700/30 hover:-translate-y-0.5">
+        Calculate My Payment &rarr;
+      </button>
+    </div>
+
+    <!-- ═══ RESULTS ═══ -->
+    <div id="results" class="hidden-soft hidden border-t border-gray-100">
+
+      <!-- Monthly Payment Hero -->
+      <div class="result-gradient px-7 py-7 text-white text-center">
+        <p class="text-blue-200 text-xs font-bold uppercase tracking-widest mb-2">Estimated Monthly Payment (P&amp;I)</p>
+        <div id="monthly-payment" class="text-5xl sm:text-6xl font-extrabold tracking-tight count-anim">$0</div>
+        <p class="text-blue-200 text-sm mt-2">
+          <span id="res-term">0</span>-year fixed &bull; <span id="res-rate">0</span>% annual rate
+        </p>
+      </div>
+
+      <!-- Stat Cards -->
+      <div class="grid grid-cols-3 divide-x divide-gray-100 border-b border-gray-100">
+        <div class="px-4 py-5 text-center">
+          <p class="text-gray-400 text-xs font-semibold uppercase tracking-wider mb-1.5">Loan Amount</p>
+          <p id="res-loan" class="text-gray-900 font-extrabold text-lg leading-tight">$0</p>
+        </div>
+        <div class="px-4 py-5 text-center">
+          <p class="text-gray-400 text-xs font-semibold uppercase tracking-wider mb-1.5">Total Payment</p>
+          <p id="res-total" class="text-gray-900 font-extrabold text-lg leading-tight">$0</p>
+        </div>
+        <div class="px-4 py-5 text-center">
+          <p class="text-gray-400 text-xs font-semibold uppercase tracking-wider mb-1.5">Total Interest</p>
+          <p id="res-interest" class="text-red-500 font-extrabold text-lg leading-tight">$0</p>
+        </div>
+      </div>
+
+      <!-- Visual Breakdown -->
+      <div class="px-7 py-6">
+        <p class="text-xs font-bold text-gray-500 uppercase tracking-wider mb-3">Total Payment Composition</p>
+        <div class="flex h-3 rounded-full overflow-hidden bg-gray-100 mb-3">
+          <div id="bar-principal" class="bar-fill bg-blue-500 h-full" style="width:0%"></div>
+          <div id="bar-interest-vis" class="bar-fill bg-red-400 h-full" style="width:0%"></div>
+        </div>
+        <div class="flex items-center justify-between text-xs text-gray-500 mb-6">
+          <div class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-blue-500 inline-block"></span> Principal <span id="pct-principal" class="font-bold text-gray-700 ml-1">0%</span></div>
+          <div class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-red-400 inline-block"></span> Interest <span id="pct-interest" class="font-bold text-gray-700 ml-1">0%</span></div>
+        </div>
+
+        <!-- Amortization summary table -->
+        <p class="text-xs font-bold text-gray-500 uppercase tracking-wider mb-3">Amortization Overview</p>
+        <div class="table-wrap rounded-xl border border-gray-100 overflow-hidden">
+          <table class="w-full text-sm">
+            <thead class="bg-gray-50 sticky top-0">
+              <tr>
+                <th class="text-left px-4 py-2.5 text-xs font-bold text-gray-500 uppercase tracking-wider">Year</th>
+                <th class="text-right px-4 py-2.5 text-xs font-bold text-gray-500 uppercase tracking-wider">Principal</th>
+                <th class="text-right px-4 py-2.5 text-xs font-bold text-gray-500 uppercase tracking-wider">Interest</th>
+                <th class="text-right px-4 py-2.5 text-xs font-bold text-gray-500 uppercase tracking-wider">Balance</th>
+              </tr>
+            </thead>
+            <tbody id="amort-table" class="divide-y divide-gray-50"></tbody>
+          </table>
+        </div>
+
+        <!-- Cost comparison for different terms -->
+        <div id="comparison" class="mt-6">
+          <p class="text-xs font-bold text-gray-500 uppercase tracking-wider mb-3">Term Comparison (same rate)</p>
+          <div id="comparison-rows" class="space-y-2"></div>
+        </div>
+
+        <!-- Disclaimer -->
+        <p class="text-gray-400 text-xs leading-relaxed mt-6 text-center">
+          This calculator estimates Principal &amp; Interest only. It does not include property taxes, homeowner's insurance, PMI, or HOA fees. Consult a licensed mortgage professional for a complete loan estimate.
+        </p>
+      </div>
+    </div><!-- /results -->
+  </div><!-- /card -->
+
+  <!-- Info box -->
+  <div class="mt-6 bg-blue-50 border border-blue-200 rounded-2xl p-5 flex gap-3">
+    <svg class="w-5 h-5 text-blue-500 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"/></svg>
+    <p class="text-blue-800 text-sm leading-relaxed">
+      <strong>Formula used:</strong> M = P &times; [r(1+r)<sup>n</sup>] / [(1+r)<sup>n</sup>&thinsp;&minus;&thinsp;1], where P is the loan principal, r is the monthly interest rate (annual&thinsp;/&thinsp;12), and n is the total number of monthly payments (years&thinsp;&times;&thinsp;12).
+    </p>
+  </div>
+
+</main>
+
+<!-- ═══ FOOTER ═══ -->
+<footer class="bg-gray-900 text-gray-400 py-8 px-4 mt-8">
+  <div class="max-w-5xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4 text-sm">
+    <span class="font-extrabold text-white">InsureCalc<span class="text-blue-400">Pro</span></span>
+    <div class="flex flex-wrap justify-center gap-5">
+      <a href="privacy.html" class="hover:text-blue-400 transition-colors">Privacy Policy</a>
+      <a href="terms.html" class="hover:text-blue-400 transition-colors">Terms of Service</a>
+      <a href="contact.html" class="hover:text-blue-400 transition-colors">Contact Us</a>
+    </div>
+    <p class="text-xs text-gray-500">&copy; 2025 InsureCalcPro. All rights reserved.</p>
+  </div>
+</footer>
+
+<script>
+(function () {
+  'use strict';
+
+  // ── Utilities ──────────────────────────────────────────────────────────────
+
+  const fmt    = (n) => '$' + Math.round(n).toLocaleString('en-US');
+  const fmtDec = (n) => '$' + n.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  const parseEl = (id) => parseFloat(document.getElementById(id).value.replace(/[$,\s]/g, '')) || 0;
+
+  // Format $ inputs with commas
+  function attachFormatter(id) {
+    const el = document.getElementById(id);
+    el.addEventListener('blur', () => {
+      const n = parseFloat(el.value.replace(/[$,\s]/g, ''));
+      if (!isNaN(n)) el.value = n.toLocaleString('en-US');
+      updateLoanIndicator();
+    });
+    el.addEventListener('focus', () => {
+      const n = parseFloat(el.value.replace(/[$,\s]/g, ''));
+      if (!isNaN(n)) el.value = n;
+    });
+    el.addEventListener('input', updateLoanIndicator);
+  }
+
+  ['home-price', 'down-payment'].forEach(attachFormatter);
+
+  // ── Live loan indicator + down payment bar ──────────────────────────────────
+
+  function updateLoanIndicator() {
+    const hp = parseEl('home-price');
+    const dp = parseEl('down-payment');
+    const loan = Math.max(0, hp - dp);
+
+    const indicator = document.getElementById('loan-indicator');
+    const dpBar     = document.getElementById('dp-bar');
+    const dpBadge   = document.getElementById('dp-pct-badge');
+    const pmiWarn   = document.getElementById('pmi-warning');
+
+    if (hp > 0) {
+      document.getElementById('loan-amount-display').textContent = fmt(loan);
+      indicator.classList.remove('hidden');
+
+      const dpPct = Math.min((dp / hp) * 100, 100);
+      dpBar.style.width = dpPct.toFixed(1) + '%';
+      dpBadge.textContent = dpPct.toFixed(1) + '%';
+
+      // PMI warning when down payment < 20%
+      if (dpPct < 20 && dp > 0) {
+        pmiWarn.classList.remove('hidden');
+      } else {
+        pmiWarn.classList.add('hidden');
+      }
+    } else {
+      indicator.classList.add('hidden');
+      dpBar.style.width = '0%';
+      dpBadge.textContent = '0%';
+      pmiWarn.classList.add('hidden');
+    }
+  }
+
+  // ── Error helpers ──────────────────────────────────────────────────────────
+
+  const resultsEl = document.getElementById('results');
+  const errorEl   = document.getElementById('error-msg');
+  const errorText = document.getElementById('error-text');
+
+  function showError(msg) {
+    errorText.textContent = msg;
+    errorEl.classList.remove('hidden');
+    resultsEl.classList.add('hidden-soft', 'hidden');
+  }
+  function hideError() { errorEl.classList.add('hidden'); }
+
+  // ── Core mortgage calculation ───────────────────────────────────────────────
+
+  function calcMonthlyPayment(principal, annualRate, termYears) {
+    const r = annualRate / 100 / 12;
+    const n = termYears * 12;
+    if (r === 0) return principal / n;
+    return principal * (r * Math.pow(1 + r, n)) / (Math.pow(1 + r, n) - 1);
+  }
+
+  function buildAmortization(principal, annualRate, termYears) {
+    const r       = annualRate / 100 / 12;
+    const monthly = calcMonthlyPayment(principal, annualRate, termYears);
+    let   balance = principal;
+    const years   = [];
+
+    for (let y = 1; y <= termYears; y++) {
+      let yearPrincipal = 0, yearInterest = 0;
+      for (let m = 0; m < 12; m++) {
+        if (balance <= 0) break;
+        const intPmt  = balance * r;
+        const prinPmt = Math.min(monthly - intPmt, balance);
+        yearInterest  += intPmt;
+        yearPrincipal += prinPmt;
+        balance       -= prinPmt;
+      }
+      years.push({ year: y, principal: yearPrincipal, interest: yearInterest, balance: Math.max(0, balance) });
+    }
+    return years;
+  }
+
+  // ── Render ─────────────────────────────────────────────────────────────────
+
+  function render(hp, dp, annualRate, termYears) {
+    const principal   = hp - dp;
+    const monthly     = calcMonthlyPayment(principal, annualRate, termYears);
+    const n           = termYears * 12;
+    const totalPaid   = monthly * n;
+    const totalInt    = totalPaid - principal;
+    const pctP        = totalPaid > 0 ? (principal / totalPaid) * 100 : 0;
+    const pctI        = totalPaid > 0 ? (totalInt  / totalPaid) * 100 : 0;
+
+    // Hero
+    document.getElementById('monthly-payment').textContent = fmtDec(monthly);
+    document.getElementById('res-term').textContent        = termYears;
+    document.getElementById('res-rate').textContent        = annualRate;
+
+    // Stats
+    document.getElementById('res-loan').textContent     = fmt(principal);
+    document.getElementById('res-total').textContent    = fmt(totalPaid);
+    document.getElementById('res-interest').textContent = fmt(totalInt);
+
+    // Bars
+    document.getElementById('bar-principal').style.width    = pctP.toFixed(1) + '%';
+    document.getElementById('bar-interest-vis').style.width = pctI.toFixed(1) + '%';
+    document.getElementById('pct-principal').textContent    = pctP.toFixed(1) + '%';
+    document.getElementById('pct-interest').textContent     = pctI.toFixed(1) + '%';
+
+    // Amortization table
+    const amortRows = buildAmortization(principal, annualRate, termYears);
+    const tbody = document.getElementById('amort-table');
+    tbody.innerHTML = amortRows.map((r, i) => `
+      <tr class="${i % 2 === 0 ? 'bg-white' : 'bg-gray-50/50'}">
+        <td class="px-4 py-2.5 text-gray-700 font-medium">Year ${r.year}</td>
+        <td class="px-4 py-2.5 text-right text-blue-600 font-semibold">${fmt(r.principal)}</td>
+        <td class="px-4 py-2.5 text-right text-red-500 font-semibold">${fmt(r.interest)}</td>
+        <td class="px-4 py-2.5 text-right text-gray-900 font-bold">${fmt(r.balance)}</td>
+      </tr>`).join('');
+
+    // Term comparison (same rate, different terms)
+    const terms = [10, 15, 20, 30].filter(t => t !== termYears);
+    const compRows = terms.map(t => {
+      const m = calcMonthlyPayment(principal, annualRate, t);
+      const diff = m - monthly;
+      const sign = diff >= 0 ? '+' : '';
+      return `
+        <div class="flex items-center justify-between bg-gray-50 rounded-xl px-4 py-3">
+          <span class="text-gray-600 text-sm font-medium">${t}-year term</span>
+          <div class="text-right">
+            <span class="text-gray-900 font-bold text-sm">${fmtDec(m)}/mo</span>
+            <span class="ml-2 text-xs font-semibold ${diff >= 0 ? 'text-red-500' : 'text-green-600'}">(${sign}${fmtDec(Math.abs(diff))})</span>
+          </div>
+        </div>`;
+    });
+    document.getElementById('comparison-rows').innerHTML = compRows.join('');
+
+    // Reveal
+    resultsEl.classList.remove('hidden');
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => { resultsEl.classList.remove('hidden-soft'); });
+    });
+    resultsEl.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }
+
+  // ── Button handler ─────────────────────────────────────────────────────────
+
+  document.getElementById('calc-btn').addEventListener('click', () => {
+    const hp       = parseEl('home-price');
+    const dp       = parseEl('down-payment');
+    const rate     = parseEl('rate');
+    const termYears = parseInt(document.getElementById('loan-term').value);
+
+    if (hp <= 0)              return showError('Please enter a valid Home Price greater than $0.');
+    if (dp < 0)               return showError('Down Payment cannot be negative.');
+    if (dp >= hp)             return showError('Down Payment must be less than the Home Price.');
+    if (rate <= 0 || rate > 30) return showError('Please enter a valid Annual Interest Rate (0.01%–30%).');
+    if (!termYears)           return showError('Please select a valid Loan Term.');
+
+    hideError();
+    render(hp, dp, rate, termYears);
+  });
+
+  // Allow Enter key
+  document.querySelectorAll('input').forEach(inp => {
+    inp.addEventListener('keydown', e => { if (e.key === 'Enter') document.getElementById('calc-btn').click(); });
+  });
+
+  // ── Mobile nav ─────────────────────────────────────────────────────────────
+
+  const hamburger  = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobile-menu');
+  const iconOpen   = document.getElementById('icon-open');
+  const iconClose  = document.getElementById('icon-close');
+
+  hamburger.addEventListener('click', () => {
+    const isOpen = mobileMenu.classList.contains('open');
+    mobileMenu.classList.toggle('open', !isOpen);
+    iconOpen.classList.toggle('hidden', !isOpen);
+    iconClose.classList.toggle('hidden', isOpen);
+  });
+
+})();
+</script>
+</body>
+</html>
