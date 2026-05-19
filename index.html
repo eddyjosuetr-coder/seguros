@@ -9,126 +9,294 @@
   <meta property="og:description" content="Estimate your life insurance needs in minutes using the trusted DIME method — free, private, and no sign-up required." />
   <meta property="og:type" content="website" />
   <title>Free Life Insurance Need Calculator (DIME Method) | InsureCalcPro</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
       theme: {
         extend: {
+          fontFamily: {
+            display: ['"DM Serif Display"', 'Georgia', 'serif'],
+          },
           colors: {
-            brand: { 50:'#eff6ff', 100:'#dbeafe', 200:'#bfdbfe', 300:'#93c5fd', 400:'#60a5fa', 500:'#3b82f6', 600:'#2563eb', 700:'#1d4ed8', 800:'#1e40af', 900:'#1e3a8a', 950:'#172554' }
+            navy: {
+              50:'#eef1f8', 100:'#d5ddf0', 200:'#aabae1', 300:'#7f97d2',
+              400:'#5474c3', 500:'#3457b4', 600:'#2843a0', 700:'#1e328c',
+              800:'#152372', 900:'#0d1b2a', 950:'#060e1a'
+            },
+            gold: {
+              50:'#fdf5e4', 100:'#fae9bc', 200:'#f5d27a', 300:'#f0bb38',
+              400:'#e8a91a', 500:'#c8921a', 600:'#a87215', 700:'#8a5a10',
+              800:'#6b4208', 900:'#4d2e05'
+            },
+            cream: {
+              50:'#fdfcf8', 100:'#faf7f0', 200:'#f5eede',
+              300:'#eddfca', 400:'#e0ceb0', 500:'#cfb890'
+            }
           }
         }
       }
     }
   </script>
   <style>
-    /* ── Range slider reset & styling ── */
+    body { font-family: 'Outfit', system-ui, sans-serif; }
+
+    /* ── Range slider — gold fill ── */
     input[type="range"] {
-      -webkit-appearance: none;
-      appearance: none;
-      width: 100%;
-      height: 5px;
-      border-radius: 9999px;
-      outline: none;
-      cursor: pointer;
+      -webkit-appearance: none; appearance: none;
+      width: 100%; height: 4px; border-radius: 9999px;
+      outline: none; cursor: pointer;
       background: linear-gradient(to right,
-        #2563eb 0%,
-        #2563eb var(--pct, 0%),
-        #e2e8f0 var(--pct, 0%),
-        #e2e8f0 100%);
+        #c8921a 0%, #c8921a var(--pct, 0%),
+        #e0ceb0 var(--pct, 0%), #e0ceb0 100%);
     }
     input[type="range"]::-webkit-slider-thumb {
-      -webkit-appearance: none;
-      width: 20px; height: 20px;
-      border-radius: 50%;
-      background: #fff;
-      border: 3px solid #2563eb;
-      box-shadow: 0 1px 6px rgba(37,99,235,.35);
-      cursor: pointer;
+      -webkit-appearance: none; width: 20px; height: 20px;
+      border-radius: 50%; background: #fff; border: 3px solid #c8921a;
+      box-shadow: 0 1px 6px rgba(200,146,26,.35); cursor: pointer;
       transition: box-shadow .15s;
     }
-    input[type="range"]::-webkit-slider-thumb:hover { box-shadow: 0 0 0 6px rgba(37,99,235,.15); }
+    input[type="range"]::-webkit-slider-thumb:hover { box-shadow: 0 0 0 7px rgba(200,146,26,.15); }
     input[type="range"]::-moz-range-thumb {
-      width: 20px; height: 20px;
-      border-radius: 50%;
-      background: #fff;
-      border: 3px solid #2563eb;
-      box-shadow: 0 1px 6px rgba(37,99,235,.35);
-      cursor: pointer;
+      width: 20px; height: 20px; border-radius: 50%; background: #fff;
+      border: 3px solid #c8921a; box-shadow: 0 1px 6px rgba(200,146,26,.35); cursor: pointer;
     }
 
-    /* ── Result number pop animation ── */
+    /* ── Result number pop ── */
     @keyframes pop { 0%,100%{transform:scale(1)} 40%{transform:scale(1.04)} }
     .pop { animation: pop .28s ease; }
 
     /* ── FAQ accordion ── */
     .faq-body { max-height:0; overflow:hidden; transition:max-height .3s ease; }
-    .faq-body.open { max-height:400px; }
+    .faq-body.open { max-height:600px; }
     .faq-chevron { transition:transform .3s ease; }
     .faq-chevron.open { transform:rotate(180deg); }
 
-    /* ── Smooth section fade-in ── */
-    .card { transition:box-shadow .2s, transform .2s; }
-    .card:hover { box-shadow:0 8px 30px rgba(30,58,138,.08); transform:translateY(-1px); }
+    /* ── Card hover ── */
+    .card { transition:box-shadow .22s, transform .22s; }
+    .card:hover { box-shadow:0 10px 32px rgba(13,27,42,.1); transform:translateY(-2px); }
+
+    /* ── Gold gradient text ── */
+    .text-gold-gradient {
+      background: linear-gradient(135deg, #a87215 0%, #f0bb38 50%, #c8921a 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+
+    /* ── Mobile nav drawer ── */
+    #mob-drawer { max-height:0; overflow:hidden; transition:max-height .35s ease, opacity .3s ease; opacity:0; }
+    #mob-drawer.open { max-height:440px; opacity:1; }
+
+    /* ── Nav pills ── */
+    .nav-pill-active { background:#0d1b2a; color:#faf7f0; box-shadow:0 4px 14px rgba(13,27,42,.25); }
+    .nav-pill-active:hover { background:#1e328c; }
+    .nav-pill-inactive { color:#64748b; background:transparent; }
+    .nav-pill-inactive:hover { background:#f5eede; color:#0d1b2a; }
+
+    /* ── Hero stagger ── */
+    @keyframes fadeUp { from{opacity:0;transform:translateY(22px)} to{opacity:1;transform:translateY(0)} }
+    .fade-up { opacity:0; animation:fadeUp .65s cubic-bezier(.22,.61,.36,1) forwards; }
+    .d1{animation-delay:.08s} .d2{animation-delay:.2s} .d3{animation-delay:.34s}
+    .d4{animation-delay:.48s} .d5{animation-delay:.62s}
+
+    /* ── Decorative section rule ── */
+    .gold-rule { display:inline-block; width:2.5rem; height:2px; background:#c8921a; border-radius:2px; vertical-align:middle; margin-right:.75rem; }
   </style>
 </head>
-<body class="bg-slate-50 text-slate-800 antialiased">
+<body class="bg-cream-100 text-navy-900 antialiased">
+
 
 <!-- ═══════════════════════════════════════════
      HEADER
 ════════════════════════════════════════════ -->
-<header class="bg-white/90 backdrop-blur sticky top-0 z-50 border-b border-slate-200 shadow-sm">
-  <div class="max-w-6xl mx-auto px-5 py-3.5 flex items-center justify-between gap-4">
-    <a href="#" class="flex items-center gap-2.5 flex-shrink-0">
-      <span class="w-8 h-8 rounded-lg bg-brand-600 flex items-center justify-center">
-        <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+<header class="bg-white/96 backdrop-blur sticky top-0 z-50 border-b border-cream-300 shadow-sm">
+  <div class="max-w-6xl mx-auto px-5">
+    <div class="flex items-center h-16 gap-4">
+
+      <!-- ── LOGO ── -->
+      <a href="index.html" class="flex items-center gap-3 flex-shrink-0 group">
+        <div class="relative w-9 h-9 flex-shrink-0">
+          <div class="absolute inset-0 rounded-xl bg-navy-900 shadow-md group-hover:shadow-lg group-hover:shadow-navy-900/40 transition-all duration-300"></div>
+          <div class="relative w-full h-full rounded-xl flex items-center justify-center">
+            <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 2L3 7v5c0 5.25 3.75 10.15 9 11.25C17.25 22.15 21 17.25 21 12V7L12 2z" fill="rgba(200,146,26,0.25)" stroke="#c8921a" stroke-width="1.8"/>
+              <polyline points="8,12 10.5,14.5 16,9" stroke="#faf7f0" stroke-width="2.2"/>
+            </svg>
+          </div>
+        </div>
+        <div class="leading-none">
+          <span class="font-display text-[18px] text-navy-900">InsureCalc</span><span class="font-display text-[18px] text-gold-500">Pro</span>
+        </div>
+      </a>
+
+      <!-- ── DESKTOP NAV (centered) ── -->
+      <nav class="hidden md:flex flex-1 items-center justify-center gap-2 text-sm font-semibold">
+        <a href="index.html"
+           class="nav-pill-active inline-flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-semibold transition-all">
+          <svg class="w-4 h-4 opacity-80" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 2L3 7v5c0 5.25 3.75 10.15 9 11.25C17.25 22.15 21 17.25 21 12V7L12 2z"/>
+            <polyline points="8,12 10.5,14.5 16,9"/>
+          </svg>
+          Life Insurance
+        </a>
+        <a href="compound-interest.html"
+           class="nav-pill-inactive inline-flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-semibold transition-all">
+          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="22,12 18,12 15,21 9,3 6,12 2,12"/>
+          </svg>
+          Compound Interest
+        </a>
+        <a href="mortgage-calculator.html"
+           class="nav-pill-inactive inline-flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-semibold transition-all">
+          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/>
+            <polyline points="9,22 9,12 15,12 15,22"/>
+          </svg>
+          Mortgage Calc
+        </a>
+      </nav>
+
+      <!-- ── CTA (desktop) ── -->
+      <a href="#calculator"
+         class="hidden md:inline-flex flex-shrink-0 items-center gap-1.5 bg-gold-500 hover:bg-gold-600 text-white text-sm font-semibold px-4 py-2 rounded-xl transition-colors shadow-sm shadow-gold-500/30">
+        Get Estimate &rarr;
+      </a>
+
+      <!-- ── HAMBURGER (mobile) ── -->
+      <button id="ham-btn" class="md:hidden ml-auto p-2 rounded-xl text-slate-500 hover:bg-cream-200 transition-colors" aria-label="Open menu">
+        <svg id="ham-open" class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/>
         </svg>
-      </span>
-      <span class="font-extrabold text-slate-900 text-base tracking-tight">InsureCalc<span class="text-brand-600">Pro</span></span>
-    </a>
-    <nav class="hidden md:flex items-center gap-4 text-sm font-medium text-slate-500">
-      <a href="index.html" class="px-3 py-2 text-brand-600 font-bold bg-brand-50 rounded-lg">Life Insurance</a>
-      <a href="compound-interest.html" class="px-3 py-2 hover:text-brand-600 hover:bg-slate-50 rounded-lg transition-colors">Compound Interest</a>
-      <a href="mortgage-calculator.html" class="px-3 py-2 hover:text-brand-600 hover:bg-slate-50 rounded-lg transition-colors">Mortgage Calc</a>
-    </nav>
-    <a href="#calculator"
-       class="flex-shrink-0 bg-brand-600 hover:bg-brand-700 text-white text-sm font-semibold px-4 py-2 rounded-lg transition-colors shadow-sm shadow-brand-600/30">
-      Get Estimate &rarr;
-    </a>
+        <svg id="ham-close" class="w-5 h-5 hidden" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/>
+        </svg>
+      </button>
+    </div>
+
+    <!-- ── MOBILE DRAWER ── -->
+    <div id="mob-drawer">
+      <nav class="flex flex-col gap-2 pb-4 pt-1">
+        <a href="index.html"
+           class="flex items-center gap-3 px-4 py-3 rounded-xl bg-navy-900 text-cream-100 font-semibold text-sm shadow shadow-navy-900/30">
+          <span class="w-8 h-8 rounded-lg bg-white/10 flex items-center justify-center flex-shrink-0">
+            <svg class="w-4 h-4 text-gold-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 2L3 7v5c0 5.25 3.75 10.15 9 11.25C17.25 22.15 21 17.25 21 12V7L12 2z"/>
+              <polyline points="8,12 10.5,14.5 16,9"/>
+            </svg>
+          </span>
+          <div>
+            <p class="font-bold leading-none">Life Insurance</p>
+            <p class="text-cream-400 text-xs mt-0.5">DIME Need Calculator</p>
+          </div>
+          <svg class="w-4 h-4 ml-auto opacity-50" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
+        </a>
+        <a href="compound-interest.html"
+           class="flex items-center gap-3 px-4 py-3 rounded-xl border border-cream-300 bg-white hover:bg-cream-100 text-navy-900 font-semibold text-sm transition-colors">
+          <span class="w-8 h-8 rounded-lg bg-green-50 flex items-center justify-center flex-shrink-0">
+            <svg class="w-4 h-4 text-green-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="22,12 18,12 15,21 9,3 6,12 2,12"/>
+            </svg>
+          </span>
+          <div>
+            <p class="font-bold leading-none">Compound Interest</p>
+            <p class="text-slate-400 text-xs mt-0.5">Investment Growth Calculator</p>
+          </div>
+          <svg class="w-4 h-4 ml-auto text-slate-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
+        </a>
+        <a href="mortgage-calculator.html"
+           class="flex items-center gap-3 px-4 py-3 rounded-xl border border-cream-300 bg-white hover:bg-cream-100 text-navy-900 font-semibold text-sm transition-colors">
+          <span class="w-8 h-8 rounded-lg bg-purple-50 flex items-center justify-center flex-shrink-0">
+            <svg class="w-4 h-4 text-purple-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/>
+              <polyline points="9,22 9,12 15,12 15,22"/>
+            </svg>
+          </span>
+          <div>
+            <p class="font-bold leading-none">Mortgage Calc</p>
+            <p class="text-slate-400 text-xs mt-0.5">Monthly Payment Estimator</p>
+          </div>
+          <svg class="w-4 h-4 ml-auto text-slate-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
+        </a>
+        <a href="#calculator"
+           class="mt-1 flex items-center justify-center gap-2 px-4 py-3 rounded-xl bg-gold-500 hover:bg-gold-600 text-white font-bold text-sm transition-colors shadow shadow-gold-500/30">
+          Get My Free Estimate &rarr;
+        </a>
+      </nav>
+    </div>
   </div>
 </header>
+
+<script>
+  (function(){
+    const btn      = document.getElementById('ham-btn');
+    const drawer   = document.getElementById('mob-drawer');
+    const iconOpen  = document.getElementById('ham-open');
+    const iconClose = document.getElementById('ham-close');
+    btn.addEventListener('click', function(){
+      const open = drawer.classList.toggle('open');
+      iconOpen.classList.toggle('hidden', open);
+      iconClose.classList.toggle('hidden', !open);
+    });
+  })();
+</script>
 
 
 <!-- ═══════════════════════════════════════════
      HERO
 ════════════════════════════════════════════ -->
-<section class="relative bg-gradient-to-br from-brand-950 via-brand-900 to-brand-700 text-white overflow-hidden">
-  <!-- decorative blobs -->
-  <div class="absolute inset-0 overflow-hidden pointer-events-none" aria-hidden="true">
-    <div class="absolute -top-32 -right-32 w-[500px] h-[500px] rounded-full bg-brand-600/20 blur-3xl"></div>
-    <div class="absolute bottom-0 -left-20 w-[400px] h-[400px] rounded-full bg-cyan-500/10 blur-3xl"></div>
+<section class="relative bg-navy-900 text-cream-100 overflow-hidden">
+  <!-- Decorative background -->
+  <div class="absolute inset-0 pointer-events-none" aria-hidden="true">
+    <div class="absolute -top-40 -right-40 w-[600px] h-[600px] rounded-full bg-navy-800/60 blur-3xl"></div>
+    <div class="absolute bottom-0 left-0 w-[500px] h-[400px] rounded-full bg-gold-900/10 blur-3xl"></div>
+    <!-- Giant ghost letters -->
+    <div class="absolute right-0 inset-y-0 hidden xl:flex items-center select-none pr-10">
+      <span class="font-display text-[13rem] text-navy-800 leading-none tracking-[.15em] opacity-60">DIME</span>
+    </div>
+    <!-- Gold accent line -->
+    <div class="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-gold-500/30 to-transparent"></div>
   </div>
 
-  <div class="relative max-w-3xl mx-auto px-5 py-20 text-center">
-    <span class="inline-flex items-center gap-2 bg-white/10 backdrop-blur border border-white/20 rounded-full px-4 py-1.5 text-xs font-semibold text-blue-100 mb-7 uppercase tracking-wider">
-      <svg class="w-3.5 h-3.5 text-cyan-300" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+  <div class="relative max-w-5xl mx-auto px-5 py-20 sm:py-24">
+    <!-- Badge -->
+    <div class="fade-up d1 inline-flex items-center gap-2 border border-gold-500/30 bg-gold-500/10 rounded-full px-4 py-1.5 text-xs font-semibold text-gold-300 mb-8 uppercase tracking-widest">
+      <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
       Free &middot; Instant &middot; No Sign-up Required
-    </span>
+    </div>
 
-    <h1 class="text-4xl sm:text-5xl font-extrabold leading-tight tracking-tight mb-5">
-      Free Life Insurance Need<br>Calculator <span class="text-cyan-300">(DIME Method)</span>
+    <!-- Headline -->
+    <h1 class="fade-up d2 font-display text-4xl sm:text-5xl md:text-[3.75rem] leading-[1.1] tracking-tight mb-6 max-w-3xl">
+      Free Life Insurance Need<br>
+      <em class="text-gold-gradient not-italic">Calculator</em>
+      <span class="text-cream-400 font-display text-2xl sm:text-3xl md:text-4xl">&thinsp;(DIME Method)</span>
     </h1>
-    <p class="text-blue-100 text-lg sm:text-xl leading-relaxed max-w-2xl mx-auto">
+
+    <p class="fade-up d3 text-cream-300 text-lg sm:text-xl leading-relaxed max-w-2xl mb-10">
       Figuring out how much life insurance you need doesn&rsquo;t have to be overwhelming.
       Our free DIME calculator gives you a clear, personalized estimate in under 2 minutes &mdash;
       no agent, no pressure, no personal data required.
     </p>
 
-    <div class="mt-10 flex flex-wrap justify-center gap-x-8 gap-y-3 text-sm text-blue-100">
-      <div class="flex items-center gap-2"><svg class="w-4 h-4 text-cyan-300" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg> Trusted DIME Formula</div>
-      <div class="flex items-center gap-2"><svg class="w-4 h-4 text-cyan-300" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg> 100% Private &amp; Anonymous</div>
-      <div class="flex items-center gap-2"><svg class="w-4 h-4 text-cyan-300" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg> Real-time Results</div>
+    <div class="fade-up d4 flex flex-wrap gap-x-7 gap-y-3 text-sm text-cream-300">
+      <div class="flex items-center gap-2">
+        <span class="w-5 h-5 rounded-full bg-gold-500/20 border border-gold-500/40 flex items-center justify-center flex-shrink-0">
+          <svg class="w-3 h-3 text-gold-400" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+        </span>
+        Trusted DIME Formula
+      </div>
+      <div class="flex items-center gap-2">
+        <span class="w-5 h-5 rounded-full bg-gold-500/20 border border-gold-500/40 flex items-center justify-center flex-shrink-0">
+          <svg class="w-3 h-3 text-gold-400" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+        </span>
+        100% Private &amp; Anonymous
+      </div>
+      <div class="flex items-center gap-2">
+        <span class="w-5 h-5 rounded-full bg-gold-500/20 border border-gold-500/40 flex items-center justify-center flex-shrink-0">
+          <svg class="w-3 h-3 text-gold-400" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+        </span>
+        Real-time Results
+      </div>
     </div>
   </div>
 </section>
@@ -137,169 +305,173 @@
 <!-- ═══════════════════════════════════════════
      CALCULATOR
 ════════════════════════════════════════════ -->
-<main id="calculator" class="max-w-5xl mx-auto px-5 py-14">
+<main id="calculator" class="bg-cream-100">
+  <div class="max-w-5xl mx-auto px-5 py-14">
 
-  <!-- ── RESULT CARD ── -->
-  <div id="result-card" class="relative bg-gradient-to-r from-brand-800 to-brand-600 text-white rounded-2xl p-6 sm:p-8 mb-10 shadow-2xl shadow-brand-600/30 overflow-hidden">
-    <div class="absolute top-0 right-0 w-64 h-64 bg-white/5 rounded-full translate-x-24 -translate-y-24 pointer-events-none"></div>
+    <!-- ── RESULT CARD ── -->
+    <div id="result-card" class="relative bg-navy-900 text-cream-100 rounded-2xl p-6 sm:p-8 mb-10 shadow-2xl shadow-navy-900/30 overflow-hidden">
+      <!-- Decorative rings -->
+      <div class="absolute top-0 right-0 w-80 h-80 rounded-full bg-gold-500/5 translate-x-28 -translate-y-28 pointer-events-none"></div>
+      <div class="absolute bottom-0 left-0 w-56 h-56 rounded-full bg-navy-800/80 -translate-x-20 translate-y-20 pointer-events-none"></div>
 
-    <div class="relative flex flex-col sm:flex-row sm:items-center justify-between gap-6">
-      <!-- Total -->
-      <div>
-        <p class="text-brand-200 text-xs font-semibold uppercase tracking-widest mb-2">Your Estimated Life Insurance Need</p>
-        <div id="result-total" class="text-5xl sm:text-6xl font-extrabold tracking-tight tabular-nums">$0</div>
-        <p class="text-brand-200 text-sm mt-2">Coverage level: <span id="result-tier" class="text-white font-semibold">&mdash;</span></p>
-      </div>
-      <!-- Mini stats -->
-      <div class="grid grid-cols-2 sm:grid-cols-1 gap-3 sm:min-w-[160px]">
-        <div class="bg-white/10 rounded-xl px-4 py-3 backdrop-blur-sm">
-          <p class="text-brand-200 text-xs font-medium">Income Replacement</p>
-          <p id="stat-income" class="text-white font-bold text-base tabular-nums mt-0.5">$0</p>
-        </div>
-        <div class="bg-white/10 rounded-xl px-4 py-3 backdrop-blur-sm">
-          <p class="text-brand-200 text-xs font-medium">Obligations Covered</p>
-          <p id="stat-obligations" class="text-white font-bold text-base tabular-nums mt-0.5">$0</p>
-        </div>
-      </div>
-    </div>
-
-    <!-- Breakdown bars -->
-    <div class="relative mt-6 pt-5 border-t border-white/20">
-      <p class="text-brand-200 text-xs font-semibold uppercase tracking-wider mb-3">Coverage Breakdown</p>
-      <div class="grid grid-cols-4 gap-3">
-        <div class="text-center">
-          <div class="h-1.5 rounded-full bg-white/20 mb-2 overflow-hidden"><div id="bar-d" class="h-full rounded-full bg-red-300 transition-all duration-500" style="width:0%"></div></div>
-          <p class="text-white/70 text-xs">Debt</p>
-          <p id="bd-d" class="text-white text-xs font-bold tabular-nums mt-0.5">$0</p>
-        </div>
-        <div class="text-center">
-          <div class="h-1.5 rounded-full bg-white/20 mb-2 overflow-hidden"><div id="bar-i" class="h-full rounded-full bg-green-300 transition-all duration-500" style="width:0%"></div></div>
-          <p class="text-white/70 text-xs">Income</p>
-          <p id="bd-i" class="text-white text-xs font-bold tabular-nums mt-0.5">$0</p>
-        </div>
-        <div class="text-center">
-          <div class="h-1.5 rounded-full bg-white/20 mb-2 overflow-hidden"><div id="bar-m" class="h-full rounded-full bg-blue-300 transition-all duration-500" style="width:0%"></div></div>
-          <p class="text-white/70 text-xs">Mortgage</p>
-          <p id="bd-m" class="text-white text-xs font-bold tabular-nums mt-0.5">$0</p>
-        </div>
-        <div class="text-center">
-          <div class="h-1.5 rounded-full bg-white/20 mb-2 overflow-hidden"><div id="bar-e" class="h-full rounded-full bg-purple-300 transition-all duration-500" style="width:0%"></div></div>
-          <p class="text-white/70 text-xs">Education</p>
-          <p id="bd-e" class="text-white text-xs font-bold tabular-nums mt-0.5">$0</p>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- ── DIME INPUT CARDS ── -->
-  <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-
-    <!-- D: Debt -->
-    <div class="card bg-white rounded-2xl p-6 border border-slate-100 shadow-sm">
-      <div class="flex items-center gap-3 mb-5">
-        <span class="w-10 h-10 rounded-xl bg-red-50 text-red-500 font-extrabold text-xl flex items-center justify-center flex-shrink-0">D</span>
+      <div class="relative flex flex-col sm:flex-row sm:items-center justify-between gap-6">
+        <!-- Total -->
         <div>
-          <h2 class="font-bold text-slate-900 leading-none">Debt</h2>
-          <p class="text-slate-500 text-xs mt-1">Credit cards, auto loans, personal loans</p>
+          <p class="text-gold-400/80 text-xs font-semibold uppercase tracking-widest mb-3">Your Estimated Life Insurance Need</p>
+          <div id="result-total" class="font-display text-5xl sm:text-6xl md:text-7xl text-gold-gradient tabular-nums">$0</div>
+          <p class="text-cream-300 text-sm mt-2.5">Coverage level: <span id="result-tier" class="text-cream-100 font-semibold">&mdash;</span></p>
+        </div>
+        <!-- Mini stats -->
+        <div class="grid grid-cols-2 sm:grid-cols-1 gap-3 sm:min-w-[175px]">
+          <div class="bg-white/5 border border-white/10 rounded-xl px-4 py-3">
+            <p class="text-cream-400 text-xs font-medium">Income Replacement</p>
+            <p id="stat-income" class="text-cream-100 font-bold text-base tabular-nums mt-0.5">$0</p>
+          </div>
+          <div class="bg-white/5 border border-white/10 rounded-xl px-4 py-3">
+            <p class="text-cream-400 text-xs font-medium">Obligations Covered</p>
+            <p id="stat-obligations" class="text-cream-100 font-bold text-base tabular-nums mt-0.5">$0</p>
+          </div>
         </div>
       </div>
-      <label class="block text-xs font-semibold text-slate-400 uppercase tracking-wider mb-1.5">Total Outstanding Debt</label>
-      <div class="relative mb-4">
-        <span class="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 font-semibold select-none">$</span>
-        <input id="debt-text" type="text" inputmode="numeric" value="0"
-          class="w-full border border-slate-200 rounded-xl pl-7 pr-4 py-2.5 text-lg font-bold text-slate-900 focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent transition" />
+
+      <!-- Breakdown bars -->
+      <div class="relative mt-6 pt-5 border-t border-white/10">
+        <p class="text-gold-400/60 text-xs font-semibold uppercase tracking-wider mb-3">Coverage Breakdown</p>
+        <div class="grid grid-cols-4 gap-3">
+          <div class="text-center">
+            <div class="h-1.5 rounded-full bg-white/10 mb-2 overflow-hidden"><div id="bar-d" class="h-full rounded-full bg-red-300 transition-all duration-500" style="width:0%"></div></div>
+            <p class="text-cream-300/70 text-xs">Debt</p>
+            <p id="bd-d" class="text-cream-100 text-xs font-bold tabular-nums mt-0.5">$0</p>
+          </div>
+          <div class="text-center">
+            <div class="h-1.5 rounded-full bg-white/10 mb-2 overflow-hidden"><div id="bar-i" class="h-full rounded-full bg-emerald-300 transition-all duration-500" style="width:0%"></div></div>
+            <p class="text-cream-300/70 text-xs">Income</p>
+            <p id="bd-i" class="text-cream-100 text-xs font-bold tabular-nums mt-0.5">$0</p>
+          </div>
+          <div class="text-center">
+            <div class="h-1.5 rounded-full bg-white/10 mb-2 overflow-hidden"><div id="bar-m" class="h-full rounded-full bg-blue-300 transition-all duration-500" style="width:0%"></div></div>
+            <p class="text-cream-300/70 text-xs">Mortgage</p>
+            <p id="bd-m" class="text-cream-100 text-xs font-bold tabular-nums mt-0.5">$0</p>
+          </div>
+          <div class="text-center">
+            <div class="h-1.5 rounded-full bg-white/10 mb-2 overflow-hidden"><div id="bar-e" class="h-full rounded-full bg-gold-300 transition-all duration-500" style="width:0%"></div></div>
+            <p class="text-cream-300/70 text-xs">Education</p>
+            <p id="bd-e" class="text-cream-100 text-xs font-bold tabular-nums mt-0.5">$0</p>
+          </div>
+        </div>
       </div>
-      <input id="debt-range" type="range" min="0" max="500000" step="1000" value="0" />
-      <div class="flex justify-between text-xs text-slate-400 mt-1.5"><span>$0</span><span>$500,000</span></div>
     </div>
 
-    <!-- I: Income -->
-    <div class="card bg-white rounded-2xl p-6 border border-slate-100 shadow-sm">
-      <div class="flex items-center gap-3 mb-5">
-        <span class="w-10 h-10 rounded-xl bg-green-50 text-green-500 font-extrabold text-xl flex items-center justify-center flex-shrink-0">I</span>
-        <div>
-          <h2 class="font-bold text-slate-900 leading-none">Income</h2>
-          <p class="text-slate-500 text-xs mt-1">Annual income &times; years your family needs support</p>
-        </div>
-      </div>
-      <label class="block text-xs font-semibold text-slate-400 uppercase tracking-wider mb-1.5">Annual Gross Income</label>
-      <div class="relative mb-4">
-        <span class="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 font-semibold select-none">$</span>
-        <input id="income-text" type="text" inputmode="numeric" value="0"
-          class="w-full border border-slate-200 rounded-xl pl-7 pr-4 py-2.5 text-lg font-bold text-slate-900 focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent transition" />
-      </div>
-      <input id="income-range" type="range" min="0" max="500000" step="1000" value="0" />
-      <div class="flex justify-between text-xs text-slate-400 mt-1.5 mb-5"><span>$0</span><span>$500,000</span></div>
+    <!-- ── DIME INPUT CARDS ── -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
 
-      <!-- Years sub-control -->
-      <div class="border-t border-slate-100 pt-4">
-        <div class="flex items-center justify-between mb-2">
-          <label class="text-xs font-semibold text-slate-400 uppercase tracking-wider">Years to Provide for Family</label>
-          <span id="years-badge" class="bg-brand-50 text-brand-700 text-sm font-bold px-3 py-0.5 rounded-full tabular-nums">10 yrs</span>
+      <!-- D: Debt -->
+      <div class="card bg-white rounded-2xl p-6 border border-cream-300 shadow-sm">
+        <div class="flex items-center gap-3 mb-5">
+          <span class="w-11 h-11 rounded-xl bg-red-500 text-white flex items-center justify-center flex-shrink-0 shadow-sm shadow-red-500/30"><svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"/></svg></span>
+          <div>
+            <h2 class="font-semibold text-navy-900 leading-none">Debt</h2>
+            <p class="text-slate-500 text-xs mt-1">Credit cards, auto loans, personal loans</p>
+          </div>
         </div>
-        <input id="years-range" type="range" min="1" max="30" step="1" value="10" />
-        <div class="flex justify-between text-xs text-slate-400 mt-1.5"><span>1 yr</span><span>30 yrs</span></div>
+        <label class="block text-xs font-semibold text-slate-400 uppercase tracking-wider mb-1.5">Total Outstanding Debt</label>
+        <div class="relative mb-4">
+          <span class="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 font-semibold select-none">$</span>
+          <input id="debt-text" type="text" inputmode="numeric" value="0"
+            class="w-full border border-cream-300 rounded-xl pl-7 pr-4 py-2.5 text-lg font-bold text-navy-900 focus:outline-none focus:ring-2 focus:ring-gold-400 focus:border-transparent transition bg-cream-50" />
+        </div>
+        <input id="debt-range" type="range" min="0" max="500000" step="1000" value="0" />
+        <div class="flex justify-between text-xs text-slate-400 mt-1.5"><span>$0</span><span>$500,000</span></div>
       </div>
+
+      <!-- I: Income -->
+      <div class="card bg-white rounded-2xl p-6 border border-cream-300 shadow-sm">
+        <div class="flex items-center gap-3 mb-5">
+          <span class="w-11 h-11 rounded-xl bg-emerald-600 text-white flex items-center justify-center flex-shrink-0 shadow-sm shadow-emerald-600/30"><svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg></span>
+          <div>
+            <h2 class="font-semibold text-navy-900 leading-none">Income</h2>
+            <p class="text-slate-500 text-xs mt-1">Annual income &times; years your family needs support</p>
+          </div>
+        </div>
+        <label class="block text-xs font-semibold text-slate-400 uppercase tracking-wider mb-1.5">Annual Gross Income</label>
+        <div class="relative mb-4">
+          <span class="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 font-semibold select-none">$</span>
+          <input id="income-text" type="text" inputmode="numeric" value="0"
+            class="w-full border border-cream-300 rounded-xl pl-7 pr-4 py-2.5 text-lg font-bold text-navy-900 focus:outline-none focus:ring-2 focus:ring-gold-400 focus:border-transparent transition bg-cream-50" />
+        </div>
+        <input id="income-range" type="range" min="0" max="500000" step="1000" value="0" />
+        <div class="flex justify-between text-xs text-slate-400 mt-1.5 mb-5"><span>$0</span><span>$500,000</span></div>
+
+        <!-- Years sub-control -->
+        <div class="border-t border-cream-200 pt-4">
+          <div class="flex items-center justify-between mb-2">
+            <label class="text-xs font-semibold text-slate-400 uppercase tracking-wider">Years to Provide for Family</label>
+            <span id="years-badge" class="bg-gold-50 text-gold-700 border border-gold-200 text-sm font-bold px-3 py-0.5 rounded-full tabular-nums">10 yrs</span>
+          </div>
+          <input id="years-range" type="range" min="1" max="30" step="1" value="10" />
+          <div class="flex justify-between text-xs text-slate-400 mt-1.5"><span>1 yr</span><span>30 yrs</span></div>
+        </div>
+      </div>
+
+      <!-- M: Mortgage -->
+      <div class="card bg-white rounded-2xl p-6 border border-cream-300 shadow-sm">
+        <div class="flex items-center gap-3 mb-5">
+          <span class="w-11 h-11 rounded-xl bg-navy-800 text-cream-200 flex items-center justify-center flex-shrink-0 shadow-sm shadow-navy-800/30"><svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg></span>
+          <div>
+            <h2 class="font-semibold text-navy-900 leading-none">Mortgage</h2>
+            <p class="text-slate-500 text-xs mt-1">Remaining balance on your home loan</p>
+          </div>
+        </div>
+        <label class="block text-xs font-semibold text-slate-400 uppercase tracking-wider mb-1.5">Mortgage Balance Remaining</label>
+        <div class="relative mb-4">
+          <span class="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 font-semibold select-none">$</span>
+          <input id="mortgage-text" type="text" inputmode="numeric" value="0"
+            class="w-full border border-cream-300 rounded-xl pl-7 pr-4 py-2.5 text-lg font-bold text-navy-900 focus:outline-none focus:ring-2 focus:ring-gold-400 focus:border-transparent transition bg-cream-50" />
+        </div>
+        <input id="mortgage-range" type="range" min="0" max="1000000" step="5000" value="0" />
+        <div class="flex justify-between text-xs text-slate-400 mt-1.5"><span>$0</span><span>$1,000,000</span></div>
+      </div>
+
+      <!-- E: Education -->
+      <div class="card bg-white rounded-2xl p-6 border border-cream-300 shadow-sm">
+        <div class="flex items-center gap-3 mb-5">
+          <span class="w-11 h-11 rounded-xl bg-purple-600 text-white flex items-center justify-center flex-shrink-0 shadow-sm shadow-purple-600/30"><svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg></span>
+          <div>
+            <h2 class="font-semibold text-navy-900 leading-none">Education</h2>
+            <p class="text-slate-500 text-xs mt-1">Estimated college costs for your children</p>
+          </div>
+        </div>
+        <label class="block text-xs font-semibold text-slate-400 uppercase tracking-wider mb-1.5">Total Education Fund Needed</label>
+        <div class="relative mb-4">
+          <span class="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 font-semibold select-none">$</span>
+          <input id="education-text" type="text" inputmode="numeric" value="0"
+            class="w-full border border-cream-300 rounded-xl pl-7 pr-4 py-2.5 text-lg font-bold text-navy-900 focus:outline-none focus:ring-2 focus:ring-gold-400 focus:border-transparent transition bg-cream-50" />
+        </div>
+        <input id="education-range" type="range" min="0" max="500000" step="5000" value="0" />
+        <div class="flex justify-between text-xs text-slate-400 mt-1.5"><span>$0</span><span>$500,000</span></div>
+      </div>
+    </div><!-- /grid -->
+
+    <!-- Reset -->
+    <div class="flex justify-center mt-8">
+      <button id="reset-btn"
+        class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl border-2 border-cream-300 text-slate-500 font-semibold text-sm hover:border-gold-400 hover:text-gold-600 transition-all">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/>
+        </svg>
+        Reset All Fields
+      </button>
     </div>
 
-    <!-- M: Mortgage -->
-    <div class="card bg-white rounded-2xl p-6 border border-slate-100 shadow-sm">
-      <div class="flex items-center gap-3 mb-5">
-        <span class="w-10 h-10 rounded-xl bg-blue-50 text-brand-600 font-extrabold text-xl flex items-center justify-center flex-shrink-0">M</span>
-        <div>
-          <h2 class="font-bold text-slate-900 leading-none">Mortgage</h2>
-          <p class="text-slate-500 text-xs mt-1">Remaining balance on your home loan</p>
-        </div>
-      </div>
-      <label class="block text-xs font-semibold text-slate-400 uppercase tracking-wider mb-1.5">Mortgage Balance Remaining</label>
-      <div class="relative mb-4">
-        <span class="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 font-semibold select-none">$</span>
-        <input id="mortgage-text" type="text" inputmode="numeric" value="0"
-          class="w-full border border-slate-200 rounded-xl pl-7 pr-4 py-2.5 text-lg font-bold text-slate-900 focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent transition" />
-      </div>
-      <input id="mortgage-range" type="range" min="0" max="1000000" step="5000" value="0" />
-      <div class="flex justify-between text-xs text-slate-400 mt-1.5"><span>$0</span><span>$1,000,000</span></div>
-    </div>
-
-    <!-- E: Education -->
-    <div class="card bg-white rounded-2xl p-6 border border-slate-100 shadow-sm">
-      <div class="flex items-center gap-3 mb-5">
-        <span class="w-10 h-10 rounded-xl bg-purple-50 text-purple-500 font-extrabold text-xl flex items-center justify-center flex-shrink-0">E</span>
-        <div>
-          <h2 class="font-bold text-slate-900 leading-none">Education</h2>
-          <p class="text-slate-500 text-xs mt-1">Estimated college costs for your children</p>
-        </div>
-      </div>
-      <label class="block text-xs font-semibold text-slate-400 uppercase tracking-wider mb-1.5">Total Education Fund Needed</label>
-      <div class="relative mb-4">
-        <span class="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 font-semibold select-none">$</span>
-        <input id="education-text" type="text" inputmode="numeric" value="0"
-          class="w-full border border-slate-200 rounded-xl pl-7 pr-4 py-2.5 text-lg font-bold text-slate-900 focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent transition" />
-      </div>
-      <input id="education-range" type="range" min="0" max="500000" step="5000" value="0" />
-      <div class="flex justify-between text-xs text-slate-400 mt-1.5"><span>$0</span><span>$500,000</span></div>
-    </div>
-  </div><!-- /grid -->
-
-  <!-- Reset -->
-  <div class="flex justify-center mt-8">
-    <button id="reset-btn"
-      class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl border-2 border-slate-200 text-slate-500 font-semibold text-sm hover:border-brand-400 hover:text-brand-600 transition-all">
-      <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/>
+    <!-- Disclaimer -->
+    <div class="mt-8 flex gap-3.5 bg-amber-50 border border-amber-200 rounded-2xl p-5">
+      <svg class="w-5 h-5 text-amber-500 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+        <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"/>
       </svg>
-      Reset All Fields
-    </button>
-  </div>
-
-  <!-- Disclaimer -->
-  <div class="mt-8 flex gap-3.5 bg-amber-50 border border-amber-200 rounded-2xl p-5">
-    <svg class="w-5 h-5 text-amber-500 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
-      <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"/>
-    </svg>
-    <p class="text-amber-800 text-sm leading-relaxed">
-      <strong>Educational Disclaimer:</strong> This tool provides an estimate for informational purposes only and does not constitute financial, tax, or insurance advice. Consult a licensed insurance professional before making any coverage decisions.
-    </p>
+      <p class="text-amber-800 text-sm leading-relaxed">
+        <strong>Educational Disclaimer:</strong> This tool provides an estimate for informational purposes only and does not constitute financial, tax, or insurance advice. Consult a licensed insurance professional before making any coverage decisions.
+      </p>
+    </div>
   </div>
 </main><!-- /calculator -->
 
@@ -309,19 +481,19 @@
 ════════════════════════════════════════════ -->
 
 <!-- ── Section 1: What is the DIME Method ── -->
-<section id="what-is-dime" class="bg-white border-t border-slate-100 py-16 px-5">
+<section id="what-is-dime" class="bg-white border-t border-cream-200 py-16 px-5">
   <div class="max-w-5xl mx-auto">
 
     <div class="max-w-3xl mb-10">
-      <span class="inline-block text-xs font-bold uppercase tracking-widest text-brand-600 mb-3">Understanding the Formula</span>
-      <h2 class="text-3xl sm:text-4xl font-extrabold text-blue-900 leading-tight mb-5">
+      <p class="text-xs font-semibold uppercase tracking-widest text-gold-500 mb-4"><span class="gold-rule"></span>Understanding the Formula</p>
+      <h2 class="font-display text-3xl sm:text-4xl text-navy-900 leading-tight mb-5">
         What Is the DIME Method for Life Insurance?
       </h2>
       <p class="text-lg text-slate-600 leading-relaxed mb-4">
         The DIME method is the gold standard framework used by Certified Financial Planners (CFPs) and licensed insurance professionals across the United States to calculate how much life insurance a person truly needs. Unlike blunt rules of thumb — such as &ldquo;buy 10&times; your salary&rdquo; — the DIME approach examines your <em>actual</em> financial obligations and quantifies each one, resulting in a coverage target that is both meaningful and defensible.
       </p>
       <p class="text-lg text-slate-600 leading-relaxed">
-        <strong class="text-slate-800">DIME</strong> is an acronym for four distinct financial pillars: <strong class="text-slate-800">Debt</strong>, <strong class="text-slate-800">Income</strong>, <strong class="text-slate-800">Mortgage</strong>, and <strong class="text-slate-800">Education</strong>. When you add these four numbers together, you arrive at a single coverage figure designed to keep your family financially whole — even in your absence. Below is a detailed breakdown of what each component means and why it matters.
+        <strong class="text-navy-900">DIME</strong> is an acronym for four distinct financial pillars: <strong class="text-navy-900">Debt</strong>, <strong class="text-navy-900">Income</strong>, <strong class="text-navy-900">Mortgage</strong>, and <strong class="text-navy-900">Education</strong>. When you add these four numbers together, you arrive at a single coverage figure designed to keep your family financially whole — even in your absence. Below is a detailed breakdown of what each component means and why it matters.
       </p>
     </div>
 
@@ -331,9 +503,9 @@
       <!-- D -->
       <div class="rounded-2xl bg-red-50 border border-red-100 p-6">
         <div class="flex items-center gap-3 mb-4">
-          <span class="w-11 h-11 rounded-xl bg-red-500 text-white font-extrabold text-xl flex items-center justify-center flex-shrink-0 shadow-sm">D</span>
+          <span class="w-11 h-11 rounded-xl bg-red-500 text-white flex items-center justify-center flex-shrink-0 shadow-sm shadow-red-500/30"><svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"/></svg></span>
           <div>
-            <h3 class="font-extrabold text-blue-900 text-lg leading-none">Debt</h3>
+            <h3 class="font-display text-navy-900 text-xl leading-none">Debt</h3>
             <p class="text-red-400 text-xs font-semibold mt-0.5 uppercase tracking-wide">Credit Cards &bull; Auto Loans &bull; Personal Loans</p>
           </div>
         </div>
@@ -352,9 +524,9 @@
       <!-- I -->
       <div class="rounded-2xl bg-green-50 border border-green-100 p-6">
         <div class="flex items-center gap-3 mb-4">
-          <span class="w-11 h-11 rounded-xl bg-green-600 text-white font-extrabold text-xl flex items-center justify-center flex-shrink-0 shadow-sm">I</span>
+          <span class="w-11 h-11 rounded-xl bg-emerald-600 text-white flex items-center justify-center flex-shrink-0 shadow-sm shadow-emerald-600/30"><svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg></span>
           <div>
-            <h3 class="font-extrabold text-blue-900 text-lg leading-none">Income</h3>
+            <h3 class="font-display text-navy-900 text-xl leading-none">Income</h3>
             <p class="text-green-500 text-xs font-semibold mt-0.5 uppercase tracking-wide">Annual Salary &bull; Years of Support Needed</p>
           </div>
         </div>
@@ -365,7 +537,7 @@
           A common guideline for &ldquo;years of support&rdquo; is the number of years until your youngest child reaches financial independence — typically 18 to 22 years of age. For a couple with young children, this often means choosing a 15&ndash;25 year replacement window. The right number is personal and should reflect your family&rsquo;s specific dependency structure.
         </p>
         <div class="mt-4 bg-white rounded-xl border border-green-100 px-4 py-3">
-          <p class="text-xs font-semibold text-green-600 uppercase tracking-wide mb-1">Key Insight</p>
+          <p class="text-xs font-semibold text-emerald-600 uppercase tracking-wide mb-1">Key Insight</p>
           <p class="text-slate-600 text-sm leading-relaxed">If your spouse also works, you may subtract their income from yours to calculate only the <em>net income gap</em> — reducing your required coverage and lowering your premium.</p>
         </div>
       </div>
@@ -373,10 +545,10 @@
       <!-- M -->
       <div class="rounded-2xl bg-blue-50 border border-blue-100 p-6">
         <div class="flex items-center gap-3 mb-4">
-          <span class="w-11 h-11 rounded-xl bg-brand-600 text-white font-extrabold text-xl flex items-center justify-center flex-shrink-0 shadow-sm">M</span>
+          <span class="w-11 h-11 rounded-xl bg-navy-800 text-cream-200 flex items-center justify-center flex-shrink-0 shadow-sm shadow-navy-800/30"><svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg></span>
           <div>
-            <h3 class="font-extrabold text-blue-900 text-lg leading-none">Mortgage</h3>
-            <p class="text-brand-500 text-xs font-semibold mt-0.5 uppercase tracking-wide">Home Loan Balance &bull; Largest Single Liability</p>
+            <h3 class="font-display text-navy-900 text-xl leading-none">Mortgage</h3>
+            <p class="text-navy-400 text-xs font-semibold mt-0.5 uppercase tracking-wide">Home Loan Balance &bull; Largest Single Liability</p>
           </div>
         </div>
         <p class="text-slate-600 leading-relaxed mb-4">
@@ -386,7 +558,7 @@
           According to the Federal Reserve, the median outstanding mortgage balance in the U.S. is approximately $190,000 — but in high-cost-of-living areas such as California, New York, and Washington, balances routinely exceed $400,000&ndash;$600,000. Always use the current principal balance from your most recent mortgage statement, not the original loan amount.
         </p>
         <div class="mt-4 bg-white rounded-xl border border-blue-100 px-4 py-3">
-          <p class="text-xs font-semibold text-brand-600 uppercase tracking-wide mb-1">If You Rent</p>
+          <p class="text-xs font-semibold text-navy-600 uppercase tracking-wide mb-1">If You Rent</p>
           <p class="text-slate-600 text-sm leading-relaxed">Leave this field at $0. Some renters choose to add 1&ndash;2 years of rent payments to the Income component instead, to ensure housing continuity for their family.</p>
         </div>
       </div>
@@ -394,14 +566,14 @@
       <!-- E -->
       <div class="rounded-2xl bg-purple-50 border border-purple-100 p-6">
         <div class="flex items-center gap-3 mb-4">
-          <span class="w-11 h-11 rounded-xl bg-purple-600 text-white font-extrabold text-xl flex items-center justify-center flex-shrink-0 shadow-sm">E</span>
+          <span class="w-11 h-11 rounded-xl bg-purple-600 text-white flex items-center justify-center flex-shrink-0 shadow-sm shadow-purple-600/30"><svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg></span>
           <div>
-            <h3 class="font-extrabold text-blue-900 text-lg leading-none">Education</h3>
+            <h3 class="font-display text-navy-900 text-xl leading-none">Education</h3>
             <p class="text-purple-400 text-xs font-semibold mt-0.5 uppercase tracking-wide">College Costs &bull; Per-Child Estimate</p>
           </div>
         </div>
         <p class="text-slate-600 leading-relaxed mb-4">
-          The Education component secures your children&rsquo;s academic future regardless of what happens to you. According to the College Board, the average total cost of attending a four-year public university (tuition, fees, room &amp; board) currently runs approximately <strong class="text-slate-800">$27,000&ndash;$30,000 per year</strong>, or $108,000&ndash;$120,000 for a full degree. Private universities average $56,000&ndash;$60,000 per year, exceeding $220,000 for four years.
+          The Education component secures your children&rsquo;s academic future regardless of what happens to you. According to the College Board, the average total cost of attending a four-year public university (tuition, fees, room &amp; board) currently runs approximately <strong class="text-navy-900">$27,000&ndash;$30,000 per year</strong>, or $108,000&ndash;$120,000 for a full degree. Private universities average $56,000&ndash;$60,000 per year, exceeding $220,000 for four years.
         </p>
         <p class="text-slate-600 leading-relaxed">
           Multiply your per-child estimate by the number of children to arrive at the Education total. If your children are still very young, factor in a moderate inflation adjustment — college costs have historically risen at approximately 4% per year, significantly faster than general inflation.
@@ -419,23 +591,23 @@
     </div>
 
     <!-- Why DIME beats other methods callout -->
-    <div class="bg-gradient-to-r from-brand-900 to-brand-700 rounded-2xl p-7 text-white">
-      <h3 class="font-extrabold text-xl mb-3">Why DIME Is More Accurate Than &ldquo;10&times; Salary&rdquo;</h3>
-      <p class="text-blue-100 leading-relaxed mb-5">
+    <div class="bg-navy-900 rounded-2xl p-7 text-cream-100 border border-navy-800">
+      <h3 class="font-display text-2xl text-cream-100 mb-3">Why DIME Is More Accurate Than &ldquo;10&times; Salary&rdquo;</h3>
+      <p class="text-cream-300 leading-relaxed mb-5">
         The &ldquo;10 times your salary&rdquo; shortcut is widely cited but fundamentally imprecise. It ignores the size of your mortgage, the number and ages of your children, your actual debt load, and how many years your family truly needs support. Two people earning $80,000 per year can have wildly different insurance needs depending on their obligations. Consider:
       </p>
       <div class="grid sm:grid-cols-3 gap-4">
-        <div class="bg-white/10 rounded-xl p-4 backdrop-blur-sm">
-          <p class="font-bold text-lg mb-1">10&times; Rule</p>
-          <p class="text-blue-200 text-sm leading-relaxed">Produces $800,000 for an $80K earner — regardless of debt, mortgage, or children. Simple but dangerously inaccurate.</p>
+        <div class="bg-white/5 border border-white/10 rounded-xl p-4">
+          <p class="font-semibold text-lg mb-1 text-cream-100">10&times; Rule</p>
+          <p class="text-cream-300 text-sm leading-relaxed">Produces $800,000 for an $80K earner — regardless of debt, mortgage, or children. Simple but dangerously inaccurate.</p>
         </div>
-        <div class="bg-white/10 rounded-xl p-4 backdrop-blur-sm">
-          <p class="font-bold text-lg mb-1">Human Life Value</p>
-          <p class="text-blue-200 text-sm leading-relaxed">Calculates the present value of all future income. More complex, but still ignores specific obligations like mortgage payoff.</p>
+        <div class="bg-white/5 border border-white/10 rounded-xl p-4">
+          <p class="font-semibold text-lg mb-1 text-cream-100">Human Life Value</p>
+          <p class="text-cream-300 text-sm leading-relaxed">Calculates the present value of all future income. More complex, but still ignores specific obligations like mortgage payoff.</p>
         </div>
-        <div class="bg-white/20 rounded-xl p-4 ring-2 ring-white/30">
-          <p class="font-bold text-lg mb-1">DIME Method ✓</p>
-          <p class="text-blue-100 text-sm leading-relaxed">Accounts for every major obligation individually. Produces the most personalized, obligation-specific coverage estimate.</p>
+        <div class="bg-gold-500/15 border border-gold-500/40 rounded-xl p-4">
+          <p class="font-semibold text-lg mb-1 text-gold-300">DIME Method ✓</p>
+          <p class="text-cream-300 text-sm leading-relaxed">Accounts for every major obligation individually. Produces the most personalized, obligation-specific coverage estimate.</p>
         </div>
       </div>
     </div>
@@ -444,35 +616,35 @@
 </section>
 
 <!-- ── Section 2: How to Use ── -->
-<section id="how-to-use" class="bg-slate-50 py-16 px-5">
+<section id="how-to-use" class="bg-cream-100 py-16 px-5 border-t border-cream-200">
   <div class="max-w-5xl mx-auto">
 
     <div class="max-w-3xl mb-10">
-      <span class="inline-block text-xs font-bold uppercase tracking-widest text-brand-600 mb-3">Step-by-Step Guide</span>
-      <h2 class="text-3xl sm:text-4xl font-extrabold text-blue-900 leading-tight mb-5">
+      <p class="text-xs font-semibold uppercase tracking-widest text-gold-500 mb-4"><span class="gold-rule"></span>Step-by-Step Guide</p>
+      <h2 class="font-display text-3xl sm:text-4xl text-navy-900 leading-tight mb-5">
         How to Use This Life Insurance Estimator
       </h2>
       <p class="text-lg text-slate-600 leading-relaxed">
-        Our DIME life insurance calculator is designed for speed, accuracy, and complete privacy. There is <strong class="text-slate-800">no account required, no personal data collected, and no cost</strong> — ever. Simply enter your figures using the sliders or text fields and your personalized estimate updates in real time. Here&rsquo;s exactly how to get the most accurate result:
+        Our DIME life insurance calculator is designed for speed, accuracy, and complete privacy. There is <strong class="text-navy-900">no account required, no personal data collected, and no cost</strong> — ever. Simply enter your figures using the sliders or text fields and your personalized estimate updates in real time. Here&rsquo;s exactly how to get the most accurate result:
       </p>
     </div>
 
     <!-- Trust badges -->
     <div class="flex flex-wrap gap-3 mb-10">
-      <span class="inline-flex items-center gap-2 bg-white border border-slate-200 rounded-full px-4 py-2 text-sm font-semibold text-slate-700 shadow-sm">
-        <svg class="w-4 h-4 text-green-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+      <span class="inline-flex items-center gap-2 bg-white border border-cream-300 rounded-full px-4 py-2 text-sm font-semibold text-navy-800 shadow-sm">
+        <svg class="w-4 h-4 text-emerald-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
         100% Free — Always
       </span>
-      <span class="inline-flex items-center gap-2 bg-white border border-slate-200 rounded-full px-4 py-2 text-sm font-semibold text-slate-700 shadow-sm">
-        <svg class="w-4 h-4 text-green-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+      <span class="inline-flex items-center gap-2 bg-white border border-cream-300 rounded-full px-4 py-2 text-sm font-semibold text-navy-800 shadow-sm">
+        <svg class="w-4 h-4 text-emerald-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
         No Sign-Up Required
       </span>
-      <span class="inline-flex items-center gap-2 bg-white border border-slate-200 rounded-full px-4 py-2 text-sm font-semibold text-slate-700 shadow-sm">
-        <svg class="w-4 h-4 text-green-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+      <span class="inline-flex items-center gap-2 bg-white border border-cream-300 rounded-full px-4 py-2 text-sm font-semibold text-navy-800 shadow-sm">
+        <svg class="w-4 h-4 text-emerald-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
         Private — We Store Nothing
       </span>
-      <span class="inline-flex items-center gap-2 bg-white border border-slate-200 rounded-full px-4 py-2 text-sm font-semibold text-slate-700 shadow-sm">
-        <svg class="w-4 h-4 text-green-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+      <span class="inline-flex items-center gap-2 bg-white border border-cream-300 rounded-full px-4 py-2 text-sm font-semibold text-navy-800 shadow-sm">
+        <svg class="w-4 h-4 text-emerald-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
         Real-Time Results
       </span>
     </div>
@@ -480,52 +652,52 @@
     <!-- Steps -->
     <ol class="space-y-5">
 
-      <li class="bg-white rounded-2xl border border-slate-100 shadow-sm p-6 flex gap-5">
-        <span class="w-10 h-10 rounded-xl bg-brand-600 text-white font-extrabold text-base flex items-center justify-center flex-shrink-0 shadow-sm shadow-brand-600/30">1</span>
+      <li class="bg-white rounded-2xl border border-cream-300 shadow-sm p-6 flex gap-5">
+        <span class="w-10 h-10 rounded-xl bg-navy-900 text-gold-400 font-display text-base flex items-center justify-center flex-shrink-0 shadow-sm shadow-navy-900/20">1</span>
         <div>
-          <h3 class="font-bold text-blue-900 text-base mb-1.5">Gather Your Debt Statements</h3>
+          <h3 class="font-semibold text-navy-900 text-base mb-1.5">Gather Your Debt Statements</h3>
           <p class="text-slate-600 leading-relaxed">
-            Before opening the calculator, pull together the current balance on every outstanding debt: all credit card accounts, your car loan payoff amount, any student loans, personal loans, and medical debt. Add them up and enter the combined total in the <strong class="text-slate-800">Debt (D)</strong> field. Exclude your mortgage — that goes in the next dedicated section. You can also use the slider to explore different scenarios.
+            Before opening the calculator, pull together the current balance on every outstanding debt: all credit card accounts, your car loan payoff amount, any student loans, personal loans, and medical debt. Add them up and enter the combined total in the <strong class="text-navy-900">Debt (D)</strong> field. Exclude your mortgage — that goes in the next dedicated section. You can also use the slider to explore different scenarios.
           </p>
         </div>
       </li>
 
-      <li class="bg-white rounded-2xl border border-slate-100 shadow-sm p-6 flex gap-5">
-        <span class="w-10 h-10 rounded-xl bg-brand-600 text-white font-extrabold text-base flex items-center justify-center flex-shrink-0 shadow-sm shadow-brand-600/30">2</span>
+      <li class="bg-white rounded-2xl border border-cream-300 shadow-sm p-6 flex gap-5">
+        <span class="w-10 h-10 rounded-xl bg-navy-900 text-gold-400 font-display text-base flex items-center justify-center flex-shrink-0 shadow-sm shadow-navy-900/20">2</span>
         <div>
-          <h3 class="font-bold text-blue-900 text-base mb-1.5">Enter Your Annual Income &amp; Set the Replacement Window</h3>
+          <h3 class="font-semibold text-navy-900 text-base mb-1.5">Enter Your Annual Income &amp; Set the Replacement Window</h3>
           <p class="text-slate-600 leading-relaxed">
-            Enter your current gross annual income (before taxes) in the <strong class="text-slate-800">Income (I)</strong> field. Next, use the <em>Years to Provide for Family</em> slider below it to choose how many years of income you want your policy to replace. A conservative, widely recommended starting point is <strong class="text-slate-800">10&ndash;20 years</strong>. If you have young children, a spouse who does not work, or aging parents who depend on you, consider selecting a longer window of 20&ndash;25 years.
+            Enter your current gross annual income (before taxes) in the <strong class="text-navy-900">Income (I)</strong> field. Next, use the <em>Years to Provide for Family</em> slider below it to choose how many years of income you want your policy to replace. A conservative, widely recommended starting point is <strong class="text-navy-900">10&ndash;20 years</strong>. If you have young children, a spouse who does not work, or aging parents who depend on you, consider selecting a longer window of 20&ndash;25 years.
           </p>
         </div>
       </li>
 
-      <li class="bg-white rounded-2xl border border-slate-100 shadow-sm p-6 flex gap-5">
-        <span class="w-10 h-10 rounded-xl bg-brand-600 text-white font-extrabold text-base flex items-center justify-center flex-shrink-0 shadow-sm shadow-brand-600/30">3</span>
+      <li class="bg-white rounded-2xl border border-cream-300 shadow-sm p-6 flex gap-5">
+        <span class="w-10 h-10 rounded-xl bg-navy-900 text-gold-400 font-display text-base flex items-center justify-center flex-shrink-0 shadow-sm shadow-navy-900/20">3</span>
         <div>
-          <h3 class="font-bold text-blue-900 text-base mb-1.5">Look Up Your Mortgage&rsquo;s Remaining Principal</h3>
+          <h3 class="font-semibold text-navy-900 text-base mb-1.5">Look Up Your Mortgage&rsquo;s Remaining Principal</h3>
           <p class="text-slate-600 leading-relaxed">
-            Log in to your mortgage servicer&rsquo;s online portal or check your most recent monthly statement. Find the <em>current unpaid principal balance</em> — not the original loan amount — and enter it in the <strong class="text-slate-800">Mortgage (M)</strong> field. This figure decreases with every payment you make, so using an accurate current balance keeps your estimate precise. Homeowners who have made significant equity through extra payments or appreciation should reflect that in a lower number here.
+            Log in to your mortgage servicer&rsquo;s online portal or check your most recent monthly statement. Find the <em>current unpaid principal balance</em> — not the original loan amount — and enter it in the <strong class="text-navy-900">Mortgage (M)</strong> field. This figure decreases with every payment you make, so using an accurate current balance keeps your estimate precise. Homeowners who have made significant equity through extra payments or appreciation should reflect that in a lower number here.
           </p>
         </div>
       </li>
 
-      <li class="bg-white rounded-2xl border border-slate-100 shadow-sm p-6 flex gap-5">
-        <span class="w-10 h-10 rounded-xl bg-brand-600 text-white font-extrabold text-base flex items-center justify-center flex-shrink-0 shadow-sm shadow-brand-600/30">4</span>
+      <li class="bg-white rounded-2xl border border-cream-300 shadow-sm p-6 flex gap-5">
+        <span class="w-10 h-10 rounded-xl bg-navy-900 text-gold-400 font-display text-base flex items-center justify-center flex-shrink-0 shadow-sm shadow-navy-900/20">4</span>
         <div>
-          <h3 class="font-bold text-blue-900 text-base mb-1.5">Estimate Total Education Costs for Your Children</h3>
+          <h3 class="font-semibold text-navy-900 text-base mb-1.5">Estimate Total Education Costs for Your Children</h3>
           <p class="text-slate-600 leading-relaxed">
-            Multiply the number of children you have (or plan to have) by your estimated per-child college cost. If you have one child and expect a public four-year university, a reasonable estimate is <strong class="text-slate-800">$120,000&ndash;$140,000</strong> in today&rsquo;s dollars. For two children targeting private universities, $400,000&ndash;$450,000 is not unreasonable. If your children are under 5 years old, consider bumping the per-child figure up by 15&ndash;20% to account for projected tuition inflation by the time they enroll.
+            Multiply the number of children you have (or plan to have) by your estimated per-child college cost. If you have one child and expect a public four-year university, a reasonable estimate is <strong class="text-navy-900">$120,000&ndash;$140,000</strong> in today&rsquo;s dollars. For two children targeting private universities, $400,000&ndash;$450,000 is not unreasonable. If your children are under 5 years old, consider bumping the per-child figure up by 15&ndash;20% to account for projected tuition inflation by the time they enroll.
           </p>
         </div>
       </li>
 
-      <li class="bg-white rounded-2xl border border-slate-100 shadow-sm p-6 flex gap-5">
-        <span class="w-10 h-10 rounded-xl bg-green-600 text-white font-extrabold text-base flex items-center justify-center flex-shrink-0 shadow-sm shadow-green-600/30">&#10003;</span>
+      <li class="bg-white rounded-2xl border border-cream-300 shadow-sm p-6 flex gap-5">
+        <span class="w-10 h-10 rounded-xl bg-gold-500 text-white font-display text-base flex items-center justify-center flex-shrink-0 shadow-sm shadow-gold-500/30">&#10003;</span>
         <div>
-          <h3 class="font-bold text-blue-900 text-base mb-1.5">Interpret Your Result &amp; Take the Next Step</h3>
+          <h3 class="font-semibold text-navy-900 text-base mb-1.5">Interpret Your Result &amp; Take the Next Step</h3>
           <p class="text-slate-600 leading-relaxed mb-3">
-            The result card updates instantly as you adjust any value. The figure shown is your <strong class="text-slate-800">gross DIME coverage target</strong>. Before treating this as your final purchase amount, subtract any coverage you already have: existing term or whole life policies, employer-provided group life insurance (typically 1&ndash;2&times; salary), and liquid savings your family could access quickly.
+            The result card updates instantly as you adjust any value. The figure shown is your <strong class="text-navy-900">gross DIME coverage target</strong>. Before treating this as your final purchase amount, subtract any coverage you already have: existing term or whole life policies, employer-provided group life insurance (typically 1&ndash;2&times; salary), and liquid savings your family could access quickly.
           </p>
           <p class="text-slate-600 leading-relaxed">
             The net gap is the amount of additional coverage you should shop for. Use this number when requesting quotes from insurance carriers, or bring it to a conversation with a licensed insurance agent or CFP for a fully personalized analysis.
@@ -539,12 +711,12 @@
 </section>
 
 <!-- ── Section 3: FAQ ── -->
-<section id="faq" class="bg-white py-16 px-5 border-t border-slate-100">
+<section id="faq" class="bg-white py-16 px-5 border-t border-cream-200">
   <div class="max-w-5xl mx-auto">
 
     <div class="max-w-3xl mb-10">
-      <span class="inline-block text-xs font-bold uppercase tracking-widest text-brand-600 mb-3">Common Questions</span>
-      <h2 class="text-3xl sm:text-4xl font-extrabold text-blue-900 leading-tight mb-5">
+      <p class="text-xs font-semibold uppercase tracking-widest text-gold-500 mb-4"><span class="gold-rule"></span>Common Questions</p>
+      <h2 class="font-display text-3xl sm:text-4xl text-navy-900 leading-tight mb-5">
         Frequently Asked Questions
       </h2>
       <p class="text-lg text-slate-600 leading-relaxed">
@@ -555,20 +727,20 @@
     <div class="space-y-3 max-w-3xl" id="faq-list">
 
       <!-- FAQ 1 -->
-      <div class="border border-slate-200 rounded-2xl overflow-hidden">
-        <button class="faq-btn w-full flex items-center justify-between gap-4 p-6 text-left hover:bg-slate-50 transition-colors" aria-expanded="false">
-          <h3 class="font-semibold text-blue-900 text-base leading-snug">Is the life insurance coverage through my employer enough?</h3>
-          <svg class="faq-chevron w-5 h-5 text-slate-400 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
+      <div class="border border-cream-300 rounded-2xl overflow-hidden bg-white">
+        <button class="faq-btn w-full flex items-center justify-between gap-4 p-6 text-left hover:bg-cream-50 transition-colors" aria-expanded="false">
+          <h3 class="font-semibold text-navy-900 text-base leading-snug">Is the life insurance coverage through my employer enough?</h3>
+          <svg class="faq-chevron w-5 h-5 text-gold-400 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
         </button>
         <div class="faq-body">
           <div class="px-6 pb-6 text-slate-600 leading-relaxed space-y-3">
             <p>
-              For the vast majority of Americans, <strong class="text-slate-800">employer-provided group life insurance is not sufficient on its own</strong> — and relying on it alone is one of the most common and costly life insurance mistakes. Here&rsquo;s why:
+              For the vast majority of Americans, <strong class="text-navy-900">employer-provided group life insurance is not sufficient on its own</strong> — and relying on it alone is one of the most common and costly life insurance mistakes. Here&rsquo;s why:
             </p>
             <ul class="space-y-2 pl-4">
-              <li class="flex gap-2"><span class="text-brand-500 font-bold flex-shrink-0">&#8250;</span><span><strong class="text-slate-800">Coverage amounts are typically modest.</strong> Most group life policies provide a death benefit of 1&times; or 2&times; your annual salary. If you earn $75,000, that means $75,000&ndash;$150,000 in coverage — a fraction of what a family with a mortgage and children actually needs.</span></li>
-              <li class="flex gap-2"><span class="text-brand-500 font-bold flex-shrink-0">&#8250;</span><span><strong class="text-slate-800">Coverage is tied to your job.</strong> If you are laid off, switch employers, or leave the workforce to care for a family member, your coverage disappears. An individual policy travels with you regardless of employment status.</span></li>
-              <li class="flex gap-2"><span class="text-brand-500 font-bold flex-shrink-0">&#8250;</span><span><strong class="text-slate-800">You cannot customize it.</strong> Group plans offer no ability to adjust coverage amounts, add riders, or tailor the policy to your family&rsquo;s specific needs.</span></li>
+              <li class="flex gap-2"><span class="text-gold-500 font-bold flex-shrink-0">&#8250;</span><span><strong class="text-navy-900">Coverage amounts are typically modest.</strong> Most group life policies provide a death benefit of 1&times; or 2&times; your annual salary. If you earn $75,000, that means $75,000&ndash;$150,000 in coverage — a fraction of what a family with a mortgage and children actually needs.</span></li>
+              <li class="flex gap-2"><span class="text-gold-500 font-bold flex-shrink-0">&#8250;</span><span><strong class="text-navy-900">Coverage is tied to your job.</strong> If you are laid off, switch employers, or leave the workforce to care for a family member, your coverage disappears. An individual policy travels with you regardless of employment status.</span></li>
+              <li class="flex gap-2"><span class="text-gold-500 font-bold flex-shrink-0">&#8250;</span><span><strong class="text-navy-900">You cannot customize it.</strong> Group plans offer no ability to adjust coverage amounts, add riders, or tailor the policy to your family&rsquo;s specific needs.</span></li>
             </ul>
             <p>
               The smart strategy is to treat your employer coverage as a <em>supplement</em>, not your primary safety net. Use the DIME calculator above to determine your total need, subtract your existing group coverage, and purchase an individual term policy to close the gap.
@@ -578,10 +750,10 @@
       </div>
 
       <!-- FAQ 2 -->
-      <div class="border border-slate-200 rounded-2xl overflow-hidden">
-        <button class="faq-btn w-full flex items-center justify-between gap-4 p-6 text-left hover:bg-slate-50 transition-colors" aria-expanded="false">
-          <h3 class="font-semibold text-blue-900 text-base leading-snug">Should I account for inflation when using this calculator?</h3>
-          <svg class="faq-chevron w-5 h-5 text-slate-400 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
+      <div class="border border-cream-300 rounded-2xl overflow-hidden bg-white">
+        <button class="faq-btn w-full flex items-center justify-between gap-4 p-6 text-left hover:bg-cream-50 transition-colors" aria-expanded="false">
+          <h3 class="font-semibold text-navy-900 text-base leading-snug">Should I account for inflation when using this calculator?</h3>
+          <svg class="faq-chevron w-5 h-5 text-gold-400 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
         </button>
         <div class="faq-body">
           <div class="px-6 pb-6 text-slate-600 leading-relaxed space-y-3">
@@ -589,52 +761,52 @@
               Yes — inflation is a legitimate factor to consider, especially when projecting costs that are many years in the future, such as your children&rsquo;s college education. The DIME calculator uses today&rsquo;s dollars, which is the standard and appropriate starting point. Here is how to incorporate an inflation adjustment in a practical way:
             </p>
             <ul class="space-y-2 pl-4">
-              <li class="flex gap-2"><span class="text-brand-500 font-bold flex-shrink-0">&#8250;</span><span><strong class="text-slate-800">For Education:</strong> College tuition has historically increased at approximately 4% per year. If your youngest child is 3 years old and won&rsquo;t enroll for 15 years, multiply your current per-child estimate by approximately <strong>1.8</strong> (the rough factor for 15 years at 4%). A $60,000 today estimate becomes ~$108,000 in inflation-adjusted terms.</span></li>
-              <li class="flex gap-2"><span class="text-brand-500 font-bold flex-shrink-0">&#8250;</span><span><strong class="text-slate-800">For Income:</strong> General inflation averages 2.5&ndash;3% per year historically. Over 20 years of income replacement, this erodes purchasing power significantly. A conservative approach is to add 10&ndash;20% to your income replacement total as an inflation buffer.</span></li>
-              <li class="flex gap-2"><span class="text-brand-500 font-bold flex-shrink-0">&#8250;</span><span><strong class="text-slate-800">For Debt and Mortgage:</strong> These are fixed nominal obligations — inflation does not meaningfully change them. Use current balances as-is.</span></li>
+              <li class="flex gap-2"><span class="text-gold-500 font-bold flex-shrink-0">&#8250;</span><span><strong class="text-navy-900">For Education:</strong> College tuition has historically increased at approximately 4% per year. If your youngest child is 3 years old and won&rsquo;t enroll for 15 years, multiply your current per-child estimate by approximately <strong>1.8</strong> (the rough factor for 15 years at 4%). A $60,000 today estimate becomes ~$108,000 in inflation-adjusted terms.</span></li>
+              <li class="flex gap-2"><span class="text-gold-500 font-bold flex-shrink-0">&#8250;</span><span><strong class="text-navy-900">For Income:</strong> General inflation averages 2.5&ndash;3% per year historically. Over 20 years of income replacement, this erodes purchasing power significantly. A conservative approach is to add 10&ndash;20% to your income replacement total as an inflation buffer.</span></li>
+              <li class="flex gap-2"><span class="text-gold-500 font-bold flex-shrink-0">&#8250;</span><span><strong class="text-navy-900">For Debt and Mortgage:</strong> These are fixed nominal obligations — inflation does not meaningfully change them. Use current balances as-is.</span></li>
             </ul>
             <p>
-              As a practical rule of thumb: if you want a simple inflation buffer without complex calculations, <strong class="text-slate-800">add 15% to your total DIME result</strong>. This provides a reasonable cushion for most households over a 15&ndash;20 year policy horizon.
+              As a practical rule of thumb: if you want a simple inflation buffer without complex calculations, <strong class="text-navy-900">add 15% to your total DIME result</strong>. This provides a reasonable cushion for most households over a 15&ndash;20 year policy horizon.
             </p>
           </div>
         </div>
       </div>
 
       <!-- FAQ 3 -->
-      <div class="border border-slate-200 rounded-2xl overflow-hidden">
-        <button class="faq-btn w-full flex items-center justify-between gap-4 p-6 text-left hover:bg-slate-50 transition-colors" aria-expanded="false">
-          <h3 class="font-semibold text-blue-900 text-base leading-snug">What is the difference between Term Life and Whole Life insurance?</h3>
-          <svg class="faq-chevron w-5 h-5 text-slate-400 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
+      <div class="border border-cream-300 rounded-2xl overflow-hidden bg-white">
+        <button class="faq-btn w-full flex items-center justify-between gap-4 p-6 text-left hover:bg-cream-50 transition-colors" aria-expanded="false">
+          <h3 class="font-semibold text-navy-900 text-base leading-snug">What is the difference between Term Life and Whole Life insurance?</h3>
+          <svg class="faq-chevron w-5 h-5 text-gold-400 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
         </button>
         <div class="faq-body">
           <div class="px-6 pb-6 text-slate-600 leading-relaxed space-y-4">
             <p>These two policy types serve different purposes and come with very different price tags. Here is a plain-language comparison:</p>
             <div class="grid sm:grid-cols-2 gap-4">
               <div class="bg-blue-50 rounded-xl border border-blue-100 p-4">
-                <p class="font-bold text-blue-900 mb-2">Term Life Insurance</p>
+                <p class="font-semibold text-navy-900 mb-2">Term Life Insurance</p>
                 <ul class="text-sm space-y-1.5">
-                  <li class="flex gap-2"><span class="text-brand-500 font-bold flex-shrink-0">&#10003;</span> Covers a fixed period: 10, 15, 20, or 30 years</li>
-                  <li class="flex gap-2"><span class="text-brand-500 font-bold flex-shrink-0">&#10003;</span> Pays a death benefit only if you pass within the term</li>
-                  <li class="flex gap-2"><span class="text-brand-500 font-bold flex-shrink-0">&#10003;</span> Much lower monthly premiums</li>
-                  <li class="flex gap-2"><span class="text-brand-500 font-bold flex-shrink-0">&#10003;</span> Best for most families: covers peak-obligation years</li>
+                  <li class="flex gap-2"><span class="text-gold-500 font-bold flex-shrink-0">&#10003;</span> Covers a fixed period: 10, 15, 20, or 30 years</li>
+                  <li class="flex gap-2"><span class="text-gold-500 font-bold flex-shrink-0">&#10003;</span> Pays a death benefit only if you pass within the term</li>
+                  <li class="flex gap-2"><span class="text-gold-500 font-bold flex-shrink-0">&#10003;</span> Much lower monthly premiums</li>
+                  <li class="flex gap-2"><span class="text-gold-500 font-bold flex-shrink-0">&#10003;</span> Best for most families: covers peak-obligation years</li>
                   <li class="flex gap-2"><span class="text-slate-400 font-bold flex-shrink-0">&#10005;</span> No cash value accumulation</li>
                   <li class="flex gap-2"><span class="text-slate-400 font-bold flex-shrink-0">&#10005;</span> Coverage expires; renewal is costly at older ages</li>
                 </ul>
               </div>
               <div class="bg-purple-50 rounded-xl border border-purple-100 p-4">
-                <p class="font-bold text-blue-900 mb-2">Whole Life Insurance</p>
+                <p class="font-semibold text-navy-900 mb-2">Whole Life Insurance</p>
                 <ul class="text-sm space-y-1.5">
-                  <li class="flex gap-2"><span class="text-brand-500 font-bold flex-shrink-0">&#10003;</span> Permanent coverage — never expires</li>
-                  <li class="flex gap-2"><span class="text-brand-500 font-bold flex-shrink-0">&#10003;</span> Builds tax-deferred cash value over time</li>
-                  <li class="flex gap-2"><span class="text-brand-500 font-bold flex-shrink-0">&#10003;</span> Cash value can be borrowed against</li>
-                  <li class="flex gap-2"><span class="text-brand-500 font-bold flex-shrink-0">&#10003;</span> Useful for estate planning &amp; wealth transfer</li>
+                  <li class="flex gap-2"><span class="text-gold-500 font-bold flex-shrink-0">&#10003;</span> Permanent coverage — never expires</li>
+                  <li class="flex gap-2"><span class="text-gold-500 font-bold flex-shrink-0">&#10003;</span> Builds tax-deferred cash value over time</li>
+                  <li class="flex gap-2"><span class="text-gold-500 font-bold flex-shrink-0">&#10003;</span> Cash value can be borrowed against</li>
+                  <li class="flex gap-2"><span class="text-gold-500 font-bold flex-shrink-0">&#10003;</span> Useful for estate planning &amp; wealth transfer</li>
                   <li class="flex gap-2"><span class="text-slate-400 font-bold flex-shrink-0">&#10005;</span> Premiums are 5&ndash;15&times; higher than comparable term</li>
                   <li class="flex gap-2"><span class="text-slate-400 font-bold flex-shrink-0">&#10005;</span> Cash value growth is slow and often low-yield</li>
                 </ul>
               </div>
             </div>
             <p>
-              <strong class="text-slate-800">The bottom line for most Americans:</strong> Term life insurance is the right starting point. It is affordable, straightforward, and designed for exactly the scenario the DIME method addresses — protecting your family during the years they depend on your income most. Whole life can play a valuable role in advanced estate planning strategies, but it should be explored with a CFP, not as a default choice driven by an agent&rsquo;s commission incentives.
+              <strong class="text-navy-900">The bottom line for most Americans:</strong> Term life insurance is the right starting point. It is affordable, straightforward, and designed for exactly the scenario the DIME method addresses — protecting your family during the years they depend on your income most. Whole life can play a valuable role in advanced estate planning strategies, but it should be explored with a CFP, not as a default choice driven by an agent&rsquo;s commission incentives.
             </p>
           </div>
         </div>
@@ -648,37 +820,40 @@
 <!-- ═══════════════════════════════════════════
      FOOTER
 ════════════════════════════════════════════ -->
-<footer class="bg-slate-900 text-slate-400 py-12 px-5">
+<footer class="bg-navy-900 text-cream-400 py-12 px-5">
   <div class="max-w-5xl mx-auto">
     <div class="grid grid-cols-1 sm:grid-cols-3 gap-10 mb-10">
       <div>
         <div class="flex items-center gap-2.5 mb-4">
-          <span class="w-8 h-8 rounded-lg bg-brand-600 flex items-center justify-center">
-            <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+          <span class="w-8 h-8 rounded-lg bg-navy-800 border border-navy-700 flex items-center justify-center">
+            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 2L3 7v5c0 5.25 3.75 10.15 9 11.25C17.25 22.15 21 17.25 21 12V7L12 2z" fill="rgba(200,146,26,0.2)" stroke="#c8921a" stroke-width="1.8"/>
+              <polyline points="8,12 10.5,14.5 16,9" stroke="#faf7f0" stroke-width="2.2"/>
+            </svg>
           </span>
-          <span class="font-extrabold text-white">InsureCalc<span class="text-brand-400">Pro</span></span>
+          <span class="font-display text-cream-100 text-lg">InsureCalc<span class="text-gold-400">Pro</span></span>
         </div>
         <p class="text-sm leading-relaxed">A free educational tool to help Americans estimate life insurance needs using the proven DIME method.</p>
       </div>
       <div>
-        <h4 class="text-white font-semibold text-sm mb-4">Navigation</h4>
+        <h4 class="text-cream-100 font-semibold text-sm mb-4">Navigation</h4>
         <ul class="space-y-2 text-sm">
-          <li><a href="#calculator" class="hover:text-brand-400 transition-colors">DIME Calculator</a></li>
-          <li><a href="#what-is-dime" class="hover:text-brand-400 transition-colors">What Is the DIME Method?</a></li>
-          <li><a href="#how-to-use" class="hover:text-brand-400 transition-colors">How to Use This Tool</a></li>
-          <li><a href="#faq" class="hover:text-brand-400 transition-colors">Frequently Asked Questions</a></li>
+          <li><a href="#calculator" class="hover:text-gold-400 transition-colors">DIME Calculator</a></li>
+          <li><a href="#what-is-dime" class="hover:text-gold-400 transition-colors">What Is the DIME Method?</a></li>
+          <li><a href="#how-to-use" class="hover:text-gold-400 transition-colors">How to Use This Tool</a></li>
+          <li><a href="#faq" class="hover:text-gold-400 transition-colors">Frequently Asked Questions</a></li>
         </ul>
       </div>
       <div>
-        <h4 class="text-white font-semibold text-sm mb-4">Legal</h4>
+        <h4 class="text-cream-100 font-semibold text-sm mb-4">Legal</h4>
         <ul class="space-y-2 text-sm">
-          <li><a href="privacy.html" class="hover:text-brand-400 transition-colors">Privacy Policy</a></li>
-          <li><a href="terms.html" class="hover:text-brand-400 transition-colors">Terms of Service</a></li>
-          <li><a href="contact.html" class="hover:text-brand-400 transition-colors">Contact Us</a></li>
+          <li><a href="privacy.html" class="hover:text-gold-400 transition-colors">Privacy Policy</a></li>
+          <li><a href="terms.html" class="hover:text-gold-400 transition-colors">Terms of Service</a></li>
+          <li><a href="contact.html" class="hover:text-gold-400 transition-colors">Contact Us</a></li>
         </ul>
       </div>
     </div>
-    <div class="border-t border-slate-800 pt-6 text-xs text-center leading-relaxed">
+    <div class="border-t border-navy-800 pt-6 text-xs text-center leading-relaxed">
       &copy; 2025 InsureCalcPro. All rights reserved. This website provides educational estimates only and does not constitute financial, tax, or insurance advice. Always consult a qualified, licensed insurance professional before making any coverage decisions.
     </div>
   </div>
