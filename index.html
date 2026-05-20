@@ -1155,5 +1155,54 @@
 
 })();
 </script>
+
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+<script>
+(function(){
+  if(window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  gsap.registerPlugin(ScrollTrigger);
+
+  /* ── Section headings ── */
+  gsap.utils.toArray('#what-is-dime h2, #how-to-use h2, #faq h2').forEach(function(el){
+    gsap.from(el, {y:36, opacity:0, duration:.85, ease:'power3.out',
+      scrollTrigger:{trigger:el, start:'top 88%', once:true}});
+  });
+
+  /* ── Intro text blocks ── */
+  gsap.utils.toArray('#what-is-dime .max-w-3xl p, #how-to-use .max-w-3xl p, #faq .max-w-3xl p').forEach(function(el){
+    gsap.from(el, {y:22, opacity:0, duration:.7, ease:'power2.out',
+      scrollTrigger:{trigger:el, start:'top 90%', once:true}});
+  });
+
+  /* ── DIME 4 cards staggered batch ── */
+  ScrollTrigger.batch('#what-is-dime .grid > div', {
+    onEnter:function(b){ gsap.from(b,{y:52, opacity:0, stagger:.13, duration:.8, ease:'power3.out'}); },
+    start:'top 88%', once:true
+  });
+
+  /* ── Why DIME callout ── */
+  var callout=document.querySelector('#what-is-dime .bg-navy-900.rounded-2xl');
+  if(callout) gsap.from(callout,{y:38, opacity:0, duration:.8, ease:'power3.out',
+    scrollTrigger:{trigger:callout, start:'top 88%', once:true}});
+
+  /* ── How-to trust badges ── */
+  var badges=document.querySelector('#how-to-use .flex.flex-wrap');
+  if(badges) gsap.from(badges,{y:28, opacity:0, duration:.7, ease:'power2.out',
+    scrollTrigger:{trigger:badges, start:'top 90%', once:true}});
+
+  /* ── How-to steps (ol li or grid cards) ── */
+  ScrollTrigger.batch('#how-to-use ol > li, #how-to-use .grid > div', {
+    onEnter:function(b){ gsap.from(b,{y:40, opacity:0, stagger:.1, duration:.72, ease:'power3.out'}); },
+    start:'top 88%', once:true
+  });
+
+  /* ── FAQ items ── */
+  ScrollTrigger.batch('#faq-list > div', {
+    onEnter:function(b){ gsap.from(b,{y:30, opacity:0, stagger:.09, duration:.65, ease:'power2.out'}); },
+    start:'top 88%', once:true
+  });
+})();
+</script>
 </body>
 </html>
