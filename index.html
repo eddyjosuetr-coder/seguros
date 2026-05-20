@@ -65,6 +65,17 @@
         "description": "Free financial calculators for Americans — life insurance, compound interest, and mortgage payment tools."
       },
       {
+        "@type": "Organization",
+        "name": "InsureCalcPro",
+        "url": "https://insurecalcpro.com/",
+        "logo": "https://insurecalcpro.com/favicon.svg",
+        "contactPoint": {
+          "@type": "ContactPoint",
+          "contactType": "customer support",
+          "url": "https://insurecalcpro.com/contact.html"
+        }
+      },
+      {
         "@type": "WebApplication",
         "name": "Free Life Insurance Need Calculator (DIME Method)",
         "url": "https://insurecalcpro.com/",
@@ -72,6 +83,12 @@
         "applicationCategory": "FinanceApplication",
         "operatingSystem": "All",
         "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://insurecalcpro.com/" }
+        ]
       },
       {
         "@type": "FAQPage",
@@ -215,6 +232,13 @@
           </svg>
           Mortgage Calc
         </a>
+        <a href="about.html"
+           class="nav-pill-inactive inline-flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-semibold transition-all">
+          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/>
+          </svg>
+          About
+        </a>
       </nav>
 
       <!-- ── CTA (desktop) ── -->
@@ -275,6 +299,19 @@
           <div>
             <p class="font-bold leading-none">Mortgage Calc</p>
             <p class="text-slate-600 text-xs mt-0.5">Monthly Payment Estimator</p>
+          </div>
+          <svg class="w-4 h-4 ml-auto text-slate-500" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
+        </a>
+        <a href="about.html"
+           class="flex items-center gap-3 px-4 py-3 rounded-xl border border-cream-300 bg-white hover:bg-cream-100 text-navy-900 font-semibold text-sm transition-colors">
+          <span class="w-8 h-8 rounded-lg bg-gold-50 flex items-center justify-center flex-shrink-0">
+            <svg class="w-4 h-4 text-gold-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/>
+            </svg>
+          </span>
+          <div>
+            <p class="font-bold leading-none">About</p>
+            <p class="text-slate-600 text-xs mt-0.5">Our mission &amp; tools</p>
           </div>
           <svg class="w-4 h-4 ml-auto text-slate-500" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
         </a>
@@ -632,6 +669,9 @@
         <div class="mt-4 bg-white rounded-xl border border-blue-100 px-4 py-3">
           <p class="text-xs font-semibold text-navy-600 uppercase tracking-wide mb-1">If You Rent</p>
           <p class="text-slate-600 text-sm leading-relaxed">Leave this field at $0. Some renters choose to add 1&ndash;2 years of rent payments to the Income component instead, to ensure housing continuity for their family.</p>
+        </div>
+        <div class="mt-4 bg-gold-50 border border-gold-200 rounded-xl px-4 py-3">
+          <p class="text-slate-600 text-sm leading-relaxed"><strong class="text-navy-900">Don't know your remaining balance?</strong> Use our <a href="mortgage-calculator.html" class="text-gold-600 font-semibold underline hover:text-gold-700">free mortgage calculator</a> to estimate your balance and monthly payment, then plug those numbers into the DIME calculator above.</p>
         </div>
       </div>
 
@@ -1156,10 +1196,10 @@
 })();
 </script>
 
-<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js" defer></script>
 <script>
-(function(){
+document.addEventListener('DOMContentLoaded', function(){
   if(window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
   gsap.registerPlugin(ScrollTrigger);
 
@@ -1202,7 +1242,7 @@
     onEnter:function(b){ gsap.from(b,{y:30, opacity:0, stagger:.09, duration:.65, ease:'power2.out'}); },
     start:'top 88%', once:true
   });
-})();
+});
 </script>
 </body>
 </html>

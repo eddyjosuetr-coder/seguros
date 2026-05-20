@@ -21,7 +21,7 @@
   <meta name="twitter:title" content="Free Compound Interest Calculator — See How Your Money Grows" />
   <meta name="twitter:description" content="Free compound interest calculator with monthly compounding and year-by-year growth table. See results instantly." />
   <meta name="twitter:image" content="https://insurecalcpro.com/og-image.png" />
-  <title>Free Compound Interest Calculator — See How Your Money Grows | InsureCalcPro</title>
+  <title>Free Compound Interest Calculator with Monthly Contributions | InsureCalcPro</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preload" href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Outfit:wght@400;500;600;700;800&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'" />
@@ -44,13 +44,49 @@
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
-    "@type": "WebApplication",
-    "name": "Free Compound Interest Calculator",
-    "url": "https://insurecalcpro.com/compound-interest.html",
-    "description": "Free compound interest calculator with monthly compounding and a year-by-year growth table.",
-    "applicationCategory": "FinanceApplication",
-    "operatingSystem": "All",
-    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+    "@graph": [
+      {
+        "@type": "WebApplication",
+        "name": "Free Compound Interest Calculator",
+        "url": "https://insurecalcpro.com/compound-interest.html",
+        "description": "Free compound interest calculator with monthly compounding and a year-by-year growth table.",
+        "applicationCategory": "FinanceApplication",
+        "operatingSystem": "All",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://insurecalcpro.com/" },
+          { "@type": "ListItem", "position": 2, "name": "Compound Interest Calculator", "item": "https://insurecalcpro.com/compound-interest.html" }
+        ]
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "How often should I compound — monthly, quarterly, or annually?",
+            "acceptedAnswer": { "@type": "Answer", "text": "More frequent compounding means faster growth, but the difference is smaller than most people expect. Monthly compounding is standard for most savings accounts, CDs, and investment accounts. Annual compounding is used in some bonds. For long-term planning, the gap between monthly and annual compounding at 7% over 30 years is roughly 0.3 percentage points annually — meaningful but not dramatic." }
+          },
+          {
+            "@type": "Question",
+            "name": "What interest rate should I use for retirement savings?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Financial planners commonly use 6%–7% as a conservative long-term assumption for a diversified stock/bond portfolio after inflation. The S&P 500 has historically returned around 10% annually before inflation and ~7% after inflation, but past performance does not guarantee future results. For a conservative scenario use 5–6%, for moderate use 7%, for aggressive equity portfolios 8–10% is sometimes modeled." }
+          },
+          {
+            "@type": "Question",
+            "name": "Does this calculator account for taxes?",
+            "acceptedAnswer": { "@type": "Answer", "text": "No. This calculator shows gross compounding growth before taxes. In tax-advantaged accounts like a 401(k) or Roth IRA, your money grows tax-deferred or tax-free, so the result is more accurate for those. In a standard taxable brokerage account you would owe capital gains and potentially dividend tax each year, reducing your effective return. Consult a financial advisor for personalized after-tax projections." }
+          },
+          {
+            "@type": "Question",
+            "name": "What is the difference between APR and APY?",
+            "acceptedAnswer": { "@type": "Answer", "text": "APR (Annual Percentage Rate) is the simple annual rate without accounting for compounding. APY (Annual Percentage Yield) includes the effect of compounding within the year. A savings account advertising 5% APR with monthly compounding has an actual APY of approximately 5.12%. When comparing savings products, APY is the more accurate number. This calculator uses the APR you enter and applies monthly compounding, equivalent to the APY calculation." }
+          }
+        ]
+      }
+    ]
   }
   </script>
   <style>
@@ -145,6 +181,12 @@
           </svg>
           Mortgage Calc
         </a>
+        <a href="about.html" class="nav-pill-inactive inline-flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-semibold transition-all">
+          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/>
+          </svg>
+          About
+        </a>
       </nav>
 
       <!-- Mobile hamburger -->
@@ -184,6 +226,15 @@
             </svg>
           </span>
           <div><p class="font-bold leading-none">Mortgage Calc</p><p class="text-slate-600 text-xs mt-0.5">Monthly Payment Estimator</p></div>
+          <svg class="w-4 h-4 ml-auto text-slate-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
+        </a>
+        <a href="about.html" class="flex items-center gap-3 px-4 py-3 rounded-xl border border-cream-300 bg-white hover:bg-cream-100 text-navy-900 font-semibold text-sm transition-colors">
+          <span class="w-8 h-8 rounded-lg bg-gold-50 flex items-center justify-center flex-shrink-0">
+            <svg class="w-4 h-4 text-gold-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/>
+            </svg>
+          </span>
+          <div><p class="font-bold leading-none">About</p><p class="text-slate-600 text-xs mt-0.5">Our mission &amp; tools</p></div>
           <svg class="w-4 h-4 ml-auto text-slate-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
         </a>
       </nav>
@@ -655,10 +706,10 @@ document.querySelectorAll('.ci-faq-btn').forEach(btn => {
 })();
 </script>
 
-<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js" defer></script>
 <script>
-(function(){
+document.addEventListener('DOMContentLoaded', function(){
   if(window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
   gsap.registerPlugin(ScrollTrigger);
 
@@ -677,7 +728,7 @@ document.querySelectorAll('.ci-faq-btn').forEach(btn => {
     onEnter:function(b){ gsap.from(b,{y:28, opacity:0, stagger:.1, duration:.65, ease:'power2.out'}); },
     start:'top 88%', once:true
   });
-})();
+});
 </script>
 </body>
 </html>
