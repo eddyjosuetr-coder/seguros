@@ -4,14 +4,28 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content="Free Life Insurance Need Calculator using the DIME Method. Instantly estimate how much life insurance coverage you need based on Debt, Income, Mortgage, and Education costs." />
-  <meta name="keywords" content="life insurance calculator, DIME method, how much life insurance do I need, life insurance estimator, term life insurance" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://www.insurecalcpro.com/" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   <meta property="og:title" content="Free Life Insurance Need Calculator (DIME Method)" />
   <meta property="og:description" content="Estimate your life insurance needs in minutes using the trusted DIME method — free, private, and no sign-up required." />
   <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://www.insurecalcpro.com/" />
+  <meta property="og:site_name" content="InsureCalcPro" />
+  <meta property="og:image" content="https://www.insurecalcpro.com/og-image.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:type" content="image/png" />
+  <meta name="theme-color" content="#0d1b2a" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Free Life Insurance Need Calculator (DIME Method)" />
+  <meta name="twitter:description" content="Estimate your life insurance needs in minutes using the trusted DIME method — free, private, and no sign-up required." />
+  <meta name="twitter:image" content="https://www.insurecalcpro.com/og-image.png" />
   <title>Free Life Insurance Need Calculator (DIME Method) | InsureCalcPro</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="preload" href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Outfit:wght@400;500;600;700;800&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+  <noscript><link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet" /></noscript>
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
@@ -39,6 +53,48 @@
         }
       }
     }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebSite",
+        "name": "InsureCalcPro",
+        "url": "https://www.insurecalcpro.com/",
+        "description": "Free financial calculators for Americans — life insurance, compound interest, and mortgage payment tools."
+      },
+      {
+        "@type": "WebApplication",
+        "name": "Free Life Insurance Need Calculator (DIME Method)",
+        "url": "https://www.insurecalcpro.com/",
+        "description": "Free DIME method life insurance calculator. Estimate how much life insurance coverage you need based on Debt, Income, Mortgage, and Education costs.",
+        "applicationCategory": "FinanceApplication",
+        "operatingSystem": "All",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "Is the life insurance coverage through my employer enough?",
+            "acceptedAnswer": { "@type": "Answer", "text": "For the vast majority of Americans, employer-provided group life insurance is not sufficient on its own. Most group life policies provide 1x or 2x your annual salary, coverage is tied to your job, and you cannot customize it. Treat employer coverage as a supplement and purchase an individual term policy to close the gap identified by the DIME method." }
+          },
+          {
+            "@type": "Question",
+            "name": "Should I account for inflation when using this calculator?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Yes. The DIME calculator uses today's dollars. For Education, college tuition rises approximately 4% per year. For Income, general inflation averages 2.5–3% per year. A practical rule of thumb: add 15% to your total DIME result as an inflation buffer." }
+          },
+          {
+            "@type": "Question",
+            "name": "What is the difference between Term Life and Whole Life insurance?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Term life insurance covers a fixed period (10, 15, 20, or 30 years) and has much lower monthly premiums. Whole life insurance is permanent, builds tax-deferred cash value, but costs 5–15 times more than comparable term. For most families, term life insurance is the right starting point for protecting dependents during peak-obligation years." }
+          }
+        ]
+      }
+    ]
+  }
   </script>
   <style>
     body { font-family: 'Outfit', system-ui, sans-serif; }
@@ -102,15 +158,19 @@
 
     /* ── Decorative section rule ── */
     .gold-rule { display:inline-block; width:2.5rem; height:2px; background:#c8921a; border-radius:2px; vertical-align:middle; margin-right:.75rem; }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
+    }
   </style>
 </head>
 <body class="bg-cream-100 text-navy-900 antialiased">
 
+<a href="#calculator" class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100] focus:bg-navy-900 focus:text-cream-100 focus:px-4 focus:py-2 focus:rounded-xl focus:font-semibold focus:text-sm focus:shadow-lg">Skip to main content</a>
 
 <!-- ═══════════════════════════════════════════
      HEADER
 ════════════════════════════════════════════ -->
-<header class="bg-white/96 backdrop-blur sticky top-0 z-50 border-b border-cream-300 shadow-sm">
+<header class="bg-white sticky top-0 z-50 border-b border-cream-300 shadow-sm">
   <div class="max-w-6xl mx-auto px-5">
     <div class="flex items-center h-16 gap-4">
 
@@ -159,12 +219,12 @@
 
       <!-- ── CTA (desktop) ── -->
       <a href="#calculator"
-         class="hidden md:inline-flex flex-shrink-0 items-center gap-1.5 bg-gold-500 hover:bg-gold-600 text-white text-sm font-semibold px-4 py-2 rounded-xl transition-colors shadow-sm shadow-gold-500/30">
+         class="hidden md:inline-flex flex-shrink-0 items-center gap-1.5 bg-gold-500 hover:bg-gold-600 text-navy-900 text-sm font-semibold px-4 py-2 rounded-xl transition-colors shadow-sm shadow-gold-500/30">
         Get Estimate &rarr;
       </a>
 
       <!-- ── HAMBURGER (mobile) ── -->
-      <button id="ham-btn" class="md:hidden ml-auto p-2 rounded-xl text-slate-500 hover:bg-cream-200 transition-colors" aria-label="Open menu">
+      <button id="ham-btn" class="md:hidden ml-auto p-2 rounded-xl text-slate-500 hover:bg-cream-200 transition-colors" aria-label="Open menu" aria-expanded="false" aria-controls="mob-drawer">
         <svg id="ham-open" class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/>
         </svg>
@@ -200,9 +260,9 @@
           </span>
           <div>
             <p class="font-bold leading-none">Compound Interest</p>
-            <p class="text-slate-400 text-xs mt-0.5">Investment Growth Calculator</p>
+            <p class="text-slate-600 text-xs mt-0.5">Investment Growth Calculator</p>
           </div>
-          <svg class="w-4 h-4 ml-auto text-slate-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
+          <svg class="w-4 h-4 ml-auto text-slate-500" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
         </a>
         <a href="mortgage-calculator.html"
            class="flex items-center gap-3 px-4 py-3 rounded-xl border border-cream-300 bg-white hover:bg-cream-100 text-navy-900 font-semibold text-sm transition-colors">
@@ -214,12 +274,12 @@
           </span>
           <div>
             <p class="font-bold leading-none">Mortgage Calc</p>
-            <p class="text-slate-400 text-xs mt-0.5">Monthly Payment Estimator</p>
+            <p class="text-slate-600 text-xs mt-0.5">Monthly Payment Estimator</p>
           </div>
-          <svg class="w-4 h-4 ml-auto text-slate-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
+          <svg class="w-4 h-4 ml-auto text-slate-500" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
         </a>
         <a href="#calculator"
-           class="mt-1 flex items-center justify-center gap-2 px-4 py-3 rounded-xl bg-gold-500 hover:bg-gold-600 text-white font-bold text-sm transition-colors shadow shadow-gold-500/30">
+           class="mt-1 flex items-center justify-center gap-2 px-4 py-3 rounded-xl bg-gold-500 hover:bg-gold-600 text-navy-900 font-bold text-sm transition-colors shadow shadow-gold-500/30">
           Get My Free Estimate &rarr;
         </a>
       </nav>
@@ -237,6 +297,18 @@
       const open = drawer.classList.toggle('open');
       iconOpen.classList.toggle('hidden', open);
       iconClose.classList.toggle('hidden', !open);
+      btn.setAttribute('aria-expanded', String(open));
+      btn.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+    });
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape' && drawer.classList.contains('open')) {
+        drawer.classList.remove('open');
+        iconOpen.classList.remove('hidden');
+        iconClose.classList.add('hidden');
+        btn.setAttribute('aria-expanded', 'false');
+        btn.setAttribute('aria-label', 'Open menu');
+        btn.focus();
+      }
     });
   })();
 </script>
@@ -318,7 +390,7 @@
         <!-- Total -->
         <div>
           <p class="text-gold-400/80 text-xs font-semibold uppercase tracking-widest mb-3">Your Estimated Life Insurance Need</p>
-          <div id="result-total" class="font-display text-5xl sm:text-6xl md:text-7xl text-gold-gradient tabular-nums">$0</div>
+          <div id="result-total" aria-live="polite" aria-atomic="true" class="font-display text-5xl sm:text-6xl md:text-7xl text-gold-gradient tabular-nums">$0</div>
           <p class="text-cream-300 text-sm mt-2.5">Coverage level: <span id="result-tier" class="text-cream-100 font-semibold">&mdash;</span></p>
         </div>
         <!-- Mini stats -->
@@ -370,18 +442,18 @@
         <div class="flex items-center gap-3 mb-5">
           <span class="w-11 h-11 rounded-xl bg-red-500 text-white flex items-center justify-center flex-shrink-0 shadow-sm shadow-red-500/30"><svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"/></svg></span>
           <div>
-            <h2 class="font-semibold text-navy-900 leading-none">Debt</h2>
+            <p class="font-semibold text-navy-900 leading-none">Debt</p>
             <p class="text-slate-500 text-xs mt-1">Credit cards, auto loans, personal loans</p>
           </div>
         </div>
-        <label class="block text-xs font-semibold text-slate-400 uppercase tracking-wider mb-1.5">Total Outstanding Debt</label>
+        <label for="debt-text" class="block text-xs font-semibold text-slate-600 uppercase tracking-wider mb-1.5">Total Outstanding Debt</label>
         <div class="relative mb-4">
-          <span class="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 font-semibold select-none">$</span>
+          <span class="absolute left-3 top-1/2 -translate-y-1/2 text-slate-600 font-semibold select-none" aria-hidden="true">$</span>
           <input id="debt-text" type="text" inputmode="numeric" value="0"
             class="w-full border border-cream-300 rounded-xl pl-7 pr-4 py-2.5 text-lg font-bold text-navy-900 focus:outline-none focus:ring-2 focus:ring-gold-400 focus:border-transparent transition bg-cream-50" />
         </div>
-        <input id="debt-range" type="range" min="0" max="500000" step="1000" value="0" />
-        <div class="flex justify-between text-xs text-slate-400 mt-1.5"><span>$0</span><span>$500,000</span></div>
+        <input id="debt-range" type="range" min="0" max="500000" step="1000" value="0" aria-label="Total outstanding debt, 0 to 500000 dollars" />
+        <div class="flex justify-between text-xs text-slate-600 mt-1.5"><span>$0</span><span>$500,000</span></div>
       </div>
 
       <!-- I: Income -->
@@ -389,27 +461,27 @@
         <div class="flex items-center gap-3 mb-5">
           <span class="w-11 h-11 rounded-xl bg-emerald-600 text-white flex items-center justify-center flex-shrink-0 shadow-sm shadow-emerald-600/30"><svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg></span>
           <div>
-            <h2 class="font-semibold text-navy-900 leading-none">Income</h2>
+            <p class="font-semibold text-navy-900 leading-none">Income</p>
             <p class="text-slate-500 text-xs mt-1">Annual income &times; years your family needs support</p>
           </div>
         </div>
-        <label class="block text-xs font-semibold text-slate-400 uppercase tracking-wider mb-1.5">Annual Gross Income</label>
+        <label for="income-text" class="block text-xs font-semibold text-slate-600 uppercase tracking-wider mb-1.5">Annual Gross Income</label>
         <div class="relative mb-4">
-          <span class="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 font-semibold select-none">$</span>
+          <span class="absolute left-3 top-1/2 -translate-y-1/2 text-slate-600 font-semibold select-none" aria-hidden="true">$</span>
           <input id="income-text" type="text" inputmode="numeric" value="0"
             class="w-full border border-cream-300 rounded-xl pl-7 pr-4 py-2.5 text-lg font-bold text-navy-900 focus:outline-none focus:ring-2 focus:ring-gold-400 focus:border-transparent transition bg-cream-50" />
         </div>
-        <input id="income-range" type="range" min="0" max="500000" step="1000" value="0" />
-        <div class="flex justify-between text-xs text-slate-400 mt-1.5 mb-5"><span>$0</span><span>$500,000</span></div>
+        <input id="income-range" type="range" min="0" max="500000" step="1000" value="0" aria-label="Annual gross income, 0 to 500000 dollars" />
+        <div class="flex justify-between text-xs text-slate-600 mt-1.5 mb-5"><span>$0</span><span>$500,000</span></div>
 
         <!-- Years sub-control -->
         <div class="border-t border-cream-200 pt-4">
           <div class="flex items-center justify-between mb-2">
-            <label class="text-xs font-semibold text-slate-400 uppercase tracking-wider">Years to Provide for Family</label>
+            <label for="years-range" class="text-xs font-semibold text-slate-600 uppercase tracking-wider">Years to Provide for Family</label>
             <span id="years-badge" class="bg-gold-50 text-gold-700 border border-gold-200 text-sm font-bold px-3 py-0.5 rounded-full tabular-nums">10 yrs</span>
           </div>
-          <input id="years-range" type="range" min="1" max="30" step="1" value="10" />
-          <div class="flex justify-between text-xs text-slate-400 mt-1.5"><span>1 yr</span><span>30 yrs</span></div>
+          <input id="years-range" type="range" min="1" max="30" step="1" value="10" aria-label="Years to provide for family, 1 to 30 years" />
+          <div class="flex justify-between text-xs text-slate-600 mt-1.5"><span>1 yr</span><span>30 yrs</span></div>
         </div>
       </div>
 
@@ -418,18 +490,18 @@
         <div class="flex items-center gap-3 mb-5">
           <span class="w-11 h-11 rounded-xl bg-navy-800 text-cream-200 flex items-center justify-center flex-shrink-0 shadow-sm shadow-navy-800/30"><svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg></span>
           <div>
-            <h2 class="font-semibold text-navy-900 leading-none">Mortgage</h2>
+            <p class="font-semibold text-navy-900 leading-none">Mortgage</p>
             <p class="text-slate-500 text-xs mt-1">Remaining balance on your home loan</p>
           </div>
         </div>
-        <label class="block text-xs font-semibold text-slate-400 uppercase tracking-wider mb-1.5">Mortgage Balance Remaining</label>
+        <label for="mortgage-text" class="block text-xs font-semibold text-slate-600 uppercase tracking-wider mb-1.5">Mortgage Balance Remaining</label>
         <div class="relative mb-4">
-          <span class="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 font-semibold select-none">$</span>
+          <span class="absolute left-3 top-1/2 -translate-y-1/2 text-slate-600 font-semibold select-none" aria-hidden="true">$</span>
           <input id="mortgage-text" type="text" inputmode="numeric" value="0"
             class="w-full border border-cream-300 rounded-xl pl-7 pr-4 py-2.5 text-lg font-bold text-navy-900 focus:outline-none focus:ring-2 focus:ring-gold-400 focus:border-transparent transition bg-cream-50" />
         </div>
-        <input id="mortgage-range" type="range" min="0" max="1000000" step="5000" value="0" />
-        <div class="flex justify-between text-xs text-slate-400 mt-1.5"><span>$0</span><span>$1,000,000</span></div>
+        <input id="mortgage-range" type="range" min="0" max="1000000" step="5000" value="0" aria-label="Mortgage balance remaining, 0 to 1000000 dollars" />
+        <div class="flex justify-between text-xs text-slate-600 mt-1.5"><span>$0</span><span>$1,000,000</span></div>
       </div>
 
       <!-- E: Education -->
@@ -437,18 +509,18 @@
         <div class="flex items-center gap-3 mb-5">
           <span class="w-11 h-11 rounded-xl bg-purple-600 text-white flex items-center justify-center flex-shrink-0 shadow-sm shadow-purple-600/30"><svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg></span>
           <div>
-            <h2 class="font-semibold text-navy-900 leading-none">Education</h2>
+            <p class="font-semibold text-navy-900 leading-none">Education</p>
             <p class="text-slate-500 text-xs mt-1">Estimated college costs for your children</p>
           </div>
         </div>
-        <label class="block text-xs font-semibold text-slate-400 uppercase tracking-wider mb-1.5">Total Education Fund Needed</label>
+        <label for="education-text" class="block text-xs font-semibold text-slate-600 uppercase tracking-wider mb-1.5">Total Education Fund Needed</label>
         <div class="relative mb-4">
-          <span class="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 font-semibold select-none">$</span>
+          <span class="absolute left-3 top-1/2 -translate-y-1/2 text-slate-600 font-semibold select-none" aria-hidden="true">$</span>
           <input id="education-text" type="text" inputmode="numeric" value="0"
             class="w-full border border-cream-300 rounded-xl pl-7 pr-4 py-2.5 text-lg font-bold text-navy-900 focus:outline-none focus:ring-2 focus:ring-gold-400 focus:border-transparent transition bg-cream-50" />
         </div>
-        <input id="education-range" type="range" min="0" max="500000" step="5000" value="0" />
-        <div class="flex justify-between text-xs text-slate-400 mt-1.5"><span>$0</span><span>$500,000</span></div>
+        <input id="education-range" type="range" min="0" max="500000" step="5000" value="0" aria-label="Education fund needed, 0 to 500000 dollars" />
+        <div class="flex justify-between text-xs text-slate-600 mt-1.5"><span>$0</span><span>$500,000</span></div>
       </div>
     </div><!-- /grid -->
 
@@ -485,7 +557,7 @@
   <div class="max-w-5xl mx-auto">
 
     <div class="max-w-3xl mb-10">
-      <p class="text-xs font-semibold uppercase tracking-widest text-gold-500 mb-4"><span class="gold-rule"></span>Understanding the Formula</p>
+      <p class="text-xs font-semibold uppercase tracking-widest text-gold-700 mb-4"><span class="gold-rule"></span>Understanding the Formula</p>
       <h2 class="font-display text-3xl sm:text-4xl text-navy-900 leading-tight mb-5">
         What Is the DIME Method for Life Insurance?
       </h2>
@@ -620,7 +692,7 @@
   <div class="max-w-5xl mx-auto">
 
     <div class="max-w-3xl mb-10">
-      <p class="text-xs font-semibold uppercase tracking-widest text-gold-500 mb-4"><span class="gold-rule"></span>Step-by-Step Guide</p>
+      <p class="text-xs font-semibold uppercase tracking-widest text-gold-700 mb-4"><span class="gold-rule"></span>Step-by-Step Guide</p>
       <h2 class="font-display text-3xl sm:text-4xl text-navy-900 leading-tight mb-5">
         How to Use This Life Insurance Estimator
       </h2>
@@ -693,7 +765,7 @@
       </li>
 
       <li class="bg-white rounded-2xl border border-cream-300 shadow-sm p-6 flex gap-5">
-        <span class="w-10 h-10 rounded-xl bg-gold-500 text-white font-display text-base flex items-center justify-center flex-shrink-0 shadow-sm shadow-gold-500/30">&#10003;</span>
+        <span class="w-10 h-10 rounded-xl bg-gold-500 text-navy-900 font-display text-base flex items-center justify-center flex-shrink-0 shadow-sm shadow-gold-500/30">&#10003;</span>
         <div>
           <h3 class="font-semibold text-navy-900 text-base mb-1.5">Interpret Your Result &amp; Take the Next Step</h3>
           <p class="text-slate-600 leading-relaxed mb-3">
@@ -715,7 +787,7 @@
   <div class="max-w-5xl mx-auto">
 
     <div class="max-w-3xl mb-10">
-      <p class="text-xs font-semibold uppercase tracking-widest text-gold-500 mb-4"><span class="gold-rule"></span>Common Questions</p>
+      <p class="text-xs font-semibold uppercase tracking-widest text-gold-700 mb-4"><span class="gold-rule"></span>Common Questions</p>
       <h2 class="font-display text-3xl sm:text-4xl text-navy-900 leading-tight mb-5">
         Frequently Asked Questions
       </h2>
@@ -789,8 +861,8 @@
                   <li class="flex gap-2"><span class="text-gold-500 font-bold flex-shrink-0">&#10003;</span> Pays a death benefit only if you pass within the term</li>
                   <li class="flex gap-2"><span class="text-gold-500 font-bold flex-shrink-0">&#10003;</span> Much lower monthly premiums</li>
                   <li class="flex gap-2"><span class="text-gold-500 font-bold flex-shrink-0">&#10003;</span> Best for most families: covers peak-obligation years</li>
-                  <li class="flex gap-2"><span class="text-slate-400 font-bold flex-shrink-0">&#10005;</span> No cash value accumulation</li>
-                  <li class="flex gap-2"><span class="text-slate-400 font-bold flex-shrink-0">&#10005;</span> Coverage expires; renewal is costly at older ages</li>
+                  <li class="flex gap-2"><span class="text-slate-600 font-bold flex-shrink-0">&#10005;</span> No cash value accumulation</li>
+                  <li class="flex gap-2"><span class="text-slate-600 font-bold flex-shrink-0">&#10005;</span> Coverage expires; renewal is costly at older ages</li>
                 </ul>
               </div>
               <div class="bg-purple-50 rounded-xl border border-purple-100 p-4">
@@ -800,8 +872,8 @@
                   <li class="flex gap-2"><span class="text-gold-500 font-bold flex-shrink-0">&#10003;</span> Builds tax-deferred cash value over time</li>
                   <li class="flex gap-2"><span class="text-gold-500 font-bold flex-shrink-0">&#10003;</span> Cash value can be borrowed against</li>
                   <li class="flex gap-2"><span class="text-gold-500 font-bold flex-shrink-0">&#10003;</span> Useful for estate planning &amp; wealth transfer</li>
-                  <li class="flex gap-2"><span class="text-slate-400 font-bold flex-shrink-0">&#10005;</span> Premiums are 5&ndash;15&times; higher than comparable term</li>
-                  <li class="flex gap-2"><span class="text-slate-400 font-bold flex-shrink-0">&#10005;</span> Cash value growth is slow and often low-yield</li>
+                  <li class="flex gap-2"><span class="text-slate-600 font-bold flex-shrink-0">&#10005;</span> Premiums are 5&ndash;15&times; higher than comparable term</li>
+                  <li class="flex gap-2"><span class="text-slate-600 font-bold flex-shrink-0">&#10005;</span> Cash value growth is slow and often low-yield</li>
                 </ul>
               </div>
             </div>
@@ -847,6 +919,7 @@
       <div>
         <h4 class="text-cream-100 font-semibold text-sm mb-4">Legal</h4>
         <ul class="space-y-2 text-sm">
+          <li><a href="about.html" class="hover:text-gold-400 transition-colors">About</a></li>
           <li><a href="privacy.html" class="hover:text-gold-400 transition-colors">Privacy Policy</a></li>
           <li><a href="terms.html" class="hover:text-gold-400 transition-colors">Terms of Service</a></li>
           <li><a href="contact.html" class="hover:text-gold-400 transition-colors">Contact Us</a></li>
@@ -854,7 +927,8 @@
       </div>
     </div>
     <div class="border-t border-navy-800 pt-6 text-xs text-center leading-relaxed">
-      &copy; 2025 InsureCalcPro. All rights reserved. This website provides educational estimates only and does not constitute financial, tax, or insurance advice. Always consult a qualified, licensed insurance professional before making any coverage decisions.
+      &copy; <span id="copy-year-index"></span> InsureCalcPro. All rights reserved. This website provides educational estimates only and does not constitute financial, tax, or insurance advice. Always consult a qualified, licensed insurance professional before making any coverage decisions.
+      <script>document.getElementById('copy-year-index').textContent = new Date().getFullYear();</script>
     </div>
   </div>
 </footer>

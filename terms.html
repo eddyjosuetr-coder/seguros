@@ -5,287 +5,305 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content="InsureCalcPro Terms of Service — Read the terms and conditions governing your use of our free life insurance need calculator." />
   <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://www.insurecalcpro.com/terms.html" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <meta property="og:title" content="Terms of Service | InsureCalcPro" />
+  <meta property="og:description" content="InsureCalcPro Terms of Service — Read the terms governing your use of our free financial calculator tools." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://www.insurecalcpro.com/terms.html" />
+  <meta property="og:site_name" content="InsureCalcPro" />
+  <meta property="og:image" content="https://www.insurecalcpro.com/og-image.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:type" content="image/png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Terms of Service | InsureCalcPro" />
+  <meta name="twitter:description" content="InsureCalcPro Terms of Service — Read the terms governing your use of our free financial calculator tools." />
+  <meta name="twitter:image" content="https://www.insurecalcpro.com/og-image.png" />
+  <meta name="theme-color" content="#0d1b2a" />
   <title>Terms of Service | InsureCalcPro</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preload" href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Outfit:wght@400;500;600;700;800&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+  <noscript><link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet" /></noscript>
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
       theme: {
         extend: {
+          fontFamily: {
+            sans: ['Outfit', 'system-ui', 'sans-serif'],
+            display: ['"DM Serif Display"', 'Georgia', 'serif']
+          },
           colors: {
-            brand: { 50:'#eff6ff', 100:'#dbeafe', 200:'#bfdbfe', 300:'#93c5fd', 400:'#60a5fa', 500:'#3b82f6', 600:'#2563eb', 700:'#1d4ed8', 800:'#1e40af', 900:'#1e3a8a', 950:'#172554' }
+            navy:  { 50:'#eef2f7',100:'#d9e2ee',200:'#b3c5de',300:'#8da9ce',400:'#678cbe',500:'#4170ae',600:'#2d5a9e',700:'#1f447a',800:'#132d56',900:'#0d1b2a' },
+            gold:  { 50:'#fdf8ec',100:'#faefc9',200:'#f5de94',300:'#f0ce5f',400:'#ebbd2a',500:'#c8921a',600:'#a67214',700:'#84560f',800:'#623b0a',900:'#402005' },
+            cream: { 50:'#fffef9',100:'#faf7f0',200:'#f4ede0',300:'#e8dccb',400:'#dccab6',500:'#d0b8a1',600:'#c4a68c',700:'#a8896d',800:'#8c6c4e',900:'#704f2f' }
           }
         }
       }
     }
   </script>
   <style>
-    body { font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; }
+    body { font-family: 'Outfit', system-ui, sans-serif; }
+    .nav-pill-inactive { color:#64748b; background:transparent; }
+    .nav-pill-inactive:hover { background:#f5eede; color:#0d1b2a; }
+    #mob-drawer { max-height:0; overflow:hidden; transition:max-height .35s ease, opacity .3s ease; opacity:0; }
+    #mob-drawer.open { max-height:440px; opacity:1; }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+    }
   </style>
 </head>
-<body class="bg-white text-slate-700 antialiased">
+<body class="bg-cream-100 text-navy-900 antialiased">
 
-  <!-- Header -->
-  <header class="bg-white border-b border-slate-200 sticky top-0 z-50 shadow-sm">
-    <div class="max-w-4xl mx-auto px-5 py-4 flex items-center justify-between">
-      <div class="flex items-center gap-2.5">
-        <span class="w-8 h-8 rounded-lg bg-brand-600 flex items-center justify-center flex-shrink-0">
-          <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
-          </svg>
-        </span>
-        <span class="font-extrabold text-slate-900">InsureCalc<span class="text-brand-600">Pro</span></span>
-      </div>
-      <a href="index.html"
-         class="inline-flex items-center gap-2 text-sm font-semibold text-brand-600 hover:text-brand-800 transition-colors">
-        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18"/>
-        </svg>
-        Back to Home
+<a href="#main-content" class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100] focus:bg-navy-900 focus:text-cream-100 focus:px-4 focus:py-2 focus:rounded-xl focus:font-semibold focus:text-sm focus:shadow-lg">Skip to main content</a>
+
+<!-- NAVBAR -->
+<header class="bg-white/96 border-b border-cream-300 sticky top-0 z-50 shadow-sm">
+  <div class="max-w-6xl mx-auto px-5">
+    <div class="flex items-center h-16 gap-4">
+
+      <a href="index.html" class="flex items-center gap-2.5 flex-shrink-0 group">
+        <div class="relative w-9 h-9 flex-shrink-0">
+          <div class="absolute inset-0 rounded-xl bg-navy-900 shadow-md group-hover:shadow-lg group-hover:shadow-navy-900/40 transition-all duration-300"></div>
+          <div class="relative w-full h-full rounded-xl flex items-center justify-center">
+            <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 2L3 7v5c0 5.25 3.75 10.15 9 11.25C17.25 22.15 21 17.25 21 12V7L12 2z" fill="rgba(200,146,26,0.25)" stroke="#c8921a" stroke-width="1.8"/>
+              <polyline points="8,12 10.5,14.5 16,9" stroke="#faf7f0" stroke-width="2.2"/>
+            </svg>
+          </div>
+        </div>
+        <div class="leading-none">
+          <span class="font-display text-[18px] text-navy-900">InsureCalc</span><span class="font-display text-[18px] text-gold-500">Pro</span>
+        </div>
       </a>
-    </div>
-  </header>
 
-  <!-- Page Title -->
-  <div class="bg-slate-50 border-b border-slate-200 py-10 px-5">
-    <div class="max-w-4xl mx-auto">
-      <p class="text-xs font-bold uppercase tracking-widest text-brand-600 mb-2">Legal</p>
-      <h1 class="text-3xl sm:text-4xl font-extrabold text-blue-900 mb-3">Terms of Service</h1>
-      <p class="text-slate-500 text-sm">
-        <strong>InsureCalcPro</strong> &mdash; insurecalcpro.com &nbsp;&bull;&nbsp;
-        Last Updated: <strong>May 18, 2025</strong> &nbsp;&bull;&nbsp;
-        Effective Date: <strong>May 18, 2025</strong>
-      </p>
+      <nav class="hidden md:flex flex-1 items-center justify-center gap-2 text-sm font-semibold">
+        <a href="index.html" class="nav-pill-inactive inline-flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-semibold transition-all">
+          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L3 7v5c0 5.25 3.75 10.15 9 11.25C17.25 22.15 21 17.25 21 12V7L12 2z"/><polyline points="8,12 10.5,14.5 16,9"/></svg>
+          Life Insurance
+        </a>
+        <a href="compound-interest.html" class="nav-pill-inactive inline-flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-semibold transition-all">
+          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22,12 18,12 15,21 9,3 6,12 2,12"/></svg>
+          Compound Interest
+        </a>
+        <a href="mortgage-calculator.html" class="nav-pill-inactive inline-flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-semibold transition-all">
+          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9,22 9,12 15,12 15,22"/></svg>
+          Mortgage Calc
+        </a>
+      </nav>
+
+      <button id="ham-btn" class="md:hidden ml-auto p-2 rounded-xl text-navy-600 hover:bg-cream-200 transition-colors" aria-label="Open menu" aria-expanded="false" aria-controls="mob-drawer">
+        <svg id="ham-open" class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/></svg>
+        <svg id="ham-close" class="w-5 h-5 hidden" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
+      </button>
+    </div>
+
+    <div id="mob-drawer">
+      <nav class="flex flex-col gap-2 pb-4 pt-1">
+        <a href="index.html" class="flex items-center gap-3 px-4 py-3 rounded-xl border border-cream-300 bg-white hover:bg-cream-100 text-navy-900 font-semibold text-sm transition-colors">
+          <span class="w-8 h-8 rounded-lg bg-cream-200 flex items-center justify-center flex-shrink-0"><svg class="w-4 h-4 text-navy-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L3 7v5c0 5.25 3.75 10.15 9 11.25C17.25 22.15 21 17.25 21 12V7L12 2z"/><polyline points="8,12 10.5,14.5 16,9"/></svg></span>
+          Life Insurance
+        </a>
+        <a href="compound-interest.html" class="flex items-center gap-3 px-4 py-3 rounded-xl border border-cream-300 bg-white hover:bg-cream-100 text-navy-900 font-semibold text-sm transition-colors">
+          <span class="w-8 h-8 rounded-lg bg-cream-200 flex items-center justify-center flex-shrink-0"><svg class="w-4 h-4 text-navy-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22,12 18,12 15,21 9,3 6,12 2,12"/></svg></span>
+          Compound Interest
+        </a>
+        <a href="mortgage-calculator.html" class="flex items-center gap-3 px-4 py-3 rounded-xl border border-cream-300 bg-white hover:bg-cream-100 text-navy-900 font-semibold text-sm transition-colors">
+          <span class="w-8 h-8 rounded-lg bg-cream-200 flex items-center justify-center flex-shrink-0"><svg class="w-4 h-4 text-navy-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9,22 9,12 15,12 15,22"/></svg></span>
+          Mortgage Calc
+        </a>
+      </nav>
+    </div>
+  </div>
+</header>
+
+<script>
+(function(){
+  const btn=document.getElementById('ham-btn'),drawer=document.getElementById('mob-drawer'),io=document.getElementById('ham-open'),ic=document.getElementById('ham-close');
+  btn.addEventListener('click',function(){const o=drawer.classList.toggle('open');io.classList.toggle('hidden',o);ic.classList.toggle('hidden',!o);btn.setAttribute('aria-expanded',String(o));btn.setAttribute('aria-label',o?'Close menu':'Open menu');});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape'&&drawer.classList.contains('open')){drawer.classList.remove('open');io.classList.remove('hidden');ic.classList.add('hidden');btn.setAttribute('aria-expanded','false');btn.setAttribute('aria-label','Open menu');btn.focus();}});
+})();
+</script>
+
+<!-- HERO -->
+<section class="bg-navy-900 py-12 px-5 relative overflow-hidden">
+  <div class="absolute inset-0 opacity-5" style="background-image:repeating-linear-gradient(0deg,transparent,transparent 40px,#c8921a 40px,#c8921a 41px),repeating-linear-gradient(90deg,transparent,transparent 40px,#c8921a 40px,#c8921a 41px);"></div>
+  <div class="max-w-4xl mx-auto relative">
+    <span class="inline-flex items-center gap-2 bg-gold-500/15 border border-gold-500/30 text-gold-400 text-xs font-bold uppercase tracking-widest px-3 py-1.5 rounded-full mb-4">Legal</span>
+    <h1 class="font-display text-3xl sm:text-4xl text-cream-100 mb-3">Terms of Service</h1>
+    <p class="text-cream-400 text-sm">
+      <strong class="text-cream-200">InsureCalcPro</strong> &mdash; insurecalcpro.com &nbsp;&bull;&nbsp;
+      Last Updated: <strong class="text-cream-200">May 18, 2025</strong> &nbsp;&bull;&nbsp;
+      Effective: <strong class="text-cream-200">May 18, 2025</strong>
+    </p>
+  </div>
+</section>
+
+<!-- CONTENT -->
+<main id="main-content" class="max-w-4xl mx-auto px-5 py-14">
+
+  <!-- Critical disclaimer -->
+  <div class="bg-gold-50 border border-gold-200 rounded-2xl p-5 mb-6 flex gap-4">
+    <svg class="w-5 h-5 text-gold-600 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd"/></svg>
+    <div>
+      <p class="font-bold text-navy-900 text-sm mb-1">Important Educational Disclaimer</p>
+      <p class="text-navy-700 text-sm leading-relaxed">InsureCalcPro is a <strong>free educational tool only</strong>. Nothing on this website constitutes financial advice, insurance advice, tax advice, or any form of professional advice. Calculator results are estimates for informational purposes only. Always consult a licensed insurance professional or Certified Financial Planner (CFP) before making coverage decisions.</p>
     </div>
   </div>
 
-  <!-- Critical Disclaimer Banner -->
-  <div class="bg-amber-50 border-b border-amber-200 px-5 py-5">
-    <div class="max-w-4xl mx-auto flex gap-4">
-      <svg class="w-5 h-5 text-amber-500 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
-        <path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd"/>
-      </svg>
-      <div>
-        <p class="font-bold text-amber-800 text-sm mb-1">Important Educational Disclaimer</p>
-        <p class="text-amber-700 text-sm leading-relaxed">
-          InsureCalcPro is a <strong>free educational tool only</strong>. Nothing on this website constitutes financial advice, insurance advice, tax advice, or any other form of professional advice. The calculator results are estimates for informational purposes and should not be the sole basis for purchasing any insurance product. Always consult a licensed insurance professional or Certified Financial Planner (CFP) before making coverage decisions.
-        </p>
-      </div>
-    </div>
+  <!-- Intro -->
+  <div class="bg-white border border-cream-200 rounded-2xl p-5 mb-10 shadow-sm">
+    <p class="text-navy-700 text-sm leading-relaxed">
+      Please read these Terms of Service (&ldquo;Terms,&rdquo; &ldquo;Agreement&rdquo;) carefully before using the website located at <strong>insurecalcpro.com</strong> (the &ldquo;Site&rdquo;) operated by <strong>InsureCalcPro</strong> (&ldquo;us,&rdquo; &ldquo;we,&rdquo; or &ldquo;our&rdquo;). Your access to and use of the Site is conditioned upon your acceptance of and compliance with these Terms. By accessing or using the Site in any manner, you agree to be bound by these Terms. If you do not agree to these Terms, please do not use the Site.
+    </p>
   </div>
 
-  <!-- Content -->
-  <main class="max-w-4xl mx-auto px-5 py-14">
+  <div class="space-y-6">
 
-    <!-- Intro -->
-    <div class="bg-blue-50 border border-blue-200 rounded-2xl p-5 mb-12">
-      <p class="text-slate-700 text-sm leading-relaxed">
-        Please read these Terms of Service (&ldquo;Terms,&rdquo; &ldquo;Agreement&rdquo;) carefully before using the website located at <strong>insurecalcpro.com</strong> (the &ldquo;Site&rdquo;) operated by <strong>InsureCalcPro</strong> (&ldquo;us,&rdquo; &ldquo;we,&rdquo; or &ldquo;our&rdquo;). Your access to and use of the Site is conditioned upon your acceptance of and compliance with these Terms. By accessing or using the Site in any manner, you agree to be bound by these Terms. If you do not agree to these Terms, please do not use the Site.
-      </p>
-    </div>
+    <section class="bg-white rounded-2xl border border-cream-200 p-7 shadow-sm">
+      <h2 class="font-display text-xl text-navy-900 mb-4 pb-3 border-b border-cream-200">1. Nature of the Service</h2>
+      <p class="text-navy-700 leading-relaxed mb-4">InsureCalcPro provides a free, browser-based life insurance needs calculator built upon the DIME (Debt, Income, Mortgage, Education) framework. The Site is designed as an <strong>educational and informational resource</strong> intended to help users develop a general understanding of their potential life insurance coverage needs.</p>
+      <p class="text-navy-700 leading-relaxed mb-4">All calculations performed by the tool are estimates based solely on the numerical inputs provided by the user. The outputs are mathematical in nature and do not account for individual risk factors, health history, existing assets, investment returns, Social Security survivor benefits, tax implications, or the full complexity of personal financial planning.</p>
+      <p class="text-navy-700 leading-relaxed"><strong>InsureCalcPro does not sell, broker, underwrite, or recommend any specific insurance product, company, or policy.</strong> We are not an insurance agency, broker, carrier, or financial advisor. We receive no compensation from insurance companies in connection with the calculator results.</p>
+    </section>
 
-    <div class="space-y-12">
-
-      <!-- 1 -->
-      <section>
-        <h2 class="text-xl font-extrabold text-blue-900 mb-4 pb-2 border-b border-slate-200">1. Nature of the Service</h2>
-        <p class="text-slate-700 leading-relaxed mb-4">
-          InsureCalcPro provides a free, browser-based life insurance needs calculator built upon the DIME (Debt, Income, Mortgage, Education) framework. The Site is designed as an <strong>educational and informational resource</strong> intended to help users develop a general understanding of their potential life insurance coverage needs.
-        </p>
-        <p class="text-slate-700 leading-relaxed mb-4">
-          All calculations performed by the tool are estimates based solely on the numerical inputs provided by the user. The outputs are mathematical in nature and do not account for individual risk factors, health history, existing assets, investment returns, Social Security survivor benefits, tax implications, or the full complexity of personal financial planning.
-        </p>
-        <p class="text-slate-700 leading-relaxed">
-          <strong>InsureCalcPro does not sell, broker, underwrite, or recommend any specific insurance product, company, or policy.</strong> We are not an insurance agency, broker, carrier, or financial advisor. We receive no compensation from insurance companies in connection with the calculator results.
-        </p>
-      </section>
-
-      <!-- 2 -->
-      <section>
-        <h2 class="text-xl font-extrabold text-blue-900 mb-4 pb-2 border-b border-slate-200">2. Not Financial or Insurance Advice</h2>
-        <div class="bg-red-50 border border-red-200 rounded-2xl p-5 mb-5">
-          <p class="text-red-800 font-semibold text-sm mb-2">&#9888; This is a critical section. Please read it carefully.</p>
-          <p class="text-slate-700 text-sm leading-relaxed">
-            THE INFORMATION, TOOLS, CONTENT, AND CALCULATOR RESULTS PROVIDED ON THIS SITE ARE FOR <strong>GENERAL EDUCATIONAL AND INFORMATIONAL PURPOSES ONLY</strong>. THEY DO NOT CONSTITUTE AND MUST NOT BE CONSTRUED AS FINANCIAL ADVICE, INVESTMENT ADVICE, INSURANCE ADVICE, TAX ADVICE, LEGAL ADVICE, OR ANY OTHER TYPE OF PROFESSIONAL ADVICE.
-          </p>
-        </div>
-        <p class="text-slate-700 leading-relaxed mb-4">
-          The results generated by the DIME calculator represent a simplified mathematical estimate. Life insurance needs are highly individual and depend on numerous variables that this tool cannot assess, including but not limited to:
-        </p>
-        <ul class="space-y-2 pl-4 text-slate-700 mb-4">
-          <li class="flex gap-2 leading-relaxed"><span class="text-brand-500 font-bold flex-shrink-0 mt-0.5">&#8250;</span> Your current health status and medical history, which affect insurability and premiums</li>
-          <li class="flex gap-2 leading-relaxed"><span class="text-brand-500 font-bold flex-shrink-0 mt-0.5">&#8250;</span> Existing life insurance coverage through employers or individually held policies</li>
-          <li class="flex gap-2 leading-relaxed"><span class="text-brand-500 font-bold flex-shrink-0 mt-0.5">&#8250;</span> Liquid savings, investment portfolios, and retirement accounts that could substitute for coverage</li>
-          <li class="flex gap-2 leading-relaxed"><span class="text-brand-500 font-bold flex-shrink-0 mt-0.5">&#8250;</span> Social Security survivor benefits available to your spouse and dependents</li>
-          <li class="flex gap-2 leading-relaxed"><span class="text-brand-500 font-bold flex-shrink-0 mt-0.5">&#8250;</span> The income and financial independence of a surviving spouse</li>
-          <li class="flex gap-2 leading-relaxed"><span class="text-brand-500 font-bold flex-shrink-0 mt-0.5">&#8250;</span> Estate planning goals, tax planning strategies, and business succession needs</li>
-          <li class="flex gap-2 leading-relaxed"><span class="text-brand-500 font-bold flex-shrink-0 mt-0.5">&#8250;</span> Inflation rates and investment return assumptions over the coverage period</li>
-        </ul>
-        <p class="text-slate-700 leading-relaxed">
-          <strong>We strongly recommend that you consult with a licensed, qualified insurance professional and/or a Certified Financial Planner (CFP) before purchasing any life insurance product or making any financial decision based on information from this Site.</strong>
-        </p>
-      </section>
-
-      <!-- 3 -->
-      <section>
-        <h2 class="text-xl font-extrabold text-blue-900 mb-4 pb-2 border-b border-slate-200">3. Eligibility and Acceptance</h2>
-        <p class="text-slate-700 leading-relaxed mb-4">
-          By using the Site, you represent and warrant that you are at least <strong>18 years of age</strong>, that you have the legal capacity to enter into these Terms, and that your use of the Site complies with all applicable laws and regulations in your jurisdiction.
-        </p>
-        <p class="text-slate-700 leading-relaxed">
-          If you are using the Site on behalf of a company, organization, or other entity, you represent that you are authorized to bind that entity to these Terms, and &ldquo;you&rdquo; refers to both you individually and the entity.
-        </p>
-      </section>
-
-      <!-- 4 -->
-      <section>
-        <h2 class="text-xl font-extrabold text-blue-900 mb-4 pb-2 border-b border-slate-200">4. Permitted Use</h2>
-        <p class="text-slate-700 leading-relaxed mb-4">You may use the Site for personal, non-commercial, educational purposes only. You agree that you will not:</p>
-        <ul class="space-y-2 pl-4 text-slate-700">
-          <li class="flex gap-2 leading-relaxed"><span class="text-brand-500 font-bold flex-shrink-0 mt-0.5">&#8250;</span> Use the Site for any unlawful purpose or in violation of any applicable federal, state, or local law or regulation</li>
-          <li class="flex gap-2 leading-relaxed"><span class="text-brand-500 font-bold flex-shrink-0 mt-0.5">&#8250;</span> Copy, reproduce, distribute, or create derivative works based on our Site content without our express written permission</li>
-          <li class="flex gap-2 leading-relaxed"><span class="text-brand-500 font-bold flex-shrink-0 mt-0.5">&#8250;</span> Use any automated scraping tools, bots, spiders, or similar technologies to access the Site or harvest content</li>
-          <li class="flex gap-2 leading-relaxed"><span class="text-brand-500 font-bold flex-shrink-0 mt-0.5">&#8250;</span> Attempt to interfere with, compromise, or disrupt the security, integrity, or availability of the Site</li>
-          <li class="flex gap-2 leading-relaxed"><span class="text-brand-500 font-bold flex-shrink-0 mt-0.5">&#8250;</span> Frame or embed the calculator or any portion of the Site on another website without our prior written consent</li>
-          <li class="flex gap-2 leading-relaxed"><span class="text-brand-500 font-bold flex-shrink-0 mt-0.5">&#8250;</span> Use the Site in any way that could damage, disable, overburden, or impair our servers or networks</li>
-        </ul>
-      </section>
-
-      <!-- 5 -->
-      <section>
-        <h2 class="text-xl font-extrabold text-blue-900 mb-4 pb-2 border-b border-slate-200">5. Intellectual Property</h2>
-        <p class="text-slate-700 leading-relaxed mb-4">
-          All content on the Site — including but not limited to text, graphics, logos, icons, images, the calculator interface and its underlying code, and the overall design and layout — is the exclusive property of InsureCalcPro and is protected by applicable United States and international intellectual property laws, including copyright and trademark laws.
-        </p>
-        <p class="text-slate-700 leading-relaxed">
-          You are granted a limited, non-exclusive, non-transferable, revocable license to access and use the Site for personal, non-commercial, informational purposes as described in these Terms. No other rights are granted, and no rights are transferred to you through your use of the Site.
-        </p>
-      </section>
-
-      <!-- 6 -->
-      <section>
-        <h2 class="text-xl font-extrabold text-blue-900 mb-4 pb-2 border-b border-slate-200">6. Third-Party Advertising</h2>
-        <p class="text-slate-700 leading-relaxed mb-4">
-          The Site may display advertisements served by <strong>Google AdSense</strong> and potentially other third-party advertising networks. These advertisements are provided by independent third parties. InsureCalcPro does not endorse, guarantee, or take responsibility for any products, services, or content advertised on the Site through these networks.
-        </p>
-        <p class="text-slate-700 leading-relaxed">
-          Your interactions with third-party advertisements — including clicking on ads, visiting advertiser websites, or purchasing advertised products or services — are solely between you and the advertiser. InsureCalcPro is not a party to those transactions and accepts no liability for any loss or damage of any sort arising from such interactions.
-        </p>
-      </section>
-
-      <!-- 7 -->
-      <section>
-        <h2 class="text-xl font-extrabold text-blue-900 mb-4 pb-2 border-b border-slate-200">7. Disclaimer of Warranties</h2>
-        <p class="text-slate-700 leading-relaxed mb-4">
-          THE SITE AND ALL CONTENT, TOOLS, AND INFORMATION PROVIDED HEREIN ARE OFFERED ON AN <strong>&ldquo;AS IS&rdquo; AND &ldquo;AS AVAILABLE&rdquo;</strong> BASIS, WITHOUT WARRANTY OF ANY KIND, EITHER EXPRESS OR IMPLIED.
-        </p>
-        <p class="text-slate-700 leading-relaxed mb-4">TO THE FULLEST EXTENT PERMITTED BY APPLICABLE LAW, INSURECALCPRO EXPRESSLY DISCLAIMS ALL WARRANTIES, INCLUDING BUT NOT LIMITED TO:</p>
-        <ul class="space-y-2 pl-4 text-slate-700">
-          <li class="flex gap-2 leading-relaxed"><span class="text-brand-500 font-bold flex-shrink-0 mt-0.5">&#8250;</span> Implied warranties of merchantability, fitness for a particular purpose, and non-infringement</li>
-          <li class="flex gap-2 leading-relaxed"><span class="text-brand-500 font-bold flex-shrink-0 mt-0.5">&#8250;</span> Any warranty that the Site will be uninterrupted, error-free, or free of viruses or other harmful components</li>
-          <li class="flex gap-2 leading-relaxed"><span class="text-brand-500 font-bold flex-shrink-0 mt-0.5">&#8250;</span> Any warranty regarding the accuracy, completeness, reliability, timeliness, or suitability of any content or calculator results</li>
-          <li class="flex gap-2 leading-relaxed"><span class="text-brand-500 font-bold flex-shrink-0 mt-0.5">&#8250;</span> Any warranty that the calculator results will meet your specific financial needs or expectations</li>
-        </ul>
-      </section>
-
-      <!-- 8 -->
-      <section>
-        <h2 class="text-xl font-extrabold text-blue-900 mb-4 pb-2 border-b border-slate-200">8. Limitation of Liability</h2>
-        <p class="text-slate-700 leading-relaxed mb-4">
-          TO THE MAXIMUM EXTENT PERMITTED BY APPLICABLE LAW, IN NO EVENT SHALL INSURECALCPRO, ITS OWNERS, OFFICERS, DIRECTORS, EMPLOYEES, AGENTS, LICENSORS, OR SERVICE PROVIDERS BE LIABLE FOR ANY INDIRECT, INCIDENTAL, SPECIAL, CONSEQUENTIAL, EXEMPLARY, OR PUNITIVE DAMAGES, INCLUDING BUT NOT LIMITED TO:
-        </p>
-        <ul class="space-y-2 pl-4 text-slate-700 mb-4">
-          <li class="flex gap-2 leading-relaxed"><span class="text-brand-500 font-bold flex-shrink-0 mt-0.5">&#8250;</span> Loss of profits, revenue, data, goodwill, or other intangible losses</li>
-          <li class="flex gap-2 leading-relaxed"><span class="text-brand-500 font-bold flex-shrink-0 mt-0.5">&#8250;</span> Financial decisions made in reliance on the calculator results or any content on the Site</li>
-          <li class="flex gap-2 leading-relaxed"><span class="text-brand-500 font-bold flex-shrink-0 mt-0.5">&#8250;</span> Inability to access or use the Site, or interruption of service</li>
-          <li class="flex gap-2 leading-relaxed"><span class="text-brand-500 font-bold flex-shrink-0 mt-0.5">&#8250;</span> Any errors, mistakes, or inaccuracies in the content or calculator outputs</li>
-          <li class="flex gap-2 leading-relaxed"><span class="text-brand-500 font-bold flex-shrink-0 mt-0.5">&#8250;</span> Unauthorized access to or use of our servers or any personal information stored therein</li>
-        </ul>
-        <p class="text-slate-700 leading-relaxed">
-          These limitations apply regardless of the legal theory on which the claim is based — whether contract, tort (including negligence), strict liability, or otherwise — and even if InsureCalcPro has been advised of the possibility of such damages. In jurisdictions that do not allow the exclusion or limitation of incidental or consequential damages, our liability shall be limited to the greatest extent permitted by law.
-        </p>
-      </section>
-
-      <!-- 9 -->
-      <section>
-        <h2 class="text-xl font-extrabold text-blue-900 mb-4 pb-2 border-b border-slate-200">9. Indemnification</h2>
-        <p class="text-slate-700 leading-relaxed">
-          You agree to defend, indemnify, and hold harmless InsureCalcPro and its owners, officers, directors, employees, agents, licensors, and service providers from and against any claims, liabilities, damages, judgments, awards, losses, costs, expenses, or fees (including reasonable attorneys&rsquo; fees) arising out of or relating to your violation of these Terms or your use of the Site, including any financial decisions made in reliance on the calculator results.
-        </p>
-      </section>
-
-      <!-- 10 -->
-      <section>
-        <h2 class="text-xl font-extrabold text-blue-900 mb-4 pb-2 border-b border-slate-200">10. Links to Third-Party Websites</h2>
-        <p class="text-slate-700 leading-relaxed">
-          The Site may contain links to third-party websites for reference or informational purposes. These links are provided as a convenience only. InsureCalcPro does not endorse, monitor, or have any control over these external websites and is not responsible for their content, privacy practices, or policies. Your access to any linked website is at your own risk, and you should review the terms and privacy policies of those websites before using them.
-        </p>
-      </section>
-
-      <!-- 11 -->
-      <section>
-        <h2 class="text-xl font-extrabold text-blue-900 mb-4 pb-2 border-b border-slate-200">11. Modifications to the Site and Terms</h2>
-        <p class="text-slate-700 leading-relaxed mb-4">
-          We reserve the right to modify, suspend, or discontinue the Site — or any feature or portion thereof — at any time without notice or liability. We also reserve the right to amend these Terms at any time by posting the revised Terms on this page with an updated &ldquo;Last Updated&rdquo; date.
-        </p>
-        <p class="text-slate-700 leading-relaxed">
-          Your continued use of the Site after any modification to these Terms constitutes your binding acceptance of the updated Terms. We encourage you to review these Terms periodically to stay informed of any changes.
-        </p>
-      </section>
-
-      <!-- 12 -->
-      <section>
-        <h2 class="text-xl font-extrabold text-blue-900 mb-4 pb-2 border-b border-slate-200">12. Governing Law and Dispute Resolution</h2>
-        <p class="text-slate-700 leading-relaxed mb-4">
-          These Terms shall be governed by and construed in accordance with the laws of the <strong>United States of America</strong>, without regard to its conflict of law provisions. Any dispute arising from or relating to these Terms or your use of the Site shall be resolved exclusively through binding arbitration in accordance with the American Arbitration Association&rsquo;s Consumer Arbitration Rules.
-        </p>
-        <p class="text-slate-700 leading-relaxed">
-          You agree that any dispute resolution proceedings will be conducted only on an individual basis and not as part of a class, consolidated, or representative action. If for any reason a claim proceeds in court rather than in arbitration, you waive any right to a jury trial.
-        </p>
-      </section>
-
-      <!-- 13 -->
-      <section>
-        <h2 class="text-xl font-extrabold text-blue-900 mb-4 pb-2 border-b border-slate-200">13. Severability and Entire Agreement</h2>
-        <p class="text-slate-700 leading-relaxed mb-4">
-          If any provision of these Terms is found to be unenforceable or invalid under applicable law, that provision will be limited or eliminated to the minimum extent necessary so that the remaining Terms will otherwise remain in full force and effect.
-        </p>
-        <p class="text-slate-700 leading-relaxed">
-          These Terms, together with our Privacy Policy, constitute the entire agreement between you and InsureCalcPro with respect to your use of the Site and supersede all prior agreements, representations, and understandings.
-        </p>
-      </section>
-
-      <!-- 14 -->
-      <section>
-        <h2 class="text-xl font-extrabold text-blue-900 mb-4 pb-2 border-b border-slate-200">14. Contact Us</h2>
-        <p class="text-slate-700 leading-relaxed mb-4">
-          If you have any questions or concerns about these Terms of Service, please contact us:
-        </p>
-        <div class="bg-slate-50 border border-slate-200 rounded-2xl p-5">
-          <p class="font-bold text-slate-900 mb-1">InsureCalcPro</p>
-          <p class="text-slate-700 text-sm">Website: <span class="text-brand-600 font-medium">insurecalcpro.com</span></p>
-          <p class="text-slate-700 text-sm">Email: <a href="mailto:contact@insurecalcpro.com" class="text-brand-600 hover:underline font-medium">contact@insurecalcpro.com</a></p>
-        </div>
-        <p class="text-slate-600 text-sm mt-4 leading-relaxed">
-          We aim to respond to all inquiries within <strong>5 business days</strong>.
-        </p>
-      </section>
-
-    </div>
-  </main>
-
-  <!-- Footer -->
-  <footer class="bg-slate-900 text-slate-400 py-8 px-5 mt-8">
-    <div class="max-w-4xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4 text-sm">
-      <span class="font-extrabold text-white">InsureCalc<span class="text-brand-400">Pro</span></span>
-      <div class="flex flex-wrap justify-center gap-5">
-        <a href="privacy.html" class="hover:text-brand-400 transition-colors">Privacy Policy</a>
-        <a href="terms.html" class="text-brand-400 font-medium">Terms of Service</a>
-        <a href="contact.html" class="hover:text-brand-400 transition-colors">Contact Us</a>
-        <a href="index.html" class="hover:text-brand-400 transition-colors">Calculator</a>
+    <section class="bg-white rounded-2xl border border-cream-200 p-7 shadow-sm">
+      <h2 class="font-display text-xl text-navy-900 mb-4 pb-3 border-b border-cream-200">2. Not Financial or Insurance Advice</h2>
+      <div class="bg-gold-50 border border-gold-200 rounded-xl p-4 mb-5">
+        <p class="text-navy-800 font-semibold text-sm mb-2">This is a critical section. Please read it carefully.</p>
+        <p class="text-navy-700 text-sm leading-relaxed">THE INFORMATION, TOOLS, CONTENT, AND CALCULATOR RESULTS PROVIDED ON THIS SITE ARE FOR <strong>GENERAL EDUCATIONAL AND INFORMATIONAL PURPOSES ONLY</strong>. THEY DO NOT CONSTITUTE AND MUST NOT BE CONSTRUED AS FINANCIAL ADVICE, INVESTMENT ADVICE, INSURANCE ADVICE, TAX ADVICE, LEGAL ADVICE, OR ANY OTHER TYPE OF PROFESSIONAL ADVICE.</p>
       </div>
-      <p class="text-xs text-slate-500">&copy; 2025 InsureCalcPro. All rights reserved.</p>
+      <p class="text-navy-700 leading-relaxed mb-4">The results generated by the DIME calculator represent a simplified mathematical estimate. Life insurance needs are highly individual and depend on numerous variables that this tool cannot assess, including but not limited to:</p>
+      <ul class="space-y-2 text-navy-700 mb-4">
+        <li class="flex gap-2 leading-relaxed"><span class="text-gold-600 font-bold flex-shrink-0 mt-0.5">&#8250;</span> Your current health status and medical history, which affect insurability and premiums</li>
+        <li class="flex gap-2 leading-relaxed"><span class="text-gold-600 font-bold flex-shrink-0 mt-0.5">&#8250;</span> Existing life insurance coverage through employers or individually held policies</li>
+        <li class="flex gap-2 leading-relaxed"><span class="text-gold-600 font-bold flex-shrink-0 mt-0.5">&#8250;</span> Liquid savings, investment portfolios, and retirement accounts that could substitute for coverage</li>
+        <li class="flex gap-2 leading-relaxed"><span class="text-gold-600 font-bold flex-shrink-0 mt-0.5">&#8250;</span> Social Security survivor benefits available to your spouse and dependents</li>
+        <li class="flex gap-2 leading-relaxed"><span class="text-gold-600 font-bold flex-shrink-0 mt-0.5">&#8250;</span> The income and financial independence of a surviving spouse</li>
+        <li class="flex gap-2 leading-relaxed"><span class="text-gold-600 font-bold flex-shrink-0 mt-0.5">&#8250;</span> Estate planning goals, tax planning strategies, and business succession needs</li>
+        <li class="flex gap-2 leading-relaxed"><span class="text-gold-600 font-bold flex-shrink-0 mt-0.5">&#8250;</span> Inflation rates and investment return assumptions over the coverage period</li>
+      </ul>
+      <p class="text-navy-700 leading-relaxed"><strong>We strongly recommend that you consult with a licensed, qualified insurance professional and/or a Certified Financial Planner (CFP) before purchasing any life insurance product or making any financial decision based on information from this Site.</strong></p>
+    </section>
+
+    <section class="bg-white rounded-2xl border border-cream-200 p-7 shadow-sm">
+      <h2 class="font-display text-xl text-navy-900 mb-4 pb-3 border-b border-cream-200">3. Eligibility and Acceptance</h2>
+      <p class="text-navy-700 leading-relaxed mb-4">By using the Site, you represent and warrant that you are at least <strong>18 years of age</strong>, that you have the legal capacity to enter into these Terms, and that your use of the Site complies with all applicable laws and regulations in your jurisdiction.</p>
+      <p class="text-navy-700 leading-relaxed">If you are using the Site on behalf of a company, organization, or other entity, you represent that you are authorized to bind that entity to these Terms, and &ldquo;you&rdquo; refers to both you individually and the entity.</p>
+    </section>
+
+    <section class="bg-white rounded-2xl border border-cream-200 p-7 shadow-sm">
+      <h2 class="font-display text-xl text-navy-900 mb-4 pb-3 border-b border-cream-200">4. Permitted Use</h2>
+      <p class="text-navy-700 leading-relaxed mb-4">You may use the Site for personal, non-commercial, educational purposes only. You agree that you will not:</p>
+      <ul class="space-y-2 text-navy-700">
+        <li class="flex gap-2 leading-relaxed"><span class="text-gold-600 font-bold flex-shrink-0 mt-0.5">&#8250;</span> Use the Site for any unlawful purpose or in violation of any applicable federal, state, or local law or regulation</li>
+        <li class="flex gap-2 leading-relaxed"><span class="text-gold-600 font-bold flex-shrink-0 mt-0.5">&#8250;</span> Copy, reproduce, distribute, or create derivative works based on our Site content without our express written permission</li>
+        <li class="flex gap-2 leading-relaxed"><span class="text-gold-600 font-bold flex-shrink-0 mt-0.5">&#8250;</span> Use any automated scraping tools, bots, spiders, or similar technologies to access the Site or harvest content</li>
+        <li class="flex gap-2 leading-relaxed"><span class="text-gold-600 font-bold flex-shrink-0 mt-0.5">&#8250;</span> Attempt to interfere with, compromise, or disrupt the security, integrity, or availability of the Site</li>
+        <li class="flex gap-2 leading-relaxed"><span class="text-gold-600 font-bold flex-shrink-0 mt-0.5">&#8250;</span> Frame or embed the calculator or any portion of the Site on another website without our prior written consent</li>
+        <li class="flex gap-2 leading-relaxed"><span class="text-gold-600 font-bold flex-shrink-0 mt-0.5">&#8250;</span> Use the Site in any way that could damage, disable, overburden, or impair our servers or networks</li>
+      </ul>
+    </section>
+
+    <section class="bg-white rounded-2xl border border-cream-200 p-7 shadow-sm">
+      <h2 class="font-display text-xl text-navy-900 mb-4 pb-3 border-b border-cream-200">5. Intellectual Property</h2>
+      <p class="text-navy-700 leading-relaxed mb-4">All content on the Site — including but not limited to text, graphics, logos, icons, images, the calculator interface and its underlying code, and the overall design and layout — is the exclusive property of InsureCalcPro and is protected by applicable United States and international intellectual property laws, including copyright and trademark laws.</p>
+      <p class="text-navy-700 leading-relaxed">You are granted a limited, non-exclusive, non-transferable, revocable license to access and use the Site for personal, non-commercial, informational purposes as described in these Terms. No other rights are granted, and no rights are transferred to you through your use of the Site.</p>
+    </section>
+
+    <section class="bg-white rounded-2xl border border-cream-200 p-7 shadow-sm">
+      <h2 class="font-display text-xl text-navy-900 mb-4 pb-3 border-b border-cream-200">6. Third-Party Advertising</h2>
+      <p class="text-navy-700 leading-relaxed mb-4">The Site may display advertisements served by <strong>Google AdSense</strong> and potentially other third-party advertising networks. These advertisements are provided by independent third parties. InsureCalcPro does not endorse, guarantee, or take responsibility for any products, services, or content advertised on the Site through these networks.</p>
+      <p class="text-navy-700 leading-relaxed">Your interactions with third-party advertisements — including clicking on ads, visiting advertiser websites, or purchasing advertised products or services — are solely between you and the advertiser. InsureCalcPro is not a party to those transactions and accepts no liability for any loss or damage of any sort arising from such interactions.</p>
+    </section>
+
+    <section class="bg-white rounded-2xl border border-cream-200 p-7 shadow-sm">
+      <h2 class="font-display text-xl text-navy-900 mb-4 pb-3 border-b border-cream-200">7. Disclaimer of Warranties</h2>
+      <p class="text-navy-700 leading-relaxed mb-4">THE SITE AND ALL CONTENT, TOOLS, AND INFORMATION PROVIDED HEREIN ARE OFFERED ON AN <strong>&ldquo;AS IS&rdquo; AND &ldquo;AS AVAILABLE&rdquo;</strong> BASIS, WITHOUT WARRANTY OF ANY KIND, EITHER EXPRESS OR IMPLIED.</p>
+      <p class="text-navy-700 leading-relaxed mb-4">TO THE FULLEST EXTENT PERMITTED BY APPLICABLE LAW, INSURECALCPRO EXPRESSLY DISCLAIMS ALL WARRANTIES, INCLUDING BUT NOT LIMITED TO:</p>
+      <ul class="space-y-2 text-navy-700">
+        <li class="flex gap-2 leading-relaxed"><span class="text-gold-600 font-bold flex-shrink-0 mt-0.5">&#8250;</span> Implied warranties of merchantability, fitness for a particular purpose, and non-infringement</li>
+        <li class="flex gap-2 leading-relaxed"><span class="text-gold-600 font-bold flex-shrink-0 mt-0.5">&#8250;</span> Any warranty that the Site will be uninterrupted, error-free, or free of viruses or other harmful components</li>
+        <li class="flex gap-2 leading-relaxed"><span class="text-gold-600 font-bold flex-shrink-0 mt-0.5">&#8250;</span> Any warranty regarding the accuracy, completeness, reliability, timeliness, or suitability of any content or calculator results</li>
+        <li class="flex gap-2 leading-relaxed"><span class="text-gold-600 font-bold flex-shrink-0 mt-0.5">&#8250;</span> Any warranty that the calculator results will meet your specific financial needs or expectations</li>
+      </ul>
+    </section>
+
+    <section class="bg-white rounded-2xl border border-cream-200 p-7 shadow-sm">
+      <h2 class="font-display text-xl text-navy-900 mb-4 pb-3 border-b border-cream-200">8. Limitation of Liability</h2>
+      <p class="text-navy-700 leading-relaxed mb-4">TO THE MAXIMUM EXTENT PERMITTED BY APPLICABLE LAW, IN NO EVENT SHALL INSURECALCPRO, ITS OWNERS, OFFICERS, DIRECTORS, EMPLOYEES, AGENTS, LICENSORS, OR SERVICE PROVIDERS BE LIABLE FOR ANY INDIRECT, INCIDENTAL, SPECIAL, CONSEQUENTIAL, EXEMPLARY, OR PUNITIVE DAMAGES, INCLUDING BUT NOT LIMITED TO:</p>
+      <ul class="space-y-2 text-navy-700 mb-4">
+        <li class="flex gap-2 leading-relaxed"><span class="text-gold-600 font-bold flex-shrink-0 mt-0.5">&#8250;</span> Loss of profits, revenue, data, goodwill, or other intangible losses</li>
+        <li class="flex gap-2 leading-relaxed"><span class="text-gold-600 font-bold flex-shrink-0 mt-0.5">&#8250;</span> Financial decisions made in reliance on the calculator results or any content on the Site</li>
+        <li class="flex gap-2 leading-relaxed"><span class="text-gold-600 font-bold flex-shrink-0 mt-0.5">&#8250;</span> Inability to access or use the Site, or interruption of service</li>
+        <li class="flex gap-2 leading-relaxed"><span class="text-gold-600 font-bold flex-shrink-0 mt-0.5">&#8250;</span> Any errors, mistakes, or inaccuracies in the content or calculator outputs</li>
+        <li class="flex gap-2 leading-relaxed"><span class="text-gold-600 font-bold flex-shrink-0 mt-0.5">&#8250;</span> Unauthorized access to or use of our servers or any personal information stored therein</li>
+      </ul>
+      <p class="text-navy-700 leading-relaxed">These limitations apply regardless of the legal theory on which the claim is based — whether contract, tort (including negligence), strict liability, or otherwise — and even if InsureCalcPro has been advised of the possibility of such damages. In jurisdictions that do not allow the exclusion or limitation of incidental or consequential damages, our liability shall be limited to the greatest extent permitted by law.</p>
+    </section>
+
+    <section class="bg-white rounded-2xl border border-cream-200 p-7 shadow-sm">
+      <h2 class="font-display text-xl text-navy-900 mb-4 pb-3 border-b border-cream-200">9. Indemnification</h2>
+      <p class="text-navy-700 leading-relaxed">You agree to defend, indemnify, and hold harmless InsureCalcPro and its owners, officers, directors, employees, agents, licensors, and service providers from and against any claims, liabilities, damages, judgments, awards, losses, costs, expenses, or fees (including reasonable attorneys&rsquo; fees) arising out of or relating to your violation of these Terms or your use of the Site, including any financial decisions made in reliance on the calculator results.</p>
+    </section>
+
+    <section class="bg-white rounded-2xl border border-cream-200 p-7 shadow-sm">
+      <h2 class="font-display text-xl text-navy-900 mb-4 pb-3 border-b border-cream-200">10. Links to Third-Party Websites</h2>
+      <p class="text-navy-700 leading-relaxed">The Site may contain links to third-party websites for reference or informational purposes. These links are provided as a convenience only. InsureCalcPro does not endorse, monitor, or have any control over these external websites and is not responsible for their content, privacy practices, or policies. Your access to any linked website is at your own risk, and you should review the terms and privacy policies of those websites before using them.</p>
+    </section>
+
+    <section class="bg-white rounded-2xl border border-cream-200 p-7 shadow-sm">
+      <h2 class="font-display text-xl text-navy-900 mb-4 pb-3 border-b border-cream-200">11. Modifications to the Site and Terms</h2>
+      <p class="text-navy-700 leading-relaxed mb-4">We reserve the right to modify, suspend, or discontinue the Site — or any feature or portion thereof — at any time without notice or liability. We also reserve the right to amend these Terms at any time by posting the revised Terms on this page with an updated &ldquo;Last Updated&rdquo; date.</p>
+      <p class="text-navy-700 leading-relaxed">Your continued use of the Site after any modification to these Terms constitutes your binding acceptance of the updated Terms. We encourage you to review these Terms periodically to stay informed of any changes.</p>
+    </section>
+
+    <section class="bg-white rounded-2xl border border-cream-200 p-7 shadow-sm">
+      <h2 class="font-display text-xl text-navy-900 mb-4 pb-3 border-b border-cream-200">12. Governing Law and Dispute Resolution</h2>
+      <p class="text-navy-700 leading-relaxed mb-4">These Terms shall be governed by and construed in accordance with the laws of the <strong>United States of America</strong>, without regard to its conflict of law provisions. Any dispute arising from or relating to these Terms or your use of the Site shall be resolved exclusively through binding arbitration in accordance with the American Arbitration Association&rsquo;s Consumer Arbitration Rules.</p>
+      <p class="text-navy-700 leading-relaxed">You agree that any dispute resolution proceedings will be conducted only on an individual basis and not as part of a class, consolidated, or representative action. If for any reason a claim proceeds in court rather than in arbitration, you waive any right to a jury trial.</p>
+    </section>
+
+    <section class="bg-white rounded-2xl border border-cream-200 p-7 shadow-sm">
+      <h2 class="font-display text-xl text-navy-900 mb-4 pb-3 border-b border-cream-200">13. Severability and Entire Agreement</h2>
+      <p class="text-navy-700 leading-relaxed mb-4">If any provision of these Terms is found to be unenforceable or invalid under applicable law, that provision will be limited or eliminated to the minimum extent necessary so that the remaining Terms will otherwise remain in full force and effect.</p>
+      <p class="text-navy-700 leading-relaxed">These Terms, together with our Privacy Policy, constitute the entire agreement between you and InsureCalcPro with respect to your use of the Site and supersede all prior agreements, representations, and understandings.</p>
+    </section>
+
+    <section class="bg-white rounded-2xl border border-cream-200 p-7 shadow-sm">
+      <h2 class="font-display text-xl text-navy-900 mb-4 pb-3 border-b border-cream-200">14. Contact Us</h2>
+      <p class="text-navy-700 leading-relaxed mb-4">If you have any questions or concerns about these Terms of Service, please contact us:</p>
+      <div class="bg-cream-100 border border-cream-300 rounded-xl p-5">
+        <p class="font-semibold text-navy-900 mb-1">InsureCalcPro</p>
+        <p class="text-navy-700 text-sm">Website: <span class="text-gold-700 font-medium">insurecalcpro.com</span></p>
+        <p class="text-navy-700 text-sm">Email: <a href="mailto:contact@insurecalcpro.com" class="text-gold-700 hover:underline font-medium">contact@insurecalcpro.com</a></p>
+      </div>
+      <p class="text-navy-600 text-sm mt-4 leading-relaxed">We aim to respond to all inquiries within <strong>5 business days</strong>.</p>
+    </section>
+
+  </div>
+</main>
+
+<!-- FOOTER -->
+<footer class="bg-navy-900 text-cream-400 py-10 px-4 mt-8">
+  <div class="max-w-5xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4 text-sm">
+    <span class="font-display text-cream-100 text-lg">InsureCalc<span class="text-gold-400">Pro</span></span>
+    <div class="flex flex-wrap justify-center gap-5">
+      <a href="index.html" class="hover:text-gold-400 transition-colors">Life Insurance</a>
+      <a href="compound-interest.html" class="hover:text-gold-400 transition-colors">Compound Interest</a>
+      <a href="mortgage-calculator.html" class="hover:text-gold-400 transition-colors">Mortgage Calc</a>
     </div>
-  </footer>
+    <div class="flex flex-wrap justify-center gap-5">
+      <a href="about.html" class="hover:text-gold-400 transition-colors">About</a>
+      <a href="privacy.html" class="hover:text-gold-400 transition-colors">Privacy Policy</a>
+      <a href="terms.html" class="text-gold-400 font-medium">Terms of Service</a>
+      <a href="contact.html" class="hover:text-gold-400 transition-colors">Contact Us</a>
+    </div>
+    <p class="text-xs text-cream-600">&copy; <span id="cy-terms"></span> InsureCalcPro. All rights reserved.<script>document.getElementById('cy-terms').textContent=new Date().getFullYear();</script></p>
+  </div>
+</footer>
 
 </body>
 </html>

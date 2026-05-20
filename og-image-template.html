@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<!--
+  OG IMAGE GENERATOR — InsureCalcPro
+  ====================================
+  HOW TO USE:
+  1. Open this file in Chrome/Edge
+  2. Open DevTools → press F12
+  3. Click the device toolbar icon (or Ctrl+Shift+M)
+  4. Set dimensions to exactly: 1200 × 630
+  5. Right-click the page → "Capture screenshot"
+     OR use DevTools menu → "Capture full size screenshot"
+  6. Save the file as og-image.png in this same folder
+  7. Delete this template file (it's not for public upload)
+-->
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=1200" />
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    @import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Outfit:wght@400;600;700;800&display=swap');
+
+    body {
+      width: 1200px;
+      height: 630px;
+      overflow: hidden;
+      background: #0d1b2a;
+      font-family: 'Outfit', system-ui, sans-serif;
+      position: relative;
+    }
+
+    /* Grid pattern overlay */
+    .grid-bg {
+      position: absolute;
+      inset: 0;
+      background-image:
+        repeating-linear-gradient(0deg, transparent, transparent 40px, rgba(200,146,26,.07) 40px, rgba(200,146,26,.07) 41px),
+        repeating-linear-gradient(90deg, transparent, transparent 40px, rgba(200,146,26,.07) 40px, rgba(200,146,26,.07) 41px);
+    }
+
+    /* Gold accent bar left */
+    .accent-bar {
+      position: absolute;
+      left: 0; top: 0; bottom: 0;
+      width: 6px;
+      background: linear-gradient(to bottom, #c8921a, #84560f);
+    }
+
+    /* Content wrapper */
+    .content {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      height: 100%;
+      padding: 64px 80px;
+    }
+
+    /* Logo row */
+    .logo-row {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 44px;
+    }
+    .logo-icon {
+      width: 52px;
+      height: 52px;
+      border-radius: 14px;
+      background: rgba(200,146,26,.15);
+      border: 1.5px solid rgba(200,146,26,.4);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .logo-text {
+      font-family: 'DM Serif Display', Georgia, serif;
+      font-size: 28px;
+      color: #faf7f0;
+      letter-spacing: -0.3px;
+    }
+    .logo-text span { color: #c8921a; }
+
+    /* Eyebrow */
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(200,146,26,.12);
+      border: 1px solid rgba(200,146,26,.3);
+      color: #c8921a;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 6px 14px;
+      border-radius: 999px;
+      margin-bottom: 24px;
+      width: fit-content;
+    }
+
+    /* Headline */
+    h1 {
+      font-family: 'DM Serif Display', Georgia, serif;
+      font-size: 62px;
+      color: #faf7f0;
+      line-height: 1.08;
+      margin-bottom: 24px;
+      max-width: 680px;
+    }
+    h1 em {
+      font-style: normal;
+      color: #c8921a;
+    }
+
+    /* Sub */
+    .sub {
+      font-size: 20px;
+      color: #a8896d;
+      line-height: 1.5;
+      max-width: 580px;
+      margin-bottom: 44px;
+    }
+
+    /* Pills row */
+    .pills {
+      display: flex;
+      gap: 12px;
+    }
+    .pill {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255,255,255,.06);
+      border: 1px solid rgba(255,255,255,.12);
+      border-radius: 10px;
+      padding: 10px 18px;
+      color: #e8dccb;
+      font-size: 15px;
+      font-weight: 600;
+    }
+    .pill-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #c8921a;
+      flex-shrink: 0;
+    }
+
+    /* Right decorative panel */
+    .right-panel {
+      position: absolute;
+      right: 0;
+      top: 0;
+      bottom: 0;
+      width: 340px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      padding: 48px 40px;
+    }
+
+    .stat-card {
+      width: 100%;
+      background: rgba(255,255,255,.05);
+      border: 1px solid rgba(200,146,26,.2);
+      border-radius: 16px;
+      padding: 20px 24px;
+    }
+    .stat-label {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: #a8896d;
+      margin-bottom: 6px;
+    }
+    .stat-value {
+      font-family: 'DM Serif Display', Georgia, serif;
+      font-size: 32px;
+      color: #faf7f0;
+      line-height: 1;
+    }
+    .stat-value span { color: #c8921a; font-size: 20px; }
+
+    .badge {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(200,146,26,.1);
+      border: 1px solid rgba(200,146,26,.25);
+      border-radius: 10px;
+      padding: 12px 18px;
+      width: 100%;
+    }
+    .badge-check {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: #c8921a;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .badge-text {
+      font-size: 13px;
+      font-weight: 600;
+      color: #e8dccb;
+    }
+
+    /* URL strip bottom */
+    .url-strip {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 48px;
+      background: rgba(0,0,0,.25);
+      border-top: 1px solid rgba(255,255,255,.06);
+      display: flex;
+      align-items: center;
+      padding: 0 80px;
+      justify-content: space-between;
+    }
+    .url-text {
+      font-size: 14px;
+      color: #a8896d;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+    }
+    .url-text strong { color: #c8921a; }
+    .tagline {
+      font-size: 13px;
+      color: #5a4a3a;
+      font-weight: 500;
+    }
+  </style>
+</head>
+<body>
+  <div class="grid-bg"></div>
+  <div class="accent-bar"></div>
+
+  <!-- Left content -->
+  <div class="content">
+    <div class="logo-row">
+      <div class="logo-icon">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none">
+          <path d="M12 2L3 7v5c0 5.25 3.75 10.15 9 11.25C17.25 22.15 21 17.25 21 12V7L12 2z" fill="rgba(200,146,26,0.25)" stroke="#c8921a" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+          <polyline points="8,12 10.5,14.5 16,9" stroke="#faf7f0" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <div class="logo-text">InsureCalc<span>Pro</span></div>
+    </div>
+
+    <div class="eyebrow">Free Financial Calculators</div>
+
+    <h1>Know Your<br><em>Coverage.</em><br>Plan Smart.</h1>
+
+    <p class="sub">Life insurance, compound interest &amp; mortgage calculators — free, private, no sign-up required.</p>
+
+    <div class="pills">
+      <div class="pill"><span class="pill-dot"></span>DIME Method</div>
+      <div class="pill"><span class="pill-dot"></span>Compound Interest</div>
+      <div class="pill"><span class="pill-dot"></span>Mortgage Calc</div>
+    </div>
+  </div>
+
+  <!-- Right panel -->
+  <div class="right-panel">
+    <div class="stat-card">
+      <div class="stat-label">Life Insurance Estimate</div>
+      <div class="stat-value"><span>$</span>1.2M</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">Compound Growth (30 yr)</div>
+      <div class="stat-value"><span>+</span>847<span>%</span></div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">Monthly Mortgage Payment</div>
+      <div class="stat-value"><span>$</span>1,847</div>
+    </div>
+    <div class="badge">
+      <div class="badge-check">
+        <svg width="11" height="11" viewBox="0 0 12 12" fill="none"><polyline points="2,6 5,9 10,3" stroke="#0d1b2a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+      <span class="badge-text">100% Free &bull; No Data Stored</span>
+    </div>
+  </div>
+
+  <!-- URL strip -->
+  <div class="url-strip">
+    <div class="url-text"><strong>insurecalcpro.com</strong></div>
+    <div class="tagline">Free · Private · Educational</div>
+  </div>
+</body>
+</html>

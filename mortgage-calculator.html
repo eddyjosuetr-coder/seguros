@@ -3,13 +3,30 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Free Mortgage Calculator — Estimate your monthly mortgage payment instantly. Enter your home price, down payment, interest rate, and loan term to see principal and interest breakdown." />
-  <meta name="keywords" content="mortgage calculator, monthly payment calculator, home loan calculator, mortgage payment estimator" />
-  <title>Mortgage Calculator | InsureCalcPro</title>
-  <script src="https://cdn.tailwindcss.com"></script>
+  <meta name="description" content="Free mortgage calculator with full amortization schedule and term comparison. Enter home price, down payment, and rate — get your monthly payment instantly." />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://www.insurecalcpro.com/mortgage-calculator.html" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <meta property="og:title" content="Free Mortgage Calculator — Estimate Your Monthly Payment" />
+  <meta property="og:description" content="Free mortgage calculator with full amortization schedule and term comparison. Get your monthly payment estimate instantly." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://www.insurecalcpro.com/mortgage-calculator.html" />
+  <meta property="og:site_name" content="InsureCalcPro" />
+  <meta property="og:image" content="https://www.insurecalcpro.com/og-image.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:type" content="image/png" />
+  <meta name="theme-color" content="#0d1b2a" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Free Mortgage Calculator — Estimate Your Monthly Payment" />
+  <meta name="twitter:description" content="Free mortgage calculator with full amortization schedule and term comparison. Get your monthly payment estimate instantly." />
+  <meta name="twitter:image" content="https://www.insurecalcpro.com/og-image.png" />
+  <title>Free Mortgage Calculator — Estimate Your Monthly Payment | InsureCalcPro</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="preload" href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Outfit:wght@400;500;600;700;800&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+  <noscript><link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet" /></noscript>
+  <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
       theme: {
@@ -27,8 +44,25 @@
       }
     }
   </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Free Mortgage Payment Calculator",
+    "url": "https://www.insurecalcpro.com/mortgage-calculator.html",
+    "description": "Free mortgage calculator with full amortization schedule and term comparison. Estimate your monthly mortgage payment instantly.",
+    "applicationCategory": "FinanceApplication",
+    "operatingSystem": "All",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+  }
+  </script>
   <style>
     body { font-family: 'Outfit', system-ui, sans-serif; }
+
+    .mort-faq-body { max-height: 0; overflow: hidden; transition: max-height .3s ease; }
+    .mort-faq-body.open { max-height: 400px; }
+    .mort-faq-chevron { transition: transform .3s ease; }
+    .mort-faq-chevron.open { transform: rotate(180deg); }
 
     /* Gold gradient text */
     .text-gold-gradient {
@@ -81,12 +115,17 @@
     .d1 { animation: fadeUp .6s ease both; }
     .d2 { animation: fadeUp .6s .12s ease both; }
     .d3 { animation: fadeUp .6s .24s ease both; }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
+    }
   </style>
 </head>
 <body class="bg-cream-100 antialiased text-navy-900">
 
+<a href="#main-content" class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100] focus:bg-navy-900 focus:text-cream-100 focus:px-4 focus:py-2 focus:rounded-xl focus:font-semibold focus:text-sm focus:shadow-lg">Skip to main content</a>
+
 <!-- ═══ NAVBAR ═══ -->
-<header class="bg-white/96 backdrop-blur border-b border-cream-300 sticky top-0 z-50 shadow-sm">
+<header class="bg-white border-b border-cream-300 sticky top-0 z-50 shadow-sm">
   <div class="max-w-6xl mx-auto px-4 sm:px-6">
     <div class="flex items-center h-16 gap-4">
 
@@ -131,7 +170,7 @@
       </nav>
 
       <!-- Mobile hamburger -->
-      <button id="hamburger" class="md:hidden ml-auto p-2 rounded-xl text-navy-600 hover:bg-cream-200 transition-colors" aria-label="Toggle menu">
+      <button id="hamburger" class="md:hidden ml-auto p-2 rounded-xl text-navy-600 hover:bg-cream-200 transition-colors" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu">
         <svg id="icon-open" class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/></svg>
         <svg id="icon-close" class="w-5 h-5 hidden" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
       </button>
@@ -186,7 +225,7 @@
 </header>
 
 <!-- ═══ HERO ═══ -->
-<div class="bg-navy-900 py-12 px-4 relative overflow-hidden">
+<section class="bg-navy-900 py-12 px-4 relative overflow-hidden" aria-label="Mortgage Calculator Hero">
   <!-- Subtle background texture -->
   <div class="absolute inset-0 opacity-5" style="background-image: repeating-linear-gradient(0deg, transparent, transparent 40px, #c8921a 40px, #c8921a 41px), repeating-linear-gradient(90deg, transparent, transparent 40px, #c8921a 40px, #c8921a 41px);"></div>
   <div class="max-w-2xl mx-auto text-center relative">
@@ -196,7 +235,7 @@
       </svg>
       Free Tool
     </span>
-    <h1 class="d2 font-display text-4xl sm:text-5xl text-cream-100 mb-4 leading-tight">
+    <h1 class="d1 font-display text-4xl sm:text-5xl text-cream-100 mb-4 leading-tight">
       Mortgage Payment<br>
       <em class="text-gold-gradient not-italic">Calculator</em>
     </h1>
@@ -204,17 +243,17 @@
       Estimate your monthly mortgage payment in seconds. See a full breakdown of principal, interest, and total loan cost.
     </p>
   </div>
-</div>
+</section>
 
 <!-- ═══ MAIN ═══ -->
-<main class="max-w-2xl mx-auto px-4 py-12">
+<main id="main-content" class="max-w-2xl mx-auto px-4 py-12">
 
   <!-- Calculator Card -->
   <div class="bg-white shadow-xl shadow-navy-900/10 rounded-2xl overflow-hidden border border-cream-200">
 
     <!-- Card Header -->
     <div class="bg-navy-900 px-7 py-5">
-      <h2 class="font-display text-cream-100 text-xl">Enter Your Loan Details</h2>
+      <p class="font-display text-cream-100 text-xl">Enter Your Loan Details</p>
       <p class="text-cream-400 text-sm mt-1">Calculates Principal &amp; Interest only. Does not include taxes, insurance, or HOA fees.</p>
     </div>
 
@@ -224,7 +263,7 @@
 
         <!-- Home Price -->
         <div>
-          <label class="block text-xs font-bold text-navy-500 uppercase tracking-wider mb-2">Home Price</label>
+          <label for="home-price" class="block text-xs font-bold text-navy-500 uppercase tracking-wider mb-2">Home Price</label>
           <div class="input-wrap">
             <span class="input-prefix">$</span>
             <input id="home-price" type="text" inputmode="numeric" placeholder="400,000"
@@ -234,7 +273,7 @@
 
         <!-- Down Payment -->
         <div>
-          <label class="block text-xs font-bold text-navy-500 uppercase tracking-wider mb-2">
+          <label for="down-payment" class="block text-xs font-bold text-navy-500 uppercase tracking-wider mb-2">
             Down Payment
             <span id="dp-pct-badge" class="ml-2 bg-gold-50 text-gold-700 border border-gold-200 text-xs px-2 py-0.5 rounded-full font-bold normal-case">0%</span>
           </label>
@@ -247,7 +286,7 @@
           <div class="mt-2 h-1.5 bg-cream-200 rounded-full overflow-hidden">
             <div id="dp-bar" class="dp-bar h-full bg-gold-500 rounded-full" style="width:0%"></div>
           </div>
-          <div class="flex justify-between text-xs text-navy-400 mt-1">
+          <div class="flex justify-between text-xs text-navy-700 mt-1">
             <span>0%</span>
             <span class="text-gold-600 font-semibold">20% recommended</span>
             <span>100%</span>
@@ -256,18 +295,18 @@
 
         <!-- Annual Interest Rate -->
         <div>
-          <label class="block text-xs font-bold text-navy-500 uppercase tracking-wider mb-2">Annual Interest Rate</label>
+          <label for="rate" class="block text-xs font-bold text-navy-500 uppercase tracking-wider mb-2">Annual Interest Rate</label>
           <div class="input-wrap">
             <input id="rate" type="text" inputmode="decimal" placeholder="6.5"
               class="has-suffix w-full border border-cream-300 bg-cream-50 rounded-xl py-3 pl-4 text-navy-900 font-semibold text-base focus:outline-none focus:ring-2 focus:ring-gold-400 focus:border-transparent transition placeholder-cream-400" />
             <span class="input-suffix">%</span>
           </div>
-          <p class="text-navy-400 text-xs mt-1.5 ml-1">US 30-yr avg: ~6.5% (2025)</p>
+          <p class="text-navy-700 text-xs mt-1.5 ml-1">US 30-yr avg: ~6.5% (2025)</p>
         </div>
 
         <!-- Loan Term -->
         <div>
-          <label class="block text-xs font-bold text-navy-500 uppercase tracking-wider mb-2">Loan Term</label>
+          <label for="loan-term" class="block text-xs font-bold text-navy-500 uppercase tracking-wider mb-2">Loan Term</label>
           <div class="relative">
             <select id="loan-term"
               class="w-full border border-cream-300 bg-cream-50 rounded-xl py-3 px-4 pr-10 text-navy-900 font-semibold text-base focus:outline-none focus:ring-2 focus:ring-gold-400 focus:border-transparent transition appearance-none cursor-pointer">
@@ -278,7 +317,7 @@
             </select>
             <svg class="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-navy-400 pointer-events-none" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
           </div>
-          <p class="text-navy-400 text-xs mt-1.5 ml-1">Most common: 30 or 15 years</p>
+          <p class="text-navy-700 text-xs mt-1.5 ml-1">Most common: 30 or 15 years</p>
         </div>
       </div>
 
@@ -295,7 +334,7 @@
       </div>
 
       <!-- Error message -->
-      <div id="error-msg" class="hidden mt-4 bg-red-50 border border-red-200 text-red-700 text-sm px-4 py-3 rounded-xl flex items-center gap-2">
+      <div id="error-msg" role="alert" aria-live="assertive" class="hidden mt-4 bg-red-50 border border-red-200 text-red-700 text-sm px-4 py-3 rounded-xl flex items-center gap-2">
         <svg class="w-4 h-4 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd"/></svg>
         <span id="error-text">Please fill in all fields with valid numbers.</span>
       </div>
@@ -308,7 +347,7 @@
     </div>
 
     <!-- ═══ RESULTS ═══ -->
-    <div id="results" class="hidden-soft hidden border-t border-cream-200">
+    <div id="results" role="region" aria-label="Calculation Results" tabindex="-1" class="hidden-soft hidden border-t border-cream-200">
 
       <!-- Monthly Payment Hero -->
       <div class="bg-navy-900 px-7 py-7 text-center">
@@ -322,22 +361,22 @@
       <!-- Stat Cards -->
       <div class="grid grid-cols-3 divide-x divide-cream-200 border-b border-cream-200">
         <div class="px-4 py-5 text-center">
-          <p class="text-navy-400 text-xs font-semibold uppercase tracking-wider mb-1.5">Loan Amount</p>
+          <p class="text-navy-700 text-xs font-semibold uppercase tracking-wider mb-1.5">Loan Amount</p>
           <p id="res-loan" class="text-navy-900 font-extrabold text-lg leading-tight">$0</p>
         </div>
         <div class="px-4 py-5 text-center">
-          <p class="text-navy-400 text-xs font-semibold uppercase tracking-wider mb-1.5">Total Payment</p>
+          <p class="text-navy-700 text-xs font-semibold uppercase tracking-wider mb-1.5">Total Payment</p>
           <p id="res-total" class="text-navy-900 font-extrabold text-lg leading-tight">$0</p>
         </div>
         <div class="px-4 py-5 text-center">
-          <p class="text-navy-400 text-xs font-semibold uppercase tracking-wider mb-1.5">Total Interest</p>
+          <p class="text-navy-700 text-xs font-semibold uppercase tracking-wider mb-1.5">Total Interest</p>
           <p id="res-interest" class="text-red-500 font-extrabold text-lg leading-tight">$0</p>
         </div>
       </div>
 
       <!-- Visual Breakdown -->
       <div class="px-7 py-6">
-        <p class="text-xs font-bold text-navy-400 uppercase tracking-wider mb-3">Total Payment Composition</p>
+        <p class="text-xs font-bold text-navy-700 uppercase tracking-wider mb-3">Total Payment Composition</p>
         <div class="flex h-3 rounded-full overflow-hidden bg-cream-200 mb-3">
           <div id="bar-principal" class="bar-fill bg-navy-700 h-full" style="width:0%"></div>
           <div id="bar-interest-vis" class="bar-fill bg-red-400 h-full" style="width:0%"></div>
@@ -348,7 +387,7 @@
         </div>
 
         <!-- Amortization summary table -->
-        <p class="text-xs font-bold text-navy-400 uppercase tracking-wider mb-3">Amortization Overview</p>
+        <p class="text-xs font-bold text-navy-700 uppercase tracking-wider mb-3">Amortization Overview</p>
         <div class="table-wrap rounded-xl border border-cream-200 overflow-hidden">
           <table class="w-full text-sm">
             <thead class="bg-cream-200 sticky top-0">
@@ -365,12 +404,12 @@
 
         <!-- Cost comparison for different terms -->
         <div id="comparison" class="mt-6">
-          <p class="text-xs font-bold text-navy-400 uppercase tracking-wider mb-3">Term Comparison (same rate)</p>
+          <p class="text-xs font-bold text-navy-700 uppercase tracking-wider mb-3">Term Comparison (same rate)</p>
           <div id="comparison-rows" class="space-y-2"></div>
         </div>
 
         <!-- Disclaimer -->
-        <p class="text-navy-400 text-xs leading-relaxed mt-6 text-center">
+        <p class="text-navy-700 text-xs leading-relaxed mt-6 text-center">
           This calculator estimates Principal &amp; Interest only. It does not include property taxes, homeowner's insurance, PMI, or HOA fees. Consult a licensed mortgage professional for a complete loan estimate.
         </p>
       </div>
@@ -387,16 +426,142 @@
 
 </main>
 
+<!-- ═══ EDUCATIONAL CONTENT ═══ -->
+<section class="max-w-2xl mx-auto px-4 pb-12 mt-4">
+  <div class="space-y-6">
+
+    <div class="bg-white rounded-2xl border border-cream-200 p-7 shadow-sm">
+      <h2 class="font-display text-2xl text-navy-900 mb-4">What Makes Up Your Mortgage Payment?</h2>
+      <p class="text-navy-700 leading-relaxed mb-4">
+        A standard mortgage payment covers two main components: <strong>principal</strong> (the portion that reduces your loan balance) and <strong>interest</strong> (the cost of borrowing). This calculator estimates P&amp;I — your core payment obligation.
+      </p>
+      <p class="text-navy-700 leading-relaxed mb-4">
+        In practice, your lender may also collect <strong>escrow</strong> payments for property taxes and homeowner's insurance, and potentially <strong>PMI</strong> (Private Mortgage Insurance) if your down payment is less than 20%. These additions can increase your actual monthly obligation by $200–$600 beyond what this calculator shows.
+      </p>
+      <p class="text-navy-700 leading-relaxed">
+        Always request a Loan Estimate from your lender, which legally must disclose all costs including escrow and fees, for a complete picture of your monthly commitment.
+      </p>
+    </div>
+
+    <div class="bg-white rounded-2xl border border-cream-200 p-7 shadow-sm">
+      <h2 class="font-display text-2xl text-navy-900 mb-4">Understanding Amortization</h2>
+      <p class="text-navy-700 leading-relaxed mb-4">
+        Amortization is the process of paying off a loan through fixed monthly payments over time. Early in your loan, most of each payment covers interest. As years pass, the balance of interest versus principal gradually shifts in your favor.
+      </p>
+      <p class="text-navy-700 leading-relaxed mb-4">
+        On a $400,000 30-year loan at 6.5%, your first payment is approximately $2,528. Of that, roughly $2,167 goes to interest and only $361 reduces your principal. By year 20, the split reverses — about $1,250 goes to principal and $1,278 to interest.
+      </p>
+      <p class="text-navy-700 leading-relaxed">
+        Making even one extra payment per year directly against principal can shave 4–5 years off a 30-year mortgage and save tens of thousands in total interest.
+      </p>
+    </div>
+
+    <div class="bg-white rounded-2xl border border-cream-200 p-7 shadow-sm">
+      <h2 class="font-display text-2xl text-navy-900 mb-4">15-Year vs. 30-Year Mortgage</h2>
+      <p class="text-navy-700 leading-relaxed mb-5">The two most common loan terms come with very different trade-offs:</p>
+      <div class="grid gap-4 sm:grid-cols-2">
+        <div class="bg-navy-50 rounded-xl p-4 border border-navy-100">
+          <p class="font-semibold text-navy-900 mb-2">30-Year Fixed</p>
+          <ul class="text-navy-600 text-sm space-y-1">
+            <li>✓ Lower monthly payment</li>
+            <li>✓ More cash flow flexibility</li>
+            <li>✗ Much more total interest paid</li>
+            <li>✗ Slower equity building</li>
+          </ul>
+        </div>
+        <div class="bg-emerald-50 rounded-xl p-4 border border-emerald-100">
+          <p class="font-semibold text-navy-900 mb-2">15-Year Fixed</p>
+          <ul class="text-navy-600 text-sm space-y-1">
+            <li>✓ Significantly less total interest</li>
+            <li>✓ Faster equity building</li>
+            <li>✗ Higher monthly payment</li>
+            <li>✗ Less monthly flexibility</li>
+          </ul>
+        </div>
+      </div>
+      <p class="text-navy-500 text-xs mt-4">Use the Term Comparison section in your results to see the exact dollar difference for your specific loan.</p>
+    </div>
+
+    <div class="bg-gold-50 border border-gold-200 rounded-2xl p-5">
+      <p class="text-navy-800 text-sm leading-relaxed">
+        <strong>Saving for a down payment?</strong> See how your savings could grow over time with our <a href="compound-interest.html" class="text-gold-600 font-semibold underline hover:text-gold-700">free compound interest calculator</a>. Knowing your future balance helps you plan exactly when you can reach 20% down.
+      </p>
+    </div>
+
+    <div class="bg-white rounded-2xl border border-cream-200 p-7 shadow-sm">
+      <h2 class="font-display text-2xl text-navy-900 mb-5">Frequently Asked Questions</h2>
+      <div class="space-y-3">
+
+        <div class="border border-cream-200 rounded-xl overflow-hidden">
+          <button class="mort-faq-btn w-full flex items-center justify-between px-5 py-4 text-left bg-white hover:bg-cream-50 transition-colors" aria-expanded="false">
+            <span class="font-semibold text-navy-900 text-sm pr-4">What credit score do I need to get a mortgage?</span>
+            <svg class="mort-faq-chevron w-4 h-4 text-gold-500 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
+          </button>
+          <div class="mort-faq-body px-5 text-navy-700 text-sm leading-relaxed">
+            <div class="pb-4 pt-1">Most conventional loans require a minimum credit score of 620. FHA loans can go as low as 580 with a 3.5% down payment, or 500 with 10% down. VA loans have no official minimum but lenders typically require 620+. Higher scores (740+) unlock the best interest rates, which can save tens of thousands over the life of your loan. Improving your credit score before applying is one of the highest-ROI financial moves you can make before a home purchase.</div>
+          </div>
+        </div>
+
+        <div class="border border-cream-200 rounded-xl overflow-hidden">
+          <button class="mort-faq-btn w-full flex items-center justify-between px-5 py-4 text-left bg-white hover:bg-cream-50 transition-colors" aria-expanded="false">
+            <span class="font-semibold text-navy-900 text-sm pr-4">What is PMI and can I avoid it?</span>
+            <svg class="mort-faq-chevron w-4 h-4 text-gold-500 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
+          </button>
+          <div class="mort-faq-body px-5 text-navy-700 text-sm leading-relaxed">
+            <div class="pb-4 pt-1">PMI (Private Mortgage Insurance) protects the lender — not you — if you default. It is required on conventional loans when your down payment is less than 20% of the home's purchase price. PMI typically costs 0.5%–1.5% of your loan amount annually, added to your monthly payment. You can avoid PMI by putting 20% down, using a piggyback loan (80-10-10 structure), or choosing a VA or USDA loan if you qualify. Once your equity reaches 20%, you can request PMI cancellation; lenders must cancel it automatically at 22%.</div>
+          </div>
+        </div>
+
+        <div class="border border-cream-200 rounded-xl overflow-hidden">
+          <button class="mort-faq-btn w-full flex items-center justify-between px-5 py-4 text-left bg-white hover:bg-cream-50 transition-colors" aria-expanded="false">
+            <span class="font-semibold text-navy-900 text-sm pr-4">How much house can I afford based on my income?</span>
+            <svg class="mort-faq-chevron w-4 h-4 text-gold-500 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
+          </button>
+          <div class="mort-faq-body px-5 text-navy-700 text-sm leading-relaxed">
+            <div class="pb-4 pt-1">The standard guideline is the 28/36 rule: your housing costs (P&amp;I + taxes + insurance) should not exceed 28% of your gross monthly income, and your total debt payments should not exceed 36%. On a $80,000 annual income ($6,667/month), your maximum PITI is $1,867 and total debts should stay under $2,400. Lenders will calculate your DTI (Debt-to-Income ratio) and most prefer it stays under 43% for conventional loans.</div>
+          </div>
+        </div>
+
+        <div class="border border-cream-200 rounded-xl overflow-hidden">
+          <button class="mort-faq-btn w-full flex items-center justify-between px-5 py-4 text-left bg-white hover:bg-cream-50 transition-colors" aria-expanded="false">
+            <span class="font-semibold text-navy-900 text-sm pr-4">Should I pay points to lower my interest rate?</span>
+            <svg class="mort-faq-chevron w-4 h-4 text-gold-500 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
+          </button>
+          <div class="mort-faq-body px-5 text-navy-700 text-sm leading-relaxed">
+            <div class="pb-4 pt-1">Mortgage points are upfront fees paid to lower your interest rate — one point equals 1% of the loan amount. Whether to pay points depends on your break-even period. If one point ($4,000 on a $400,000 loan) lowers your rate from 6.5% to 6.25% and saves $60/month, you break even in 67 months (~5.5 years). If you plan to stay in the home longer than that, points make sense. If you may move or refinance sooner, keep the cash and take the higher rate.</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</section>
+<script>
+document.querySelectorAll('.mort-faq-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const body = btn.nextElementSibling;
+    const chevron = btn.querySelector('.mort-faq-chevron');
+    const isOpen = body.classList.contains('open');
+    document.querySelectorAll('.mort-faq-btn').forEach(b => b.setAttribute('aria-expanded', 'false'));
+    document.querySelectorAll('.mort-faq-body').forEach(b => b.classList.remove('open'));
+    document.querySelectorAll('.mort-faq-chevron').forEach(c => c.classList.remove('open'));
+    if (!isOpen) { body.classList.add('open'); chevron.classList.add('open'); btn.setAttribute('aria-expanded', 'true'); }
+  });
+});
+</script>
+
 <!-- ═══ FOOTER ═══ -->
 <footer class="bg-navy-900 text-cream-400 py-10 px-4 mt-8">
   <div class="max-w-5xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4 text-sm">
     <span class="font-display text-cream-100 text-lg">InsureCalc<span class="text-gold-400">Pro</span></span>
     <div class="flex flex-wrap justify-center gap-5">
+      <a href="about.html" class="hover:text-gold-400 transition-colors">About</a>
       <a href="privacy.html" class="hover:text-gold-400 transition-colors">Privacy Policy</a>
       <a href="terms.html" class="hover:text-gold-400 transition-colors">Terms of Service</a>
       <a href="contact.html" class="hover:text-gold-400 transition-colors">Contact Us</a>
     </div>
-    <p class="text-xs text-cream-600">&copy; 2025 InsureCalcPro. All rights reserved.</p>
+    <p class="text-xs text-cream-600">&copy; <span id="copy-year-mort"></span> InsureCalcPro. All rights reserved.<script>document.getElementById('copy-year-mort').textContent=new Date().getFullYear();</script></p>
   </div>
 </footer>
 
@@ -562,7 +727,10 @@
     // Reveal
     resultsEl.classList.remove('hidden');
     requestAnimationFrame(() => {
-      requestAnimationFrame(() => { resultsEl.classList.remove('hidden-soft'); });
+      requestAnimationFrame(() => {
+        resultsEl.classList.remove('hidden-soft');
+        resultsEl.focus();
+      });
     });
     resultsEl.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
   }
@@ -602,6 +770,19 @@
     mobileMenu.classList.toggle('open', !isOpen);
     iconOpen.classList.toggle('hidden', !isOpen);
     iconClose.classList.toggle('hidden', isOpen);
+    hamburger.setAttribute('aria-expanded', String(!isOpen));
+    hamburger.setAttribute('aria-label', !isOpen ? 'Close menu' : 'Open menu');
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && mobileMenu.classList.contains('open')) {
+      mobileMenu.classList.remove('open');
+      iconOpen.classList.remove('hidden');
+      iconClose.classList.add('hidden');
+      hamburger.setAttribute('aria-expanded', 'false');
+      hamburger.setAttribute('aria-label', 'Open menu');
+      hamburger.focus();
+    }
   });
 
 })();
